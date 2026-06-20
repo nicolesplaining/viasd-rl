@@ -1,0 +1,12 @@
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 9612.29it/s]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 9940.09it/s]
+keep_mask: 26 / 48
+corrected latencies(ms): t_p1=0.34 t_qp=3.88 t_q=14.69 t_q1=10.23
+Using the latest cached version of the dataset since openai/gsm8k couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'main' at /home/ubuntu/.cache/huggingface/datasets/openai___gsm8k/main/0.0.0/740312add88f781978c0658806c59bc2815b9866 (last modified on Sat Jun 20 16:57:25 2026).
+iter 1/120: tok_reward=0.602 match=0.854 correct=0.500 cost/tok=0.643 rej=0.270 ent=0.482 gn=3.47 ntok=1121 62.7s
+iter 2/120: tok_reward=0.649 match=0.857 correct=0.167 cost/tok=0.684 rej=0.276 ent=0.483 gn=3.06 ntok=1450 69.9s
+iter 3/120: tok_reward=0.661 match=0.888 correct=0.500 cost/tok=0.663 rej=0.257 ent=0.456 gn=3.02 ntok=1207 57.9s
+iter 4/120: tok_reward=0.661 match=0.877 correct=0.500 cost/tok=0.660 rej=0.250 ent=0.458 gn=2.70 ntok=1294 60.9s

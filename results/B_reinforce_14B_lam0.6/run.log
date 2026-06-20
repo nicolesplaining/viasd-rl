@@ -1,0 +1,193 @@
+=== CONFIG verifier=Qwen2.5-14B lam=0.6 n_train=100 rl_iters=250 n_eval=150 ===
+Sat Jun 20 12:07:20 UTC 2026
+##### STAGE 1: IMITATION #####
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 9350.27it/s]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 8585.77it/s]
+keep_mask: [True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, True, True]
+[collect 1/100] samples=69 acc_so_far=1.000
+[collect 2/100] samples=79 acc_so_far=1.000
+[collect 3/100] samples=171 acc_so_far=1.000
+[collect 4/100] samples=133 acc_so_far=1.000
+[collect 5/100] samples=99 acc_so_far=1.000
+[collect 6/100] samples=247 acc_so_far=1.000
+[collect 7/100] samples=97 acc_so_far=1.000
+[collect 8/100] samples=147 acc_so_far=1.000
+[collect 9/100] samples=207 acc_so_far=1.000
+[collect 10/100] samples=251 acc_so_far=1.000
+[collect 11/100] samples=205 acc_so_far=1.000
+[collect 12/100] samples=262 acc_so_far=1.000
+[collect 13/100] samples=106 acc_so_far=1.000
+[collect 14/100] samples=236 acc_so_far=0.929
+[collect 15/100] samples=167 acc_so_far=0.933
+[collect 16/100] samples=238 acc_so_far=0.938
+[collect 17/100] samples=160 acc_so_far=0.941
+[collect 18/100] samples=258 acc_so_far=0.944
+[collect 19/100] samples=185 acc_so_far=0.947
+[collect 20/100] samples=165 acc_so_far=0.950
+[collect 21/100] samples=166 acc_so_far=0.952
+[collect 22/100] samples=246 acc_so_far=0.955
+[collect 23/100] samples=169 acc_so_far=0.957
+[collect 24/100] samples=215 acc_so_far=0.958
+[collect 25/100] samples=142 acc_so_far=0.960
+[collect 26/100] samples=202 acc_so_far=0.962
+[collect 27/100] samples=151 acc_so_far=0.963
+[collect 28/100] samples=219 acc_so_far=0.964
+[collect 29/100] samples=105 acc_so_far=0.966
+[collect 30/100] samples=302 acc_so_far=0.967
+[collect 31/100] samples=233 acc_so_far=0.968
+[collect 32/100] samples=130 acc_so_far=0.969
+[collect 33/100] samples=161 acc_so_far=0.970
+[collect 34/100] samples=315 acc_so_far=0.971
+[collect 35/100] samples=74 acc_so_far=0.971
+[collect 36/100] samples=118 acc_so_far=0.972
+[collect 37/100] samples=130 acc_so_far=0.973
+[collect 38/100] samples=176 acc_so_far=0.947
+[collect 39/100] samples=218 acc_so_far=0.949
+[collect 40/100] samples=161 acc_so_far=0.950
+[collect 41/100] samples=187 acc_so_far=0.951
+[collect 42/100] samples=81 acc_so_far=0.952
+[collect 43/100] samples=281 acc_so_far=0.953
+[collect 44/100] samples=151 acc_so_far=0.955
+[collect 45/100] samples=192 acc_so_far=0.956
+[collect 46/100] samples=133 acc_so_far=0.957
+[collect 47/100] samples=135 acc_so_far=0.957
+[collect 48/100] samples=230 acc_so_far=0.958
+[collect 49/100] samples=77 acc_so_far=0.959
+[collect 50/100] samples=95 acc_so_far=0.960
+[collect 51/100] samples=201 acc_so_far=0.961
+[collect 52/100] samples=236 acc_so_far=0.962
+[collect 53/100] samples=150 acc_so_far=0.962
+[collect 54/100] samples=129 acc_so_far=0.963
+[collect 55/100] samples=132 acc_so_far=0.964
+[collect 56/100] samples=174 acc_so_far=0.964
+[collect 57/100] samples=219 acc_so_far=0.965
+[collect 58/100] samples=234 acc_so_far=0.966
+[collect 59/100] samples=236 acc_so_far=0.966
+[collect 60/100] samples=174 acc_so_far=0.967
+[collect 61/100] samples=125 acc_so_far=0.967
+[collect 62/100] samples=262 acc_so_far=0.968
+[collect 63/100] samples=170 acc_so_far=0.968
+[collect 64/100] samples=232 acc_so_far=0.969
+[collect 65/100] samples=223 acc_so_far=0.969
+[collect 66/100] samples=161 acc_so_far=0.970
+[collect 67/100] samples=186 acc_so_far=0.970
+[collect 68/100] samples=321 acc_so_far=0.971
+[collect 69/100] samples=282 acc_so_far=0.971
+[collect 70/100] samples=116 acc_so_far=0.971
+[collect 71/100] samples=87 acc_so_far=0.972
+[collect 72/100] samples=155 acc_so_far=0.972
+[collect 73/100] samples=207 acc_so_far=0.973
+[collect 74/100] samples=110 acc_so_far=0.973
+[collect 75/100] samples=185 acc_so_far=0.973
+[collect 76/100] samples=194 acc_so_far=0.974
+[collect 77/100] samples=160 acc_so_far=0.974
+[collect 78/100] samples=74 acc_so_far=0.974
+[collect 79/100] samples=187 acc_so_far=0.975
+[collect 80/100] samples=55 acc_so_far=0.975
+[collect 81/100] samples=198 acc_so_far=0.975
+[collect 82/100] samples=303 acc_so_far=0.976
+[collect 83/100] samples=156 acc_so_far=0.976
+[collect 84/100] samples=308 acc_so_far=0.976
+[collect 85/100] samples=80 acc_so_far=0.976
+[collect 86/100] samples=170 acc_so_far=0.977
+[collect 87/100] samples=58 acc_so_far=0.977
+[collect 88/100] samples=138 acc_so_far=0.977
+[collect 89/100] samples=80 acc_so_far=0.978
+[collect 90/100] samples=168 acc_so_far=0.978
+[collect 91/100] samples=245 acc_so_far=0.978
+[collect 92/100] samples=176 acc_so_far=0.978
+[collect 93/100] samples=219 acc_so_far=0.978
+[collect 94/100] samples=163 acc_so_far=0.979
+[collect 95/100] samples=113 acc_so_far=0.979
+[collect 96/100] samples=244 acc_so_far=0.979
+[collect 97/100] samples=136 acc_so_far=0.979
+[collect 98/100] samples=279 acc_so_far=0.980
+[collect 99/100] samples=242 acc_so_far=0.980
+[collect 100/100] samples=248 acc_so_far=0.980
+oracle (==greedy-q) accuracy: 0.980
+action counts: {'accept': 15966, 'regen': 118, 'escalate': 1694}
+epoch 1: loss=1.0266 train_action_acc=0.834
+epoch 25: loss=0.5987 train_action_acc=0.789
+epoch 50: loss=0.5773 train_action_acc=0.805
+epoch 75: loss=0.5729 train_action_acc=0.767
+epoch 100: loss=0.5413 train_action_acc=0.800
+epoch 125: loss=0.5140 train_action_acc=0.813
+epoch 150: loss=0.5013 train_action_acc=0.797
+epoch 175: loss=0.4932 train_action_acc=0.797
+epoch 200: loss=0.4711 train_action_acc=0.819
+saved policy -> policy_imitation.pt
+##### STAGE 2: RL (lam=0.6) #####
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 9091.34it/s]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 8311.32it/s]
+latencies (ms): t_p1=13.20 t_qp=24.71 t_q=42.23 t_q1=28.73
+warm-started from policy_imitation.pt
+iter 10: reward=0.649 match=0.914 correct=1.000 cost/tok=1.275 rej=0.187 baseline=0.301
+iter 20: reward=0.263 match=0.909 correct=0.500 cost/tok=1.493 rej=0.245 baseline=0.447
+iter 30: reward=0.492 match=0.912 correct=0.750 cost/tok=1.326 rej=0.181 baseline=0.514
+iter 40: reward=0.783 match=0.946 correct=1.000 cost/tok=1.106 rej=0.117 baseline=0.737
+iter 50: reward=0.637 match=0.951 correct=0.750 cost/tok=1.149 rej=0.134 baseline=0.693
+iter 60: reward=0.716 match=0.936 correct=0.750 cost/tok=0.991 rej=0.091 baseline=0.630
+iter 70: reward=0.636 match=0.920 correct=0.750 cost/tok=1.098 rej=0.115 baseline=0.694
+iter 80: reward=0.508 match=0.933 correct=0.500 cost/tok=1.125 rej=0.129 baseline=0.640
+iter 90: reward=0.854 match=0.955 correct=1.000 cost/tok=1.001 rej=0.079 baseline=0.787
+iter 100: reward=0.705 match=0.973 correct=0.750 cost/tok=1.070 rej=0.105 baseline=0.719
+iter 110: reward=0.733 match=0.968 correct=0.750 cost/tok=1.016 rej=0.075 baseline=0.744
+iter 120: reward=0.781 match=0.960 correct=1.000 cost/tok=1.132 rej=0.108 baseline=0.759
+iter 130: reward=0.809 match=0.975 correct=1.000 cost/tok=1.111 rej=0.099 baseline=0.761
+iter 140: reward=0.843 match=0.976 correct=1.000 cost/tok=1.055 rej=0.074 baseline=0.787
+iter 150: reward=0.781 match=0.970 correct=1.000 cost/tok=1.148 rej=0.105 baseline=0.721
+iter 160: reward=0.819 match=0.972 correct=1.000 cost/tok=1.088 rej=0.081 baseline=0.727
+iter 170: reward=0.643 match=0.973 correct=0.750 cost/tok=1.175 rej=0.100 baseline=0.734
+iter 180: reward=0.636 match=0.966 correct=0.750 cost/tok=1.175 rej=0.110 baseline=0.696
+iter 190: reward=0.832 match=0.967 correct=1.000 cost/tok=1.058 rej=0.069 baseline=0.771
+iter 200: reward=0.669 match=0.976 correct=0.750 cost/tok=1.135 rej=0.104 baseline=0.715
+iter 210: reward=0.812 match=0.977 correct=1.000 cost/tok=1.108 rej=0.089 baseline=0.733
+iter 220: reward=0.642 match=0.940 correct=0.750 cost/tok=1.122 rej=0.091 baseline=0.718
+iter 230: reward=0.570 match=0.958 correct=0.750 cost/tok=1.271 rej=0.136 baseline=0.707
+iter 240: reward=0.811 match=0.981 correct=1.000 cost/tok=1.118 rej=0.082 baseline=0.755
+iter 250: reward=0.762 match=0.961 correct=1.000 cost/tok=1.165 rej=0.104 baseline=0.702
+saved RL policy -> policy_rl.pt
+##### STAGE 3: BENCHMARK #####
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 8990.21it/s]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 8065.00it/s]
+keep_mask: [True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, True, True] (keep 26/48)
+latencies (ms): t_p1=13.22 t_qp=14.00 t_q=24.83 t_q1=25.94
+
+running greedy_q ...
+running plain_sd ...
+running via_fixed ...
+running via_imit ...
+running via_rl ...
+
+method         acc     rej  accept   regen   escal   q/tok  speedup
+-------------------------------------------------------------------
+greedy_q     0.887   0.000   0.000   0.000   0.000   1.000    1.00x
+plain_sd     0.907   0.112   0.000   0.000   0.000   0.259    1.10x
+via_fixed    0.380   0.247   0.254   0.064   0.681   0.310    0.74x
+via_imit     0.327   0.327   0.434   0.133   0.434   0.288    0.66x
+via_rl       0.887   0.113   0.408   0.001   0.591   0.253    0.96x
+=== PIPELINE DONE ===
+Sat Jun 20 16:48:12 UTC 2026
+                              running plain_sd ...
+running via_fixed ...
+running via_imit ...
+running via_rl ...
+
+method         acc     rej  accept   regen   escal   q/tok  speedup
+-------------------------------------------------------------------
+greedy_q     0.887   0.000   0.000   0.000   0.000   1.000    1.00x
+plain_sd     0.907   0.112   0.000   0.000   0.000   0.259    1.10x
+via_fixed    0.380   0.247   0.254   0.064   0.681   0.310    0.74x
+via_imit     0.327   0.327   0.434   0.133   0.434   0.288    0.66x
+via_rl       0.867   0.111   0.551   0.001   0.449   0.228    0.98x
+=== PIPELINE DONE ===
+Sat Jun 20 14:34:29 UTC 2026

@@ -1,0 +1,193 @@
+=== CONFIG verifier=Qwen2.5-14B lam=0.3 n_train=100 rl_iters=120 n_eval=150 keep_mask=dimr_mask.json ===
+Sat Jun 20 16:02:37 UTC 2026
+##### STAGE 1: IMITATION #####
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 11488.96it/s]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 10245.81it/s]
+keep_mask: [True, True, False, True, True, True, True, False, False, False, True, True, True, False, True, True, True, False, False, False, False, False, False, False, True, False, False, False, True, True, True, False, False, False, False, True, True, True, True, True, False, False, False, True, True, True, True, True]
+Using the latest cached version of the dataset since openai/gsm8k couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'main' at /home/ubuntu/.cache/huggingface/datasets/openai___gsm8k/main/0.0.0/740312add88f781978c0658806c59bc2815b9866 (last modified on Sat Jun 20 10:22:10 2026).
+[collect 1/100] samples=69 acc_so_far=1.000
+[collect 2/100] samples=79 acc_so_far=1.000
+[collect 3/100] samples=171 acc_so_far=1.000
+[collect 4/100] samples=133 acc_so_far=1.000
+[collect 5/100] samples=99 acc_so_far=1.000
+[collect 6/100] samples=247 acc_so_far=1.000
+[collect 7/100] samples=97 acc_so_far=1.000
+[collect 8/100] samples=147 acc_so_far=1.000
+[collect 9/100] samples=207 acc_so_far=1.000
+[collect 10/100] samples=251 acc_so_far=1.000
+[collect 11/100] samples=205 acc_so_far=1.000
+[collect 12/100] samples=262 acc_so_far=1.000
+[collect 13/100] samples=106 acc_so_far=1.000
+[collect 14/100] samples=236 acc_so_far=0.929
+[collect 15/100] samples=167 acc_so_far=0.933
+[collect 16/100] samples=238 acc_so_far=0.938
+[collect 17/100] samples=160 acc_so_far=0.941
+[collect 18/100] samples=258 acc_so_far=0.944
+[collect 19/100] samples=185 acc_so_far=0.947
+[collect 20/100] samples=165 acc_so_far=0.950
+[collect 21/100] samples=166 acc_so_far=0.952
+[collect 22/100] samples=246 acc_so_far=0.955
+[collect 23/100] samples=169 acc_so_far=0.957
+[collect 24/100] samples=215 acc_so_far=0.958
+[collect 25/100] samples=142 acc_so_far=0.960
+[collect 26/100] samples=202 acc_so_far=0.962
+[collect 27/100] samples=151 acc_so_far=0.963
+[collect 28/100] samples=219 acc_so_far=0.964
+[collect 29/100] samples=105 acc_so_far=0.966
+[collect 30/100] samples=302 acc_so_far=0.967
+[collect 31/100] samples=233 acc_so_far=0.968
+[collect 32/100] samples=130 acc_so_far=0.969
+[collect 33/100] samples=161 acc_so_far=0.970
+[collect 34/100] samples=315 acc_so_far=0.971
+[collect 35/100] samples=74 acc_so_far=0.971
+[collect 36/100] samples=118 acc_so_far=0.972
+[collect 37/100] samples=130 acc_so_far=0.973
+[collect 38/100] samples=176 acc_so_far=0.947
+[collect 39/100] samples=218 acc_so_far=0.949
+[collect 40/100] samples=161 acc_so_far=0.950
+[collect 41/100] samples=187 acc_so_far=0.951
+[collect 42/100] samples=81 acc_so_far=0.952
+[collect 43/100] samples=281 acc_so_far=0.953
+[collect 44/100] samples=151 acc_so_far=0.955
+[collect 45/100] samples=192 acc_so_far=0.956
+[collect 46/100] samples=133 acc_so_far=0.957
+[collect 47/100] samples=135 acc_so_far=0.957
+[collect 48/100] samples=230 acc_so_far=0.958
+[collect 49/100] samples=77 acc_so_far=0.959
+[collect 50/100] samples=95 acc_so_far=0.960
+[collect 51/100] samples=201 acc_so_far=0.961
+[collect 52/100] samples=236 acc_so_far=0.962
+[collect 53/100] samples=150 acc_so_far=0.962
+[collect 54/100] samples=129 acc_so_far=0.963
+[collect 55/100] samples=132 acc_so_far=0.964
+[collect 56/100] samples=174 acc_so_far=0.964
+[collect 57/100] samples=219 acc_so_far=0.965
+[collect 58/100] samples=234 acc_so_far=0.966
+[collect 59/100] samples=236 acc_so_far=0.966
+[collect 60/100] samples=174 acc_so_far=0.967
+[collect 61/100] samples=125 acc_so_far=0.967
+[collect 62/100] samples=262 acc_so_far=0.968
+[collect 63/100] samples=170 acc_so_far=0.968
+[collect 64/100] samples=232 acc_so_far=0.969
+[collect 65/100] samples=223 acc_so_far=0.969
+[collect 66/100] samples=161 acc_so_far=0.970
+[collect 67/100] samples=186 acc_so_far=0.970
+[collect 68/100] samples=321 acc_so_far=0.971
+[collect 69/100] samples=282 acc_so_far=0.971
+[collect 70/100] samples=116 acc_so_far=0.971
+[collect 71/100] samples=87 acc_so_far=0.972
+[collect 72/100] samples=155 acc_so_far=0.972
+[collect 73/100] samples=207 acc_so_far=0.973
+[collect 74/100] samples=110 acc_so_far=0.973
+[collect 75/100] samples=185 acc_so_far=0.973
+[collect 76/100] samples=194 acc_so_far=0.974
+[collect 77/100] samples=160 acc_so_far=0.974
+[collect 78/100] samples=74 acc_so_far=0.974
+[collect 79/100] samples=187 acc_so_far=0.975
+[collect 80/100] samples=55 acc_so_far=0.975
+[collect 81/100] samples=198 acc_so_far=0.975
+[collect 82/100] samples=303 acc_so_far=0.976
+[collect 83/100] samples=156 acc_so_far=0.976
+[collect 84/100] samples=308 acc_so_far=0.976
+[collect 85/100] samples=80 acc_so_far=0.976
+[collect 86/100] samples=170 acc_so_far=0.977
+[collect 87/100] samples=58 acc_so_far=0.977
+[collect 88/100] samples=138 acc_so_far=0.977
+[collect 89/100] samples=80 acc_so_far=0.978
+[collect 90/100] samples=168 acc_so_far=0.978
+[collect 91/100] samples=245 acc_so_far=0.978
+[collect 92/100] samples=176 acc_so_far=0.978
+[collect 93/100] samples=219 acc_so_far=0.978
+[collect 94/100] samples=163 acc_so_far=0.979
+[collect 95/100] samples=113 acc_so_far=0.979
+[collect 96/100] samples=244 acc_so_far=0.979
+[collect 97/100] samples=136 acc_so_far=0.979
+[collect 98/100] samples=279 acc_so_far=0.980
+[collect 99/100] samples=242 acc_so_far=0.980
+[collect 100/100] samples=248 acc_so_far=0.980
+oracle (==greedy-q) accuracy: 0.980
+action counts: {'accept': 15966, 'regen': 296, 'escalate': 1516}
+epoch 1: loss=1.0155 train_action_acc=0.840
+epoch 25: loss=0.5571 train_action_acc=0.789
+epoch 50: loss=0.5379 train_action_acc=0.794
+epoch 75: loss=0.5237 train_action_acc=0.755
+epoch 100: loss=0.5080 train_action_acc=0.788
+epoch 125: loss=0.4969 train_action_acc=0.795
+epoch 150: loss=0.4898 train_action_acc=0.786
+epoch 175: loss=0.4803 train_action_acc=0.781
+epoch 200: loss=0.4655 train_action_acc=0.794
+saved policy -> policy_imitation.pt
+##### STAGE 2: RL (lam=0.3) #####
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 12088.77it/s]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 9971.39it/s]
+latencies (ms): t_p1=10.42 t_qp=13.86 t_q=24.62 t_q1=20.63
+Using the latest cached version of the dataset since openai/gsm8k couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'main' at /home/ubuntu/.cache/huggingface/datasets/openai___gsm8k/main/0.0.0/740312add88f781978c0658806c59bc2815b9866 (last modified on Sat Jun 20 10:22:10 2026).
+warm-started from policy_imitation.pt
+RESUMED from rl_ckpt.pt at iter 80 (baseline=1.033)
+iter 81/120: reward=1.116 match=0.955 correct=1.000 cost/tok=1.130 rej=0.130 baseline=1.048
+iter 82/120: reward=1.082 match=0.943 correct=1.000 cost/tok=1.203 rej=0.163 baseline=1.054
+iter 83/120: reward=1.151 match=0.960 correct=1.000 cost/tok=1.030 rej=0.079 baseline=1.072
+iter 84/120: reward=1.039 match=0.930 correct=1.000 cost/tok=1.302 rej=0.178 baseline=1.066
+iter 85/120: reward=1.096 match=0.953 correct=1.000 cost/tok=1.188 rej=0.139 baseline=1.072
+iter 86/120: reward=0.952 match=0.937 correct=0.750 cost/tok=1.199 rej=0.143 baseline=1.051
+iter 87/120: reward=1.148 match=0.964 correct=1.000 cost/tok=1.054 rej=0.085 baseline=1.069
+iter 88/120: reward=0.888 match=0.959 correct=0.500 cost/tok=1.070 rej=0.092 baseline=1.033
+iter 89/120: reward=0.957 match=0.943 correct=0.750 cost/tok=1.203 rej=0.148 baseline=1.019
+iter 90/120: reward=1.108 match=0.949 correct=1.000 cost/tok=1.137 rej=0.135 baseline=1.036
+  [ckpt @ iter 90 -> rl_ckpt.pt]
+iter 91/120: reward=0.947 match=0.937 correct=0.750 cost/tok=1.217 rej=0.153 baseline=1.017
+iter 92/120: reward=0.827 match=0.947 correct=0.500 cost/tok=1.235 rej=0.158 baseline=0.979
+iter 93/120: reward=1.081 match=0.943 correct=1.000 cost/tok=1.208 rej=0.148 baseline=0.998
+iter 94/120: reward=1.122 match=0.968 correct=1.000 cost/tok=1.154 rej=0.128 baseline=1.021
+iter 95/120: reward=1.117 match=0.971 correct=1.000 cost/tok=1.178 rej=0.133 baseline=1.039
+iter 96/120: reward=1.137 match=0.954 correct=1.000 cost/tok=1.057 rej=0.102 baseline=1.057
+iter 97/120: reward=1.088 match=0.943 correct=1.000 cost/tok=1.186 rej=0.124 baseline=1.063
+iter 98/120: reward=1.111 match=0.969 correct=1.000 cost/tok=1.194 rej=0.133 baseline=1.071
+iter 99/120: reward=1.128 match=0.951 correct=1.000 cost/tok=1.078 rej=0.115 baseline=1.082
+iter 100/120: reward=0.833 match=0.938 correct=0.500 cost/tok=1.185 rej=0.148 baseline=1.036
+  [ckpt @ iter 100 -> rl_ckpt.pt]
+iter 101/120: reward=1.094 match=0.946 correct=1.000 cost/tok=1.173 rej=0.139 baseline=1.047
+iter 102/120: reward=1.115 match=0.966 correct=1.000 cost/tok=1.169 rej=0.126 baseline=1.060
+iter 103/120: reward=0.796 match=0.918 correct=0.500 cost/tok=1.240 rej=0.164 baseline=1.011
+iter 104/120: reward=1.003 match=0.967 correct=0.750 cost/tok=1.130 rej=0.114 baseline=1.010
+iter 105/120: reward=0.966 match=0.942 correct=0.750 cost/tok=1.169 rej=0.141 baseline=1.002
+iter 106/120: reward=1.126 match=0.963 correct=1.000 cost/tok=1.124 rej=0.116 baseline=1.025
+iter 107/120: reward=0.967 match=0.944 correct=0.750 cost/tok=1.173 rej=0.138 baseline=1.016
+iter 108/120: reward=1.128 match=0.969 correct=1.000 cost/tok=1.135 rej=0.110 baseline=1.037
+iter 109/120: reward=1.003 match=0.970 correct=0.750 cost/tok=1.139 rej=0.108 baseline=1.031
+iter 110/120: reward=1.011 match=0.975 correct=0.750 cost/tok=1.129 rej=0.106 baseline=1.028
+  [ckpt @ iter 110 -> rl_ckpt.pt]
+iter 111/120: reward=1.130 match=0.981 correct=1.000 cost/tok=1.170 rej=0.123 baseline=1.048
+iter 112/120: reward=1.172 match=0.981 correct=1.000 cost/tok=1.031 rej=0.070 baseline=1.071
+iter 113/120: reward=1.130 match=0.968 correct=1.000 cost/tok=1.126 rej=0.104 baseline=1.081
+iter 114/120: reward=1.129 match=0.969 correct=1.000 cost/tok=1.135 rej=0.113 baseline=1.090
+iter 115/120: reward=1.156 match=0.977 correct=1.000 cost/tok=1.068 rej=0.092 baseline=1.103
+iter 116/120: reward=0.833 match=0.945 correct=0.500 cost/tok=1.204 rej=0.138 baseline=1.053
+iter 117/120: reward=0.845 match=0.956 correct=0.500 cost/tok=1.204 rej=0.152 baseline=1.013
+iter 118/120: reward=1.019 match=0.972 correct=0.750 cost/tok=1.095 rej=0.087 baseline=1.016
+iter 119/120: reward=1.137 match=0.972 correct=1.000 cost/tok=1.118 rej=0.112 baseline=1.038
+iter 120/120: reward=1.175 match=0.984 correct=1.000 cost/tok=1.029 rej=0.074 baseline=1.064
+  [ckpt @ iter 120 -> rl_ckpt.pt]
+saved RL policy -> policy_rl.pt ; checkpoint -> rl_ckpt.pt
+##### STAGE 3: BENCHMARK #####
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 11893.85it/s]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 10320.04it/s]
+keep_mask: [True, True, False, True, True, True, True, False, False, False, True, True, True, False, True, True, True, False, False, False, False, False, False, False, True, False, False, False, True, True, True, False, False, False, False, True, True, True, True, True, False, False, False, True, True, True, True, True] (keep 26/48)
+latencies (ms): t_p1=10.51 t_qp=13.95 t_q=24.80 t_q1=20.61
+
+Using the latest cached version of the dataset since openai/gsm8k couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'main' at /home/ubuntu/.cache/huggingface/datasets/openai___gsm8k/main/0.0.0/740312add88f781978c0658806c59bc2815b9866 (last modified on Sat Jun 20 10:22:10 2026).
+corrected (ms):  t_p1=0.35 t_qp=3.78 t_q=14.64 t_q1=10.44
+bandwidth (ms):  t_p1=0.29 t_qp=5.20 t_q=8.82 t_q1=8.82
+
+running greedy_q ...
+running plain_sd ...
+running via_fixed ...

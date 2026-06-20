@@ -1,0 +1,173 @@
+=== CONFIG verifier=Qwen2.5-14B lam=0.3 n_train=100 rl_iters=250 n_eval=150 ===
+Sat Jun 20 09:44:12 UTC 2026
+##### STAGE 1: IMITATION #####
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 10427.15it/s]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 9025.74it/s]
+keep_mask: [True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, True, True]
+[collect 1/100] samples=69 acc_so_far=1.000
+[collect 2/100] samples=79 acc_so_far=1.000
+[collect 3/100] samples=171 acc_so_far=1.000
+[collect 4/100] samples=133 acc_so_far=1.000
+[collect 5/100] samples=99 acc_so_far=1.000
+[collect 6/100] samples=247 acc_so_far=1.000
+[collect 7/100] samples=97 acc_so_far=1.000
+[collect 8/100] samples=147 acc_so_far=1.000
+[collect 9/100] samples=207 acc_so_far=1.000
+[collect 10/100] samples=251 acc_so_far=1.000
+[collect 11/100] samples=205 acc_so_far=1.000
+[collect 12/100] samples=262 acc_so_far=1.000
+[collect 13/100] samples=106 acc_so_far=1.000
+[collect 14/100] samples=236 acc_so_far=0.929
+[collect 15/100] samples=167 acc_so_far=0.933
+[collect 16/100] samples=238 acc_so_far=0.938
+[collect 17/100] samples=160 acc_so_far=0.941
+[collect 18/100] samples=258 acc_so_far=0.944
+[collect 19/100] samples=185 acc_so_far=0.947
+[collect 20/100] samples=165 acc_so_far=0.950
+[collect 21/100] samples=166 acc_so_far=0.952
+[collect 22/100] samples=246 acc_so_far=0.955
+[collect 23/100] samples=169 acc_so_far=0.957
+[collect 24/100] samples=215 acc_so_far=0.958
+[collect 25/100] samples=142 acc_so_far=0.960
+[collect 26/100] samples=202 acc_so_far=0.962
+[collect 27/100] samples=151 acc_so_far=0.963
+[collect 28/100] samples=219 acc_so_far=0.964
+[collect 29/100] samples=105 acc_so_far=0.966
+[collect 30/100] samples=302 acc_so_far=0.967
+[collect 31/100] samples=233 acc_so_far=0.968
+[collect 32/100] samples=130 acc_so_far=0.969
+[collect 33/100] samples=161 acc_so_far=0.970
+[collect 34/100] samples=315 acc_so_far=0.971
+[collect 35/100] samples=74 acc_so_far=0.971
+[collect 36/100] samples=118 acc_so_far=0.972
+[collect 37/100] samples=130 acc_so_far=0.973
+[collect 38/100] samples=176 acc_so_far=0.947
+[collect 39/100] samples=218 acc_so_far=0.949
+[collect 40/100] samples=161 acc_so_far=0.950
+[collect 41/100] samples=187 acc_so_far=0.951
+[collect 42/100] samples=81 acc_so_far=0.952
+[collect 43/100] samples=281 acc_so_far=0.953
+[collect 44/100] samples=151 acc_so_far=0.955
+[collect 45/100] samples=192 acc_so_far=0.956
+[collect 46/100] samples=133 acc_so_far=0.957
+[collect 47/100] samples=135 acc_so_far=0.957
+[collect 48/100] samples=230 acc_so_far=0.958
+[collect 49/100] samples=77 acc_so_far=0.959
+[collect 50/100] samples=95 acc_so_far=0.960
+[collect 51/100] samples=201 acc_so_far=0.961
+[collect 52/100] samples=236 acc_so_far=0.962
+[collect 53/100] samples=150 acc_so_far=0.962
+[collect 54/100] samples=129 acc_so_far=0.963
+[collect 55/100] samples=132 acc_so_far=0.964
+[collect 56/100] samples=174 acc_so_far=0.964
+[collect 57/100] samples=219 acc_so_far=0.965
+[collect 58/100] samples=234 acc_so_far=0.966
+[collect 59/100] samples=236 acc_so_far=0.966
+[collect 60/100] samples=174 acc_so_far=0.967
+[collect 61/100] samples=125 acc_so_far=0.967
+[collect 62/100] samples=262 acc_so_far=0.968
+[collect 63/100] samples=170 acc_so_far=0.968
+[collect 64/100] samples=232 acc_so_far=0.969
+[collect 65/100] samples=223 acc_so_far=0.969
+[collect 66/100] samples=161 acc_so_far=0.970
+[collect 67/100] samples=186 acc_so_far=0.970
+[collect 68/100] samples=321 acc_so_far=0.971
+[collect 69/100] samples=282 acc_so_far=0.971
+[collect 70/100] samples=116 acc_so_far=0.971
+[collect 71/100] samples=87 acc_so_far=0.972
+[collect 72/100] samples=155 acc_so_far=0.972
+[collect 73/100] samples=207 acc_so_far=0.973
+[collect 74/100] samples=110 acc_so_far=0.973
+[collect 75/100] samples=185 acc_so_far=0.973
+[collect 76/100] samples=194 acc_so_far=0.974
+[collect 77/100] samples=160 acc_so_far=0.974
+[collect 78/100] samples=74 acc_so_far=0.974
+[collect 79/100] samples=187 acc_so_far=0.975
+[collect 80/100] samples=55 acc_so_far=0.975
+[collect 81/100] samples=198 acc_so_far=0.975
+[collect 82/100] samples=303 acc_so_far=0.976
+[collect 83/100] samples=156 acc_so_far=0.976
+[collect 84/100] samples=308 acc_so_far=0.976
+[collect 85/100] samples=80 acc_so_far=0.976
+[collect 86/100] samples=170 acc_so_far=0.977
+[collect 87/100] samples=58 acc_so_far=0.977
+[collect 88/100] samples=138 acc_so_far=0.977
+[collect 89/100] samples=80 acc_so_far=0.978
+[collect 90/100] samples=168 acc_so_far=0.978
+[collect 91/100] samples=245 acc_so_far=0.978
+[collect 92/100] samples=176 acc_so_far=0.978
+[collect 93/100] samples=219 acc_so_far=0.978
+[collect 94/100] samples=163 acc_so_far=0.979
+[collect 95/100] samples=113 acc_so_far=0.979
+[collect 96/100] samples=244 acc_so_far=0.979
+[collect 97/100] samples=136 acc_so_far=0.979
+[collect 98/100] samples=279 acc_so_far=0.980
+[collect 99/100] samples=242 acc_so_far=0.980
+[collect 100/100] samples=248 acc_so_far=0.980
+oracle (==greedy-q) accuracy: 0.980
+action counts: {'accept': 15966, 'regen': 118, 'escalate': 1694}
+epoch 1: loss=1.0266 train_action_acc=0.834
+epoch 25: loss=0.5987 train_action_acc=0.789
+epoch 50: loss=0.5773 train_action_acc=0.805
+epoch 75: loss=0.5729 train_action_acc=0.767
+epoch 100: loss=0.5413 train_action_acc=0.800
+epoch 125: loss=0.5140 train_action_acc=0.813
+epoch 150: loss=0.5013 train_action_acc=0.797
+epoch 175: loss=0.4932 train_action_acc=0.797
+epoch 200: loss=0.4711 train_action_acc=0.819
+saved policy -> policy_imitation.pt
+##### STAGE 2: RL (lam=0.3) #####
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 10427.33it/s]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 9207.03it/s]
+latencies (ms): t_p1=10.20 t_qp=13.66 t_q=24.33 t_q1=20.01
+warm-started from policy_imitation.pt
+iter 10: reward=0.896 match=0.917 correct=0.750 cost/tok=1.319 rej=0.202 baseline=0.564
+iter 20: reward=0.917 match=0.912 correct=0.750 cost/tok=1.232 rej=0.160 baseline=0.799
+iter 30: reward=0.965 match=0.936 correct=0.750 cost/tok=1.154 rej=0.137 baseline=0.850
+iter 40: reward=1.006 match=0.951 correct=0.750 cost/tok=1.067 rej=0.118 baseline=1.008
+iter 50: reward=0.864 match=0.953 correct=0.500 cost/tok=1.131 rej=0.133 baseline=0.966
+iter 60: reward=1.052 match=0.985 correct=0.750 cost/tok=1.027 rej=0.096 baseline=1.013
+iter 70: reward=1.094 match=0.947 correct=1.000 cost/tok=1.176 rej=0.143 baseline=1.007
+iter 80: reward=0.708 match=0.959 correct=0.250 cost/tok=1.254 rej=0.167 baseline=0.916
+iter 90: reward=0.987 match=0.957 correct=0.750 cost/tok=1.151 rej=0.120 baseline=1.041
+iter 100: reward=0.862 match=0.964 correct=0.500 cost/tok=1.174 rej=0.131 baseline=1.007
+iter 110: reward=1.120 match=0.959 correct=1.000 cost/tok=1.127 rej=0.104 baseline=1.039
+iter 120: reward=0.962 match=0.964 correct=0.750 cost/tok=1.258 rej=0.149 baseline=1.068
+iter 130: reward=1.076 match=0.964 correct=1.000 cost/tok=1.294 rej=0.163 baseline=1.032
+iter 140: reward=1.154 match=0.975 correct=1.000 cost/tok=1.070 rej=0.083 baseline=1.085
+iter 150: reward=1.143 match=0.973 correct=1.000 cost/tok=1.099 rej=0.097 baseline=1.045
+iter 160: reward=1.139 match=0.979 correct=1.000 cost/tok=1.134 rej=0.106 baseline=1.085
+iter 170: reward=0.966 match=0.970 correct=0.750 cost/tok=1.263 rej=0.150 baseline=1.058
+iter 180: reward=1.124 match=0.971 correct=1.000 cost/tok=1.157 rej=0.113 baseline=1.068
+iter 190: reward=1.144 match=0.970 correct=1.000 cost/tok=1.088 rej=0.090 baseline=1.111
+iter 200: reward=1.142 match=0.979 correct=1.000 cost/tok=1.121 rej=0.109 baseline=1.114
+iter 210: reward=1.101 match=0.950 correct=1.000 cost/tok=1.165 rej=0.123 baseline=1.088
+iter 220: reward=1.110 match=0.961 correct=1.000 cost/tok=1.173 rej=0.114 baseline=1.062
+iter 230: reward=1.112 match=0.961 correct=1.000 cost/tok=1.165 rej=0.114 baseline=1.057
+iter 240: reward=1.132 match=0.966 correct=1.000 cost/tok=1.111 rej=0.095 baseline=1.128
+iter 250: reward=0.994 match=0.954 correct=0.750 cost/tok=1.116 rej=0.104 baseline=1.046
+saved RL policy -> policy_rl.pt
+##### STAGE 3: BENCHMARK #####
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 10849.11it/s]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 9221.75it/s]
+keep_mask: [True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, True, True] (keep 26/48)
+latencies (ms): t_p1=10.37 t_qp=13.72 t_q=24.40 t_q1=20.61
+
+running greedy_q ...
+running plain_sd ...
+running via_fixed ...
+running via_imit ...
+running via_rl ...
+
+method         acc     rej  accept   regen   escal   q/tok  speedup
+-------------------------------------------------------------------
+greedy_q     0.887   0.000   0.000   0.000   0.000   1.000    1.00x
+plain_sd     0.907   0.112   0.000   0.000   0.000   0.259    1.04x
+via_fixed    0.380   0.247   0.254   0.064   0.681   0.310    0.69x
+via_imit     0.327   0.327   0.434   0.133   0.434   0.288    0.62x
+via_rl       0.880   0.114   0.480   0.002   0.518   0.243    0.89x
+=== PIPELINE DONE ===
+Sat Jun 20 13:12:32 UTC 2026
