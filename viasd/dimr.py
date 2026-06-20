@@ -83,6 +83,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--n_calib", type=int, default=12)
     ap.add_argument("--skip_ratio", type=float, default=0.45)
+    ap.add_argument("--n_random", type=int, default=30)
+    ap.add_argument("--hill_steps", type=int, default=40)
     ap.add_argument("--out", type=str, default="dimr_mask.json")
     args = ap.parse_args()
 
@@ -92,7 +94,8 @@ def main():
     problems = load_gsm8k(args.n_calib, split="train")
     calib = [build_prompt_ids(tiers.tokenizer, q, tiers.device) for q, _ in problems]
 
-    mask, score = search(tiers, calib, args.skip_ratio, cfg.keep_first_last, seed=cfg.seed)
+    mask, score = search(tiers, calib, args.skip_ratio, cfg.keep_first_last,
+                         n_random=args.n_random, hill_steps=args.hill_steps, seed=cfg.seed)
     with open(args.out, "w") as f:
         json.dump({"keep_mask": mask, "skip_ratio": args.skip_ratio, "score": score}, f)
     n_keep = sum(mask)

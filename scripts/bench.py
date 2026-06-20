@@ -17,7 +17,7 @@ from viasd.data_gsm8k import build_prompt_ids, load_gsm8k
 from viasd.decoding import (FixedThresholdDecider, PolicyDecider,
                             greedy_q_generate, plain_sd_generate, via_sd_generate)
 from viasd.metrics import is_correct
-from viasd.models import load_models, measure_latencies
+from viasd.models import bandwidth_latencies, corrected_latencies, load_models, measure_latencies
 from viasd.policy import load_policy
 
 
@@ -68,19 +68,31 @@ def main():
         polr = load_policy(args.policy_rl, cfg.device)
         methods["via_rl"] = lambda ids, m: via_sd_generate(tiers, ids, m, PolicyDecider(polr))
 
+    lat_corr = corrected_latencies(tiers, lat)
+    lat_bw = bandwidth_latencies(tiers)
+    print(f"corrected (ms):  t_p1={lat_corr.t_p1*1e3:.2f} t_qp={lat_corr.t_qp*1e3:.2f} "
+          f"t_q={lat_corr.t_q*1e3:.2f} t_q1={lat_corr.t_q1*1e3:.2f}")
+    print(f"bandwidth (ms):  t_p1={lat_bw.t_p1*1e3:.2f} t_qp={lat_bw.t_qp*1e3:.2f} "
+          f"t_q={lat_bw.t_q*1e3:.2f} t_q1={lat_bw.t_q1*1e3:.2f}\n", flush=True)
+
     rows = []
     for name, fn in methods.items():
         print(f"running {name} ...", flush=True)
         agg, acc = run_method(tiers, problems, fn)
         a, r, e = agg.tier_fractions()
-        rows.append((name, acc, agg.rejection_rate, a, r, e,
-                     agg.q_calls_per_token, lat.speedup(agg)))
+        tpq = (agg.tokens / (agg.q_forwards + agg.q1_steps)) if (agg.q_forwards + agg.q1_steps) else float("inf")
+        rows.append((name, acc, agg.rejection_rate, a, r, e, agg.q_calls_per_token, tpq,
+                     lat.speedup(agg), lat_corr.speedup(agg), lat_bw.speedup(agg)))
 
-    hdr = f"{'method':<11}{'acc':>7}{'rej':>8}{'accept':>8}{'regen':>8}{'escal':>8}{'q/tok':>8}{'speedup':>9}"
+    # q/tok = full-verifier calls/token (headline, hardware-independent); tok/q = its inverse.
+    # spd = measured (overhead-bound); spd_cor = overhead-subtracted; spd_bw = bandwidth model.
+    hdr = (f"{'method':<11}{'acc':>7}{'rej':>7}{'accept':>7}{'escal':>7}"
+           f"{'q/tok':>7}{'tok/q':>7}{'spd':>6}{'spd_cor':>8}{'spd_bw':>8}")
     print("\n" + hdr)
     print("-" * len(hdr))
-    for name, acc, rej, a, r, e, qpt, sp in rows:
-        print(f"{name:<11}{acc:>7.3f}{rej:>8.3f}{a:>8.3f}{r:>8.3f}{e:>8.3f}{qpt:>8.3f}{sp:>8.2f}x")
+    for name, acc, rej, a, r, e, qpt, tpq, sp, spc, spbw in rows:
+        print(f"{name:<11}{acc:>7.3f}{rej:>7.3f}{a:>7.3f}{e:>7.3f}"
+              f"{qpt:>7.3f}{tpq:>7.2f}{sp:>5.2f}x{spc:>7.2f}x{spbw:>7.2f}x")
 
 
 if __name__ == "__main__":

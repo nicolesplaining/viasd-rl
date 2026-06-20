@@ -94,14 +94,79 @@ def lm_logits(model, input_ids, keep_mask=None):
     return model(input_ids=input_ids, use_cache=False).logits
 
 
-def compile_models(tiers: Tiers, mode="default"):
-    """torch.compile the drafter and verifier to cut per-call overhead.
-    The layer-skip context manager mutates verifier.model.layers, which triggers
-    a recompile when switching between full/slim graphs -- fine as long as the two
-    shapes are each reused (grouped) rather than interleaved per call."""
-    tiers.drafter = torch.compile(tiers.drafter, mode=mode)
-    tiers.verifier = torch.compile(tiers.verifier, mode=mode)
+def compile_models(tiers: Tiers, mode="default", compile_verifier=False):
+    """torch.compile the drafter (and optionally verifier) to cut per-call overhead.
+
+    CUDA graphs (mode='reduce-overhead', and inductor's default cudagraph_trees)
+    are INCOMPATIBLE with our reused dynamic KV-cache loop -- they raise
+    "accessing tensor output of CUDAGraphs that has been overwritten". So we
+    disable cudagraphs and rely on inductor kernel *fusion* only (fewer launches,
+    no graph capture). This is the safe win; the bigger cudagraph win needs a
+    static-cache rewrite.
+
+    The layer-skip context manager mutates verifier.model.layers, which triggers a
+    recompile when switching full<->slim graphs -- fine as long as the two shapes
+    are each reused (grouped) rather than interleaved per call."""
+    try:
+        import torch._inductor.config as ic
+        ic.triton.cudagraphs = False
+    except Exception:
+        pass
+    # Drafter only: it has no layer-skip, so compiling it is safe and high-value
+    # (drafting = gamma sequential steps/block, the dominant per-block latency;
+    # measured ~1.8x). The verifier is NOT compiled here because via_sd alternates
+    # full<->slim (layer-skip swap) every block, which thrashes torch.compile guards;
+    # and the slim path gets ~no benefit anyway (measured 1.00x).
+    if compile_verifier:
+        tiers.verifier = torch.compile(tiers.verifier)
+    tiers.drafter = torch.compile(tiers.drafter)
     return tiers
+
+
+def bandwidth_latencies(tiers: Tiers, bandwidth_bytes_s=3.35e12, bytes_per_param=2) -> Latencies:
+    """Idealized per-forward latency from the batch-1 decode bottleneck: memory
+    bandwidth. One decode step streams all (active) weights once, so
+    time ~= active_params * bytes_per_param / HBM_bandwidth -- independent of the
+    eager per-call overhead floor that pollutes measured wall-clock.
+
+    A gamma-token block verify still reads weights once (compute is negligible vs
+    the weight read at batch 1), so t_q == t_q1 and t_qp scales with kept layers.
+    Default bandwidth = H100 SXM (~3.35 TB/s); the speedup *ratio* is bandwidth-
+    independent. This is "seconds/decode in an overhead-free implementation."
+    """
+    layers = _decoder_layers(tiers.verifier)
+    layer_params = sum(p.numel() for l in layers for p in l.parameters())
+    total_q = sum(p.numel() for p in tiers.verifier.parameters())
+    non_layer = total_q - layer_params
+    per_layer = layer_params / len(layers)
+    P_qp = non_layer + sum(tiers.keep_mask) * per_layer
+    P_p = sum(p.numel() for p in tiers.drafter.parameters())
+
+    def t(params):
+        return params * bytes_per_param / bandwidth_bytes_s
+
+    return Latencies(t_p1=t(P_p), t_qp=t(P_qp), t_q=t(total_q), t_q1=t(total_q))
+
+
+@torch.no_grad()
+def corrected_latencies(tiers: Tiers, raw: "Latencies" = None) -> "Latencies":
+    """Overhead-corrected per-forward latency = measured - launch_floor.
+
+    A batch-1 forward costs `floor + params*2/BW_eff` (per-token compute is
+    negligible). We solve for the fixed launch `floor` and effective bandwidth
+    `BW_eff` from the drafter vs verifier 1-token times (overhead is size-
+    independent; weight-read scales with params), then subtract the floor from
+    every measured forward. Real measurement, with only the launch artifact removed.
+    """
+    raw = raw or measure_latencies(tiers)
+    P_p = sum(p.numel() for p in tiers.drafter.parameters())
+    P_q = sum(p.numel() for p in tiers.verifier.parameters())
+    if raw.t_q1 <= raw.t_p1 or P_q <= P_p:        # degenerate; nothing to correct
+        return raw
+    bw_eff = (P_q - P_p) * 2 / (raw.t_q1 - raw.t_p1)   # bytes/sec
+    floor = max(0.0, raw.t_p1 - P_p * 2 / bw_eff)
+    sub = lambda t: max(t - floor, 1e-5)
+    return Latencies(t_p1=sub(raw.t_p1), t_qp=sub(raw.t_qp), t_q=sub(raw.t_q), t_q1=sub(raw.t_q1))
 
 
 @torch.no_grad()
