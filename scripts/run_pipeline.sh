@@ -11,21 +11,23 @@ EPOCHS=${EPOCHS:-200}
 RL_ITERS=${RL_ITERS:-250}
 N_EVAL=${N_EVAL:-150}
 MAX_NEW=${MAX_NEW:-320}
+KEEP_MASK=${KEEP_MASK:-}
+KARG=""; [ -n "$KEEP_MASK" ] && KARG="--keep_mask $KEEP_MASK"
 
-echo "=== CONFIG verifier=${VIASD_VERIFIER:-Qwen2.5-14B} lam=$LAM n_train=$N_TRAIN rl_iters=$RL_ITERS n_eval=$N_EVAL ==="
+echo "=== CONFIG verifier=${VIASD_VERIFIER:-Qwen2.5-14B} lam=$LAM n_train=$N_TRAIN rl_iters=$RL_ITERS n_eval=$N_EVAL keep_mask=${KEEP_MASK:-default} ==="
 date
 
 echo "##### STAGE 1: IMITATION #####"
 python -m viasd.train_imitation --n_train "$N_TRAIN" --epochs "$EPOCHS" \
-    --max_new "$MAX_NEW" --out policy_imitation.pt
+    --max_new "$MAX_NEW" --out policy_imitation.pt $KARG
 
 echo "##### STAGE 2: RL (lam=$LAM) #####"
 python -m viasd.train_rl --init policy_imitation.pt --out policy_rl.pt \
     --iters "$RL_ITERS" --batch 4 --lam "$LAM" --r_correct 0.5 \
-    --max_new "$MAX_NEW" --n_train "$N_TRAIN"
+    --max_new "$MAX_NEW" --n_train "$N_TRAIN" $KARG
 
 echo "##### STAGE 3: BENCHMARK #####"
-python scripts/bench.py --n_eval "$N_EVAL" --max_new "$MAX_NEW"
+python scripts/bench.py --n_eval "$N_EVAL" --max_new "$MAX_NEW" $KARG
 
 echo "=== PIPELINE DONE ==="
 date
