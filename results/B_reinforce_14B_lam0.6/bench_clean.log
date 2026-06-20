@@ -1,27 +1,15 @@
 /usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
   warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
-Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 8267.50it/s]
-Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 7287.79it/s]
-Traceback (most recent call last):
-  File "/home/ubuntu/viasd-rl/scripts/bench.py", line 99, in <module>
-    main()
-  File "/home/ubuntu/viasd-rl/scripts/bench.py", line 50, in main
-    tiers = load_models(cfg)
-  File "/home/ubuntu/viasd-rl/viasd/models.py", line 71, in load_models
-    verifier = AutoModelForCausalLM.from_pretrained(cfg.verifier_name, **common).to(cfg.device).eval()
-  File "/home/ubuntu/viasd-rl/.venv/lib/python3.10/site-packages/transformers/modeling_utils.py", line 3729, in to
-    return super().to(*args, **kwargs)
-  File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 1355, in to
-    return self._apply(convert)
-  File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 915, in _apply
-    module._apply(fn)
-  File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 915, in _apply
-    module._apply(fn)
-  File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 915, in _apply
-    module._apply(fn)
-  [Previous line repeated 2 more times]
-  File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 942, in _apply
-    param_applied = fn(param)
-  File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 1341, in convert
-    return t.to(
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 136.00 MiB. GPU 0 has a total capacity of 79.18 GiB of which 46.75 MiB is free. Process 6534 has 52.74 GiB memory in use. Including non-PyTorch memory, this process has 26.38 GiB memory in use. Of the allocated memory 25.83 GiB is allocated by PyTorch, and 42.33 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 8377.23it/s]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 8453.31it/s]
+keep_mask: [True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, True, True] (keep 26/48)
+latencies (ms): t_p1=12.99 t_qp=13.88 t_q=24.56 t_q1=25.49
+
+Using the latest cached version of the dataset since openai/gsm8k couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'main' at /home/ubuntu/.cache/huggingface/datasets/openai___gsm8k/main/0.0.0/740312add88f781978c0658806c59bc2815b9866 (last modified on Sat Jun 20 09:53:22 2026).
+corrected (ms):  t_p1=0.43 t_qp=1.32 t_q=12.01 t_q1=12.93
+bandwidth (ms):  t_p1=0.29 t_qp=5.20 t_q=8.82 t_q1=8.82
+
+running greedy_q ...
+running plain_sd ...
+running via_fixed ...
