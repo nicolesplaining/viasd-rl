@@ -32,7 +32,7 @@ from .models import compile_models, load_models, measure_latencies
 from .policy import load_policy, save_policy
 
 
-def rollout(tiers, policy, q, gold, lat, lam, r_correct):
+def rollout(tiers, policy, q, gold, lat, lam, r_correct, match_weight=1.0):
     ids = build_prompt_ids(tiers.tokenizer, q, tiers.device)
     plen = ids.shape[1]
     samples = []
@@ -44,7 +44,7 @@ def rollout(tiers, policy, q, gold, lat, lam, r_correct):
     matches = [s.match for s in samples if s.match >= 0]
     match_rate = sum(matches) / len(matches) if matches else 0.0
     cost_per_tok = (lat.estimate(m) / max(m.tokens, 1)) / lat.t_q1
-    reward = match_rate + r_correct * correct - lam * cost_per_tok
+    reward = match_weight * match_rate + r_correct * correct - lam * cost_per_tok
     return samples, reward, correct, match_rate, cost_per_tok, m
 
 
@@ -67,6 +67,7 @@ def main():
     ap.add_argument("--entropy", type=float, default=0.01)
     ap.add_argument("--lam", type=float, default=0.3)
     ap.add_argument("--r_correct", type=float, default=0.5)
+    ap.add_argument("--match_weight", type=float, default=1.0)  # set ~0 for correctness-focused RL
     ap.add_argument("--max_new", type=int, default=320)
     ap.add_argument("--keep_mask", default="")
     ap.add_argument("--ckpt_every", type=int, default=10)
@@ -119,7 +120,7 @@ def main():
             grp = []
             for _g in range(args.group_size):
                 samples, reward, correct, match, cost, m = rollout(
-                    tiers, policy, q, gold, lat, args.lam, args.r_correct)
+                    tiers, policy, q, gold, lat, args.lam, args.r_correct, args.match_weight)
                 grp.append((samples, reward))
                 r_all.append(reward); match_all.append(match)
                 correct_all.append(correct); cost_all.append(cost); rej_all.append(m.rejection_rate)
