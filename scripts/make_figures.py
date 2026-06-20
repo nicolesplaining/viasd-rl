@@ -117,6 +117,7 @@ def rl_curves():
                               ("match", axes[1], "Match w/ full model"),
                               ("rej", axes[2], "Rejection rate")]:
         for label, data, c in series:
+            data = [d for d in data if d.get("iter", 0) <= 125]   # truncate to 125 steps
             if not data:
                 continue
             xs = [d["iter"] for d in data]
@@ -125,6 +126,7 @@ def rl_curves():
             if any(v is None for v in ys):
                 continue
             ax.plot(xs, ys, label=label, color=c, lw=1.4, alpha=0.85)
+        ax.set_xlim(0, 125)
         ax.set_xlabel("iteration"); ax.set_title(title); ax.grid(True, alpha=0.3)
     axes[1].legend(fontsize=8)
     fig.suptitle("RL training curves (0.5B→14B, GSM8K)", y=1.02)

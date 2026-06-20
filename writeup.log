@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.22)  20 JUN 2026 15:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.22)  20 JUN 2026 16:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -775,15 +775,15 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.303 \item \textbf
-                   {Honest negatives}: the $q'$ middle tier's per-block over...
+l.304 \item \textbf
+                   {The v2 per-token reward drives escalation below break-ev...
 
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.303 \item \textbf
-                   {Honest negatives}: the $q'$ middle tier's per-block over...
+l.304 \item \textbf
+                   {The v2 per-token reward drives escalation below break-ev...
  <./results/figures/pareto.png> <./results/figures/rl_curves.png>] [8]
 (./writeup.aux)
  ***********
@@ -796,7 +796,7 @@ Package rerunfilecheck Info: File `writeup.out' has not changed.
 Here is how much of TeX's memory you used:
  21786 strings out of 467525
  407310 string characters out of 5418982
- 818677 words of memory out of 5000000
+ 818699 words of memory out of 5000000
  50305 multiletter control sequences out of 15000+600000
  641722 words of font info for 92 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -824,7 +824,7 @@ f-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2026/texmf
 exmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/local/texlive/2026/tex
 mf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2026/texmf
 -dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on writeup.pdf (8 pages, 598679 bytes).
+Output written on writeup.pdf (8 pages, 642573 bytes).
 PDF statistics:
  254 PDF objects out of 1000 (max. 8388607)
  190 compressed objects within 2 object streams

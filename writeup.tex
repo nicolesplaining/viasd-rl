@@ -9,7 +9,7 @@
 \usepackage{float}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, positioning, shapes.geometric}
-\title{\textbf{Learning the Routing Policy for VIA-SD:\\ RL-Gated Hierarchical Speculative Decoding}}
+\title{\textbf{Self-Taught Semi-Self Speculative Decoding (S4D):\\ A Learned Routing Policy for Hierarchical Verification}}
 \author{viasd-rl experiments}
 \date{\today}
 
@@ -257,8 +257,8 @@ plain SD (standard, lossless) & 0.907 & 0.259 & 1.40$\times$\textsuperscript{\da
 via\_fixed (paper, tuned)     & 0.40\textsuperscript{*} & 0.31 & 1.76$\times$ \\
 via\_imit (imitation only)    & 0.34  & 0.29 & 1.69$\times$ \\
 \midrule
-via\_rl REINFORCE             & 0.880 & 0.243 & --- \\
-via\_rl GRPO                  & 0.853 & \textbf{0.162} & --- \\
+via\_rl REINFORCE             & 0.880 & 0.243 & 2.29$\times$ \\
+via\_rl GRPO                  & 0.853 & \textbf{0.162} & 2.94$\times$ \\
 via\_rl REINFORCE\,+\,DIMR    & \textbf{0.907} & 0.250 & 2.22$\times$ \\
 via\_rl v2 per-token ($\lambda{=}0.3$) & 0.713 & 0.104 & \textbf{3.53$\times$} \\
 \bottomrule
@@ -292,7 +292,11 @@ GRPO (orange) is noisiest; REINFORCE (green) intermediate; all reach match$\appr
 \section{Findings}
 \begin{enumerate}\itemsep2pt
 \item \textbf{Learned gate $\gg$ fixed thresholds} ($0.88$--$0.91$ vs.\ $0.21$--$0.40$, and $\le0.50$
-fully tuned), at lower q-calls/token --- robust across masks and capacity gaps.
+fully tuned), at lower q-calls/token --- robust across masks and capacity gaps. \emph{Mechanism:} the
+layer-skipped $q'$ is miscalibrated, so a single global confidence cutoff cannot separate
+confident-and-correct from confident-but-wrong tokens; the fixed rule accepts locally-plausible but
+globally-wrong tokens, and on GSM8K (all-or-nothing final answer) those per-token errors compound ---
+which is why even a full $(\alpha_1,\alpha_2)$ sweep plateaus at $\le0.50$.
 \item \textbf{RL fixes imitation's exposure bias} ($0.33\to0.88$+) by training on-policy.
 \item \textbf{DIMR helps only the learned gate} (via\_rl $0.88\to0.91$); the fixed rule stays brittle.
 \item \textbf{Credit assignment matters}: per-token (v2) is far lower-variance than trajectory-level
