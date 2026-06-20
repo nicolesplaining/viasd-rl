@@ -1,0 +1,45 @@
+=== k10l6 draft=knapspec_keep10.json qp=dimr_mask.json lam=0.6 :: IMITATION ===
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:00<00:00, 85.79it/s]
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/ubuntu/viasd/viasd/train_imitation.py", line 94, in <module>
+    main()
+  File "/home/ubuntu/viasd/viasd/train_imitation.py", line 83, in main
+    tiers = load_models(cfg)
+  File "/home/ubuntu/viasd/viasd/models.py", line 139, in load_models
+    with open(dmp) as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'knapspec_keep10.json'
+=== k10l6 :: RL iters=40 lam=0.6 ckpt_every=10 ===
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:00<00:00, 84.42it/s]
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/ubuntu/viasd/viasd/train_rl_pertoken.py", line 155, in <module>
+    main()
+  File "/home/ubuntu/viasd/viasd/train_rl_pertoken.py", line 89, in main
+    tiers = load_models(cfg)
+  File "/home/ubuntu/viasd/viasd/models.py", line 139, in load_models
+    with open(dmp) as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'knapspec_keep10.json'
+=== k10l6 :: BENCH ===
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:00<00:00, 85.76it/s]
+Traceback (most recent call last):
+  File "/home/ubuntu/viasd/scripts/bench.py", line 99, in <module>
+    main()
+  File "/home/ubuntu/viasd/scripts/bench.py", line 50, in main
+    tiers = load_models(cfg)
+  File "/home/ubuntu/viasd/viasd/models.py", line 139, in load_models
+    with open(dmp) as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'knapspec_keep10.json'
+=== k10l6 :: DONE ===
