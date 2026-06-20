@@ -1,0 +1,7 @@
+torch>=2.2
+transformers>=4.44
+datasets>=2.20
+numpy<2          # system torch/pandas on the GPU boxes are built against numpy 1.x
+pillow>=9.1      # transformers 5.x needs Image.Resampling
+jinja2>=3.1      # chat templates
+tqdm>=4.66
