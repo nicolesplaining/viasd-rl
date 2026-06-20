@@ -43,6 +43,8 @@ def main():
     ap.add_argument("--keep_mask", type=str, default="")
     ap.add_argument("--policy_imitation", type=str, default="policy_imitation.pt")
     ap.add_argument("--policy_rl", type=str, default="policy_rl.pt")
+    ap.add_argument("--methods", type=str, default="",
+                    help="comma-separated subset to run (e.g. greedy_q,via_fixed,via_rl); empty=all")
     args = ap.parse_args()
 
     cfg = Config(max_new_tokens=args.max_new, keep_mask_path=args.keep_mask)
@@ -67,6 +69,10 @@ def main():
     if os.path.exists(args.policy_rl):
         polr = load_policy(args.policy_rl, cfg.device)
         methods["via_rl"] = lambda ids, m: via_sd_generate(tiers, ids, m, PolicyDecider(polr))
+    if args.methods:
+        sel = [s.strip() for s in args.methods.split(",")]
+        methods = {k: v for k, v in methods.items() if k in sel}
+        print("running subset:", list(methods.keys()), flush=True)
 
     lat_corr = corrected_latencies(tiers, lat)
     lat_bw = bandwidth_latencies(tiers)
@@ -75,24 +81,22 @@ def main():
     print(f"bandwidth (ms):  t_p1={lat_bw.t_p1*1e3:.2f} t_qp={lat_bw.t_qp*1e3:.2f} "
           f"t_q={lat_bw.t_q*1e3:.2f} t_q1={lat_bw.t_q1*1e3:.2f}\n", flush=True)
 
-    rows = []
-    for name, fn in methods.items():
-        print(f"running {name} ...", flush=True)
-        agg, acc = run_method(tiers, problems, fn)
-        a, r, e = agg.tier_fractions()
-        tpq = (agg.tokens / (agg.q_forwards + agg.q1_steps)) if (agg.q_forwards + agg.q1_steps) else float("inf")
-        rows.append((name, acc, agg.rejection_rate, a, r, e, agg.q_calls_per_token, tpq,
-                     lat.speedup(agg), lat_corr.speedup(agg), lat_bw.speedup(agg)))
-
     # q/tok = full-verifier calls/token (headline, hardware-independent); tok/q = its inverse.
     # spd = measured (overhead-bound); spd_cor = overhead-subtracted; spd_bw = bandwidth model.
     hdr = (f"{'method':<11}{'acc':>7}{'rej':>7}{'accept':>7}{'escal':>7}"
            f"{'q/tok':>7}{'tok/q':>7}{'spd':>6}{'spd_cor':>8}{'spd_bw':>8}")
     print("\n" + hdr)
     print("-" * len(hdr))
-    for name, acc, rej, a, r, e, qpt, tpq, sp, spc, spbw in rows:
-        print(f"{name:<11}{acc:>7.3f}{rej:>7.3f}{a:>7.3f}{e:>7.3f}"
-              f"{qpt:>7.3f}{tpq:>7.2f}{sp:>5.2f}x{spc:>7.2f}x{spbw:>7.2f}x")
+    # Print each row as soon as it finishes, so a crash mid-run preserves completed rows.
+    for name, fn in methods.items():
+        print(f"running {name} ...", flush=True)
+        agg, acc = run_method(tiers, problems, fn)
+        a, r, e = agg.tier_fractions()
+        tpq = (agg.tokens / (agg.q_forwards + agg.q1_steps)) if (agg.q_forwards + agg.q1_steps) else float("inf")
+        qpt, sp, spc, spbw = (agg.q_calls_per_token, lat.speedup(agg),
+                              lat_corr.speedup(agg), lat_bw.speedup(agg))
+        print(f"{name:<11}{acc:>7.3f}{agg.rejection_rate:>7.3f}{a:>7.3f}{e:>7.3f}"
+              f"{qpt:>7.3f}{tpq:>7.2f}{sp:>5.2f}x{spc:>7.2f}x{spbw:>7.2f}x", flush=True)
 
 
 if __name__ == "__main__":

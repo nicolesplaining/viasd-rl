@@ -18,16 +18,19 @@ os.makedirs(FIG, exist_ok=True)
 
 # ---- stable curated points (completed runs; see results/README.md) ----
 # name, acc, spd_bw, qtok, group
+# NOTE: plain SD speedup is MEASURED WALL-CLOCK (Qwen, 1.4x); all via_* speedups are the
+# idealized BANDWIDTH model -- not directly comparable (real via_* wall-clock would be lower).
 BASE = [
-    ("greedy_q",               0.900, 1.00,  1.000, "baseline"),
-    ("plain_sd (lossless)",    0.912, 3.32,  0.258, "baseline"),
-    ("via_fixed (paper)",      0.400, 1.76,  0.311, "fixed"),
-    ("via_imit (imitation)",   0.338, 1.69,  0.288, "fixed"),
-    ("via_rl REINFORCE+DIMR",  0.907, 2.22,  0.250, "learned"),
-    ("via_rl v2 (lam0.3)",     0.713, 3.53,  0.104, "learned"),
+    ("greedy_q",                 0.900, 1.00,  1.000, "baseline"),
+    ("plain SD (wall-clock)",    0.907, 1.40,  0.259, "wallclock"),
+    ("via_fixed (paper)",        0.400, 1.76,  0.311, "fixed"),
+    ("via_imit (imitation)",     0.338, 1.69,  0.288, "fixed"),
+    ("via_rl REINFORCE+DIMR",    0.907, 2.22,  0.250, "learned"),
+    ("via_rl v2 (lam0.3)",       0.713, 3.53,  0.104, "learned"),
 ]
-BAR_METHODS = BASE[:5] + [BASE[5]]
-COLORS = {"baseline": "#888888", "fixed": "#d62728", "learned": "#1f77b4", "acc-rl": "#9467bd"}
+BAR_METHODS = list(BASE)
+COLORS = {"baseline": "#888888", "wallclock": "#111111", "fixed": "#d62728",
+          "learned": "#1f77b4", "acc-rl": "#9467bd"}
 
 # ---- live points parsed from bench logs (auto-refresh as runs finish) ----
 # (label, logpath, group). via_rl row of each = the trained policy of that run.
@@ -68,7 +71,7 @@ def speedup_bar():
     bars = ax.bar(range(len(names)), spd, color=cols)
     ax.axhline(1.0, color="k", ls="--", lw=0.8, alpha=0.6)
     ax.set_xticks(range(len(names))); ax.set_xticklabels(names, rotation=30, ha="right", fontsize=9)
-    ax.set_ylabel("Speedup vs greedy (bandwidth model)")
+    ax.set_ylabel("Speedup vs greedy (bw model; plain SD = wall-clock)")
     ax.set_title("Estimated speedup by method (overhead-free, 0.5B→14B, GSM8K)")
     for b, v in zip(bars, spd):
         ax.text(b.get_x()+b.get_width()/2, v+0.05, f"{v:.2f}×", ha="center", fontsize=8)
@@ -81,7 +84,7 @@ def pareto():
     for name, acc, spd, qtok, grp in pts:
         ax.scatter(spd, acc, s=90, color=COLORS[grp], zorder=3)
         ax.annotate(name, (spd, acc), textcoords="offset points", xytext=(6, 4), fontsize=7.5)
-    ax.set_xlabel("Speedup vs greedy (bandwidth model)"); ax.set_ylabel("GSM8K accuracy")
+    ax.set_xlabel("Speedup vs greedy (bw model; plain SD = wall-clock)"); ax.set_ylabel("GSM8K accuracy")
     ax.set_title("Accuracy vs speedup frontier"); ax.grid(True, alpha=0.3)
     for g, c in COLORS.items():
         ax.scatter([], [], color=c, label=g)

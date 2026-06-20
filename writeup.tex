@@ -21,8 +21,8 @@ policy}. We study three RL formulations (REINFORCE, GRPO, and a per-token-reward
 variant) and their reward/credit-assignment design. On a GSM8K slice with a Qwen2.5
 \mbox{0.5B$\to$14B} pair, the learned gate \textbf{dramatically outperforms the paper's fixed
 thresholds} (accuracy $0.21$--$0.40\to0.88$--$0.91$) at fewer expensive verifier calls.
-We also report honest negatives: plain lossless speculative decoding stays
-Pareto-competitive at this gap, and the slim-verifier tier only pays off when the gate is learned.
+We also report honest negatives: the slim-verifier middle tier only pays off when the gate is
+learned, and scaling the verifier alone (without the drafter) hurts an accept-heavy policy.
 \end{abstract}
 
 \section{Background: VIA-SD and DIMR}
@@ -39,7 +39,7 @@ inserts a \emph{slim intermediate verifier} $q'$ between $p$ and $q$, turning th
 accept/reject into a three-way \emph{hierarchical} decision per token: \textbf{accept} $p$'s token
 when $q'$ is highly confident; \textbf{regenerate} with $q'$ for medium-confidence (middle-zone)
 tokens; \textbf{escalate} to the full $q$ only for low-confidence tokens. By resolving middle-zone
-tokens at $q'$, it reduces how often the expensive $q$ is invoked relative to plain SD. The routing
+tokens at $q'$, it reduces how often the expensive $q$ is invoked relative to standard two-tier SD. The routing
 is governed by two fixed confidence thresholds $(\alpha_1,\alpha_2)$ on $q'$'s confidence ratio
 (reported best at $\alpha_1{=}0.5,\alpha_2{=}0.3$); the scheme is mildly \emph{lossy}, with a
 tolerance $\alpha$ controlling how far accepted tokens may deviate. The paper motivates the
@@ -161,10 +161,10 @@ the match-based rewards are match-dominated, the resulting RL is close to \emph{
 \begin{table}[H]\centering\small
 \begin{tabular}{lccc}
 \toprule
-Method & GSM8K acc & q-calls/tok & speedup (bw) \\
+Method & GSM8K acc & q-calls/tok & speedup \\
 \midrule
 greedy-$q$ (reference)        & 0.887 & 1.000 & 1.00$\times$ \\
-plain SD (lossless)           & 0.907 & 0.259 & 3.30$\times$ \\
+plain SD (standard, lossless) & 0.907 & 0.259 & 1.40$\times$\textsuperscript{\dag} \\
 \midrule
 via\_fixed (paper, tuned)     & 0.40\textsuperscript{*} & 0.31 & 1.76$\times$ \\
 via\_imit (imitation only)    & 0.34  & 0.29 & 1.69$\times$ \\
@@ -175,21 +175,25 @@ via\_rl REINFORCE\,+\,DIMR    & \textbf{0.907} & 0.250 & 2.22$\times$ \\
 via\_rl v2 per-token ($\lambda{=}0.3$) & 0.713 & 0.104 & \textbf{3.53$\times$} \\
 \bottomrule
 \end{tabular}
-\caption{Headline comparison (0.5B$\to$14B, GSM8K). \textsuperscript{*}via\_fixed peaks at
-$\approx$0.50 even under a full 9-config threshold sweep. q-calls/token is exact; bandwidth
-speedup reported where measured. Accuracy uses $n{=}80$--$150$ (see caveats).}
+\caption{Headline comparison (0.5B$\to$14B, GSM8K). \textsuperscript{\dag}plain SD speedup is
+\textbf{measured wall-clock} (Qwen) at 0.907 accuracy --- the realistic SD anchor (matches the
+paper's 1.3--1.7$\times$). All other speedups are the \textbf{bandwidth model} (idealized,
+overhead-free; the via\_* real wall-clock would be lower), so they are not directly comparable
+to \textsuperscript{\dag}. \textsuperscript{*}via\_fixed peaks at $\approx$0.50 even under a full
+9-config threshold sweep. q-calls/token is exact and hardware-independent. Accuracy $n{=}80$--$150$.}
 \end{table}
 
 \begin{figure}[H]\centering
 \includegraphics[width=0.72\textwidth]{results/figures/speedup_bar.png}
-\caption{Overhead-free speedup by method. The learned v2 gate and plain SD reach $\sim$3.3--3.5$\times$;
-the fixed-threshold gate is slow because it over-escalates to the full model.}
+\caption{Speedup by method. \textbf{plain SD's bar is measured wall-clock (1.4$\times$, Qwen)};
+all via\_* bars are the idealized bandwidth model (overhead-free) and are \emph{not} directly
+comparable --- their real wall-clock would be lower. The fixed-threshold gate over-escalates.}
 \end{figure}
 \begin{figure}[H]\centering
 \includegraphics[width=0.62\textwidth]{results/figures/pareto.png}
 \caption{Accuracy vs.\ speedup. \textcolor{blue}{Learned} gates dominate \textcolor{red}{fixed}
-ones; \texttt{REINFORCE+DIMR} matches plain SD's accuracy (0.907) at lower speed (the $q'$ overhead);
-v2 trades accuracy for speed.}
+ones; \texttt{REINFORCE+DIMR} reaches near-greedy accuracy (0.907); v2 trades accuracy for higher speed.
+(plain SD's $x$ is measured wall-clock; via\_* use the bandwidth model --- different metrics.)}
 \end{figure}
 \begin{figure}[H]\centering
 \includegraphics[width=\textwidth]{results/figures/rl_curves.png}
@@ -205,11 +209,12 @@ fully tuned), at lower q-calls/token --- robust across masks and capacity gaps.
 \item \textbf{DIMR helps only the learned gate} (via\_rl $0.88\to0.91$); the fixed rule stays brittle.
 \item \textbf{Credit assignment matters}: per-token (v2) is far lower-variance than trajectory-level
 REINFORCE/GRPO and reaches the lowest escalation; GRPO's group baseline beats REINFORCE's global one.
-\item \textbf{v2 unlocks VIA-SD $>$ plain-SD \emph{on speed}} ($3.53\times>3.30\times$, escalation below
-break-even) but overshoots accuracy ($0.71$) at $\lambda{=}0.3$.
-\item \textbf{Honest negatives}: plain lossless SD stays Pareto-competitive (the $q'$ tier overhead
-doesn't pay off at this gap); a bigger \emph{verifier} (32B) hurts an accept-heavy policy (acc $0.33$)
---- a bigger \emph{drafter} is the indicated lever.
+\item \textbf{The v2 per-token reward drives escalation below break-even} and reaches the highest
+speedup ($3.53\times$) but overshoots accuracy ($0.71$) at $\lambda{=}0.3$; lower $\lambda$ trades
+back toward accuracy ($\lambda{=}0.1$: acc $0.80$ at $2.68\times$).
+\item \textbf{Honest negatives}: the $q'$ middle tier's per-block overhead limits net speedup at
+this gap; and a bigger \emph{verifier} (32B) hurts an accept-heavy policy (acc $0.33$) because the
+fixed small drafter is then relatively weaker --- a bigger \emph{drafter} is the indicated lever.
 \end{enumerate}
 
 \section{Caveats}
@@ -217,5 +222,16 @@ Accuracy at small $n$ ($24$--$50$) carries a $\pm0.06$--$0.10$ CI, so small accu
 noise (large ones are not). Speedups are an overhead-free cost \emph{model}, not a stopwatch on an
 optimized engine (CUDA-graphs/static-cache were incompatible with the dynamic KV-cache loop). Single
 task (GSM8K), single model family (Qwen2.5).
+
+\textbf{Why our accuracy differs from the paper.} Our plain-SD GSM8K accuracy ($0.907$) is well
+above the paper's reported SD numbers ($0.70$ for Gemma2-2B$\to$9B, $0.78$ for 2B$\to$27B). This
+reflects the \emph{base model, not the method}: standard SD is \emph{lossless}, so its accuracy
+equals the target verifier's own greedy accuracy, and Qwen2.5-14B is far stronger on GSM8K than
+Gemma2-9B/27B. The methodologically meaningful agreement is that, in both works, SD accuracy tracks
+the verifier's greedy accuracy and the hierarchical/learned variants preserve or marginally shift it.
+Within our own runs the SD (=greedy) accuracy also varies by $\pm0.02$ from small $n$ plus bf16
+nondeterminism between the cached and re-forward code paths (which is also why our measured
+$\text{plain\_sd}\approx0.907 > \text{greedy}_q\approx0.887$ despite SD being exactly lossless).
+We also use 4-shot prompting vs.\ the paper's 8-shot.
 
 \end{document}
