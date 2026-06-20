@@ -24,7 +24,7 @@ reward (GSM8K correctness minus a latency penalty).
 
 ## Setup (drafter -> verifier)
 
-`Qwen2.5-0.5B-Instruct` -> `Qwen2.5-3B-Instruct`, benchmarked on a GSM8K slice.
+`Qwen2.5-0.5B-Instruct` -> `Qwen2.5-14B-Instruct`, benchmarked on a GSM8K slice.
 
 ## Install
 
