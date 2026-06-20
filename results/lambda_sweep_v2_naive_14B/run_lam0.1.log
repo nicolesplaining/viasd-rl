@@ -1,0 +1,12 @@
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 10381.85it/s]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 10313.82it/s]
+keep_mask: 26 / 48
+corrected latencies(ms): t_p1=0.34 t_qp=3.83 t_q=14.49 t_q1=10.09
+Using the latest cached version of the dataset since openai/gsm8k couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'main' at /home/ubuntu/.cache/huggingface/datasets/openai___gsm8k/main/0.0.0/740312add88f781978c0658806c59bc2815b9866 (last modified on Sat Jun 20 09:16:20 2026).
+iter 1/120: tok_reward=0.746 match=0.854 correct=0.500 cost/tok=0.643 rej=0.270 ent=0.482 gn=4.59 ntok=1121 62.7s
+iter 2/120: tok_reward=0.765 match=0.844 correct=0.167 cost/tok=0.728 rej=0.316 ent=0.494 gn=4.37 ntok=1502 79.9s
+iter 3/120: tok_reward=0.810 match=0.885 correct=0.500 cost/tok=0.610 rej=0.218 ent=0.412 gn=3.56 ntok=1330 61.1s
+iter 4/120: tok_reward=0.824 match=0.897 correct=0.500 cost/tok=0.581 rej=0.211 ent=0.435 gn=3.48 ntok=1271 56.6s
+iter 5/120: tok_reward=0.833 match=0.897 correct=0.333 cost/tok=0.594 rej=0.206 ent=0.381 gn=3.20 ntok=1194 50.1s
+iter 6/120: tok_reward=0.817 match=0.891 correct=0.667 cost/tok=0.615 rej=0.210 ent=0.405 gn=3.22 ntok=1310 56.6s

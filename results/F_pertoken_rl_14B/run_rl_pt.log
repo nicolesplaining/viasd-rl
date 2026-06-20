@@ -34,3 +34,108 @@ iter 23/120: tok_reward=0.812 match=0.947 correct=1.000 cost/tok=0.414 rej=0.109
 iter 24/120: tok_reward=0.834 match=0.944 correct=0.667 cost/tok=0.370 rej=0.088 ent=0.227 gn=0.54 ntok=906 28.3s
 iter 25/120: tok_reward=0.866 match=0.946 correct=1.000 cost/tok=0.294 rej=0.058 ent=0.182 gn=0.51 ntok=843 25.4s
 iter 26/120: tok_reward=0.807 match=0.930 correct=1.000 cost/tok=0.370 rej=0.097 ent=0.247 gn=0.31 ntok=1069 36.7s
+iter 27/120: tok_reward=0.860 match=0.946 correct=1.000 cost/tok=0.299 rej=0.054 ent=0.186 gn=0.27 ntok=1298 39.4s
+iter 28/120: tok_reward=0.811 match=0.924 correct=0.667 cost/tok=0.375 rej=0.090 ent=0.247 gn=0.45 ntok=1023 33.1s
+iter 29/120: tok_reward=0.836 match=0.935 correct=1.000 cost/tok=0.355 rej=0.089 ent=0.221 gn=0.47 ntok=964 30.8s
+iter 30/120: tok_reward=0.833 match=0.924 correct=0.833 cost/tok=0.293 rej=0.060 ent=0.200 gn=0.31 ntok=513 15.4s
+  [ckpt @ 30]
+iter 31/120: tok_reward=0.813 match=0.927 correct=0.833 cost/tok=0.363 rej=0.079 ent=0.222 gn=0.20 ntok=1027 31.9s
+iter 32/120: tok_reward=0.815 match=0.922 correct=0.833 cost/tok=0.394 rej=0.106 ent=0.224 gn=0.27 ntok=993 32.2s
+iter 33/120: tok_reward=0.813 match=0.921 correct=0.500 cost/tok=0.341 rej=0.073 ent=0.212 gn=0.45 ntok=1067 32.7s
+iter 34/120: tok_reward=0.805 match=0.902 correct=0.500 cost/tok=0.306 rej=0.068 ent=0.223 gn=0.20 ntok=1042 32.5s
+iter 35/120: tok_reward=0.818 match=0.930 correct=0.667 cost/tok=0.340 rej=0.081 ent=0.228 gn=0.55 ntok=1086 34.8s
+iter 36/120: tok_reward=0.852 match=0.948 correct=0.833 cost/tok=0.314 rej=0.064 ent=0.203 gn=0.60 ntok=1220 37.8s
+iter 37/120: tok_reward=0.861 match=0.942 correct=0.833 cost/tok=0.286 rej=0.060 ent=0.177 gn=0.48 ntok=1125 33.5s
+iter 38/120: tok_reward=0.851 match=0.933 correct=0.833 cost/tok=0.298 rej=0.069 ent=0.184 gn=0.26 ntok=1028 30.9s
+iter 39/120: tok_reward=0.808 match=0.923 correct=0.667 cost/tok=0.355 rej=0.088 ent=0.230 gn=0.35 ntok=1298 43.4s
+iter 40/120: tok_reward=0.853 match=0.932 correct=0.833 cost/tok=0.254 rej=0.055 ent=0.173 gn=0.55 ntok=685 20.5s
+  [ckpt @ 40]
+iter 41/120: tok_reward=0.848 match=0.924 correct=0.833 cost/tok=0.268 rej=0.049 ent=0.174 gn=0.26 ntok=857 25.0s
+iter 42/120: tok_reward=0.876 match=0.929 correct=0.833 cost/tok=0.248 rej=0.041 ent=0.141 gn=0.25 ntok=743 20.8s
+iter 43/120: tok_reward=0.882 match=0.942 correct=0.833 cost/tok=0.237 rej=0.052 ent=0.143 gn=0.41 ntok=941 27.3s
+iter 44/120: tok_reward=0.842 match=0.910 correct=0.833 cost/tok=0.266 rej=0.064 ent=0.174 gn=0.22 ntok=913 27.1s
+iter 45/120: tok_reward=0.838 match=0.918 correct=0.667 cost/tok=0.299 rej=0.058 ent=0.187 gn=0.31 ntok=1299 38.5s
+iter 46/120: tok_reward=0.861 match=0.916 correct=0.833 cost/tok=0.253 rej=0.051 ent=0.151 gn=0.28 ntok=750 22.2s
+iter 47/120: tok_reward=0.842 match=0.904 correct=0.833 cost/tok=0.286 rej=0.070 ent=0.173 gn=0.22 ntok=950 29.3s
+iter 48/120: tok_reward=0.832 match=0.907 correct=0.833 cost/tok=0.300 rej=0.070 ent=0.193 gn=0.26 ntok=787 24.2s
+iter 49/120: tok_reward=0.819 match=0.914 correct=0.833 cost/tok=0.315 rej=0.070 ent=0.217 gn=0.30 ntok=867 26.9s
+iter 50/120: tok_reward=0.836 match=0.911 correct=0.500 cost/tok=0.268 rej=0.055 ent=0.163 gn=0.26 ntok=1299 38.9s
+  [ckpt @ 50]
+iter 51/120: tok_reward=0.857 match=0.937 correct=1.000 cost/tok=0.259 rej=0.051 ent=0.180 gn=0.25 ntok=636 18.1s
+iter 52/120: tok_reward=0.803 match=0.905 correct=0.500 cost/tok=0.298 rej=0.072 ent=0.201 gn=0.26 ntok=1297 40.8s
+iter 53/120: tok_reward=0.798 match=0.908 correct=0.667 cost/tok=0.296 rej=0.071 ent=0.214 gn=0.23 ntok=1127 35.2s
+iter 54/120: tok_reward=0.811 match=0.906 correct=0.667 cost/tok=0.260 rej=0.064 ent=0.179 gn=0.23 ntok=1091 33.2s
+iter 55/120: tok_reward=0.853 match=0.918 correct=0.833 cost/tok=0.248 rej=0.052 ent=0.144 gn=0.18 ntok=862 25.2s
+iter 56/120: tok_reward=0.818 match=0.925 correct=0.667 cost/tok=0.305 rej=0.070 ent=0.196 gn=0.21 ntok=1140 36.8s
+iter 57/120: tok_reward=0.824 match=0.900 correct=0.833 cost/tok=0.245 rej=0.046 ent=0.152 gn=0.45 ntok=709 20.3s
+iter 58/120: tok_reward=0.880 match=0.935 correct=0.667 cost/tok=0.207 rej=0.029 ent=0.117 gn=0.32 ntok=1104 30.8s
+iter 59/120: tok_reward=0.858 match=0.912 correct=0.833 cost/tok=0.230 rej=0.047 ent=0.142 gn=0.34 ntok=763 21.6s
+iter 60/120: tok_reward=0.871 match=0.946 correct=1.000 cost/tok=0.258 rej=0.041 ent=0.143 gn=0.41 ntok=1082 30.7s
+  [ckpt @ 60]
+iter 61/120: tok_reward=0.801 match=0.868 correct=0.667 cost/tok=0.261 rej=0.052 ent=0.179 gn=0.66 ntok=774 22.5s
+iter 62/120: tok_reward=0.854 match=0.935 correct=0.833 cost/tok=0.283 rej=0.066 ent=0.162 gn=0.24 ntok=1196 36.3s
+iter 63/120: tok_reward=0.876 match=0.937 correct=1.000 cost/tok=0.244 rej=0.052 ent=0.121 gn=0.20 ntok=833 24.4s
+iter 64/120: tok_reward=0.848 match=0.922 correct=1.000 cost/tok=0.242 rej=0.048 ent=0.153 gn=0.32 ntok=907 26.9s
+iter 65/120: tok_reward=0.804 match=0.901 correct=0.667 cost/tok=0.313 rej=0.084 ent=0.203 gn=0.24 ntok=831 26.2s
+iter 66/120: tok_reward=0.857 match=0.942 correct=0.833 cost/tok=0.280 rej=0.059 ent=0.162 gn=0.29 ntok=1024 30.4s
+iter 67/120: tok_reward=0.820 match=0.928 correct=0.500 cost/tok=0.299 rej=0.064 ent=0.196 gn=0.43 ntok=1147 36.9s
+iter 68/120: tok_reward=0.865 match=0.938 correct=0.833 cost/tok=0.268 rej=0.052 ent=0.143 gn=0.28 ntok=830 24.4s
+iter 69/120: tok_reward=0.802 match=0.910 correct=0.667 cost/tok=0.290 rej=0.060 ent=0.184 gn=0.17 ntok=1207 38.0s
+iter 70/120: tok_reward=0.841 match=0.929 correct=0.833 cost/tok=0.309 rej=0.080 ent=0.193 gn=0.15 ntok=1053 33.1s
+  [ckpt @ 70]
+iter 71/120: tok_reward=0.874 match=0.938 correct=1.000 cost/tok=0.220 rej=0.043 ent=0.129 gn=0.28 ntok=949 27.2s
+iter 72/120: tok_reward=0.873 match=0.943 correct=1.000 cost/tok=0.255 rej=0.050 ent=0.133 gn=0.29 ntok=982 28.8s
+iter 73/120: tok_reward=0.844 match=0.931 correct=1.000 cost/tok=0.268 rej=0.059 ent=0.157 gn=0.22 ntok=853 25.6s
+iter 74/120: tok_reward=0.843 match=0.939 correct=1.000 cost/tok=0.294 rej=0.071 ent=0.174 gn=0.17 ntok=1097 34.0s
+iter 75/120: tok_reward=0.880 match=0.940 correct=1.000 cost/tok=0.235 rej=0.051 ent=0.123 gn=0.28 ntok=958 28.5s
+iter 76/120: tok_reward=0.863 match=0.938 correct=1.000 cost/tok=0.266 rej=0.054 ent=0.142 gn=0.27 ntok=907 27.0s
+iter 77/120: tok_reward=0.868 match=0.936 correct=0.667 cost/tok=0.255 rej=0.037 ent=0.124 gn=0.17 ntok=977 28.1s
+iter 78/120: tok_reward=0.834 match=0.929 correct=0.833 cost/tok=0.297 rej=0.072 ent=0.163 gn=0.27 ntok=1025 32.3s
+iter 79/120: tok_reward=0.854 match=0.940 correct=1.000 cost/tok=0.292 rej=0.067 ent=0.154 gn=0.19 ntok=1008 30.7s
+iter 80/120: tok_reward=0.852 match=0.930 correct=1.000 cost/tok=0.245 rej=0.051 ent=0.138 gn=0.41 ntok=541 16.0s
+  [ckpt @ 80]
+iter 81/120: tok_reward=0.856 match=0.944 correct=1.000 cost/tok=0.321 rej=0.065 ent=0.148 gn=0.62 ntok=998 30.3s
+iter 82/120: tok_reward=0.823 match=0.928 correct=0.833 cost/tok=0.352 rej=0.085 ent=0.187 gn=0.39 ntok=762 23.8s
+iter 83/120: tok_reward=0.848 match=0.937 correct=0.833 cost/tok=0.289 rej=0.056 ent=0.170 gn=0.24 ntok=1046 31.2s
+iter 84/120: tok_reward=0.864 match=0.950 correct=0.833 cost/tok=0.262 rej=0.047 ent=0.148 gn=0.35 ntok=859 25.0s
+iter 85/120: tok_reward=0.815 match=0.934 correct=0.833 cost/tok=0.314 rej=0.072 ent=0.183 gn=0.19 ntok=987 31.0s
+iter 86/120: tok_reward=0.874 match=0.950 correct=0.833 cost/tok=0.264 rej=0.052 ent=0.147 gn=0.37 ntok=1093 32.5s
+iter 87/120: tok_reward=0.849 match=0.925 correct=0.833 cost/tok=0.275 rej=0.059 ent=0.148 gn=0.36 ntok=1158 34.7s
+iter 88/120: tok_reward=0.829 match=0.916 correct=0.833 cost/tok=0.330 rej=0.091 ent=0.146 gn=0.33 ntok=1268 39.8s
+iter 89/120: tok_reward=0.828 match=0.922 correct=0.833 cost/tok=0.323 rej=0.079 ent=0.169 gn=0.20 ntok=1370 43.6s
+iter 90/120: tok_reward=0.867 match=0.942 correct=1.000 cost/tok=0.235 rej=0.034 ent=0.131 gn=0.42 ntok=683 20.0s
+  [ckpt @ 90]
+iter 91/120: tok_reward=0.871 match=0.934 correct=0.833 cost/tok=0.251 rej=0.053 ent=0.123 gn=0.19 ntok=992 29.4s
+iter 92/120: tok_reward=0.873 match=0.907 correct=1.000 cost/tok=0.220 rej=0.051 ent=0.114 gn=0.39 ntok=848 24.3s
+iter 93/120: tok_reward=0.878 match=0.943 correct=1.000 cost/tok=0.246 rej=0.045 ent=0.130 gn=0.27 ntok=843 24.3s
+iter 94/120: tok_reward=0.863 match=0.936 correct=0.833 cost/tok=0.260 rej=0.050 ent=0.139 gn=0.28 ntok=940 27.7s
+iter 95/120: tok_reward=0.847 match=0.925 correct=0.833 cost/tok=0.286 rej=0.069 ent=0.158 gn=0.19 ntok=1170 36.3s
+iter 96/120: tok_reward=0.875 match=0.943 correct=1.000 cost/tok=0.260 rej=0.063 ent=0.113 gn=0.24 ntok=720 21.4s
+iter 97/120: tok_reward=0.855 match=0.931 correct=0.833 cost/tok=0.257 rej=0.057 ent=0.138 gn=0.32 ntok=746 21.9s
+iter 98/120: tok_reward=0.802 match=0.880 correct=0.667 cost/tok=0.275 rej=0.059 ent=0.141 gn=0.40 ntok=467 13.4s
+iter 99/120: tok_reward=0.830 match=0.911 correct=0.667 cost/tok=0.281 rej=0.070 ent=0.164 gn=0.31 ntok=732 21.9s
+iter 100/120: tok_reward=0.834 match=0.922 correct=0.667 cost/tok=0.265 rej=0.049 ent=0.140 gn=0.18 ntok=1297 38.7s
+  [ckpt @ 100]
+iter 101/120: tok_reward=0.849 match=0.912 correct=0.833 cost/tok=0.281 rej=0.064 ent=0.145 gn=0.45 ntok=730 21.9s
+iter 102/120: tok_reward=0.820 match=0.918 correct=0.500 cost/tok=0.272 rej=0.059 ent=0.155 gn=0.25 ntok=1192 36.7s
+iter 103/120: tok_reward=0.842 match=0.933 correct=1.000 cost/tok=0.300 rej=0.071 ent=0.160 gn=0.25 ntok=1209 37.7s
+iter 104/120: tok_reward=0.789 match=0.894 correct=0.333 cost/tok=0.289 rej=0.084 ent=0.165 gn=0.25 ntok=1159 37.8s
+iter 105/120: tok_reward=0.879 match=0.946 correct=1.000 cost/tok=0.246 rej=0.048 ent=0.109 gn=0.13 ntok=932 26.7s
+iter 106/120: tok_reward=0.827 match=0.915 correct=0.667 cost/tok=0.282 rej=0.078 ent=0.158 gn=0.16 ntok=987 31.8s
+iter 107/120: tok_reward=0.827 match=0.900 correct=0.833 cost/tok=0.261 rej=0.056 ent=0.116 gn=0.32 ntok=650 18.6s
+iter 108/120: tok_reward=0.890 match=0.947 correct=0.833 cost/tok=0.226 rej=0.049 ent=0.099 gn=0.42 ntok=986 28.7s
+iter 109/120: tok_reward=0.863 match=0.932 correct=0.833 cost/tok=0.207 rej=0.038 ent=0.118 gn=0.32 ntok=915 26.4s
+iter 110/120: tok_reward=0.874 match=0.938 correct=0.833 cost/tok=0.233 rej=0.047 ent=0.105 gn=0.20 ntok=1176 34.4s
+  [ckpt @ 110]
+iter 111/120: tok_reward=0.834 match=0.912 correct=0.500 cost/tok=0.282 rej=0.070 ent=0.135 gn=0.15 ntok=1003 31.3s
+iter 112/120: tok_reward=0.838 match=0.929 correct=0.833 cost/tok=0.279 rej=0.067 ent=0.143 gn=0.27 ntok=1046 32.6s
+iter 113/120: tok_reward=0.837 match=0.917 correct=0.833 cost/tok=0.293 rej=0.086 ent=0.136 gn=0.44 ntok=696 21.8s
+iter 114/120: tok_reward=0.858 match=0.935 correct=1.000 cost/tok=0.270 rej=0.067 ent=0.123 gn=0.31 ntok=859 26.2s
+iter 115/120: tok_reward=0.820 match=0.915 correct=0.833 cost/tok=0.311 rej=0.081 ent=0.168 gn=0.20 ntok=608 19.9s
+iter 116/120: tok_reward=0.840 match=0.912 correct=1.000 cost/tok=0.273 rej=0.065 ent=0.129 gn=0.21 ntok=880 26.1s
+iter 117/120: tok_reward=0.832 match=0.921 correct=0.667 cost/tok=0.293 rej=0.071 ent=0.146 gn=0.36 ntok=981 31.2s
+iter 118/120: tok_reward=0.852 match=0.935 correct=0.833 cost/tok=0.277 rej=0.064 ent=0.130 gn=0.24 ntok=867 26.1s
+iter 119/120: tok_reward=0.863 match=0.946 correct=0.833 cost/tok=0.268 rej=0.054 ent=0.123 gn=0.38 ntok=1200 36.6s
+iter 120/120: tok_reward=0.831 match=0.915 correct=0.167 cost/tok=0.305 rej=0.079 ent=0.146 gn=0.25 ntok=1624 51.4s
+  [ckpt @ 120]
+saved -> policy_rl_pt.pt; ckpt -> rl_pt_ckpt.pt; log -> rl_pt_log.jsonl

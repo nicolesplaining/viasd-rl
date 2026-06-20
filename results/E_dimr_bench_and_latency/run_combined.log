@@ -1,0 +1,166 @@
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 11869.13it/s]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 10316.53it/s]
+keep_mask: 26 / 48
+corrected latencies(ms): t_p1=0.35 t_qp=3.70 t_q=14.48 t_q1=10.43
+Using the latest cached version of the dataset since openai/gsm8k couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'main' at /home/ubuntu/.cache/huggingface/datasets/openai___gsm8k/main/0.0.0/740312add88f781978c0658806c59bc2815b9866 (last modified on Sat Jun 20 16:37:46 2026).
+iter 1/120: tok_reward=0.726 match=0.891 correct=0.667 cost/tok=0.500 rej=0.199 ent=0.404 gn=2.42 ntok=651 28.3s
+iter 2/120: tok_reward=0.688 match=0.863 correct=0.500 cost/tok=0.524 rej=0.239 ent=0.440 gn=3.49 ntok=1309 63.7s
+iter 3/120: tok_reward=0.693 match=0.886 correct=0.667 cost/tok=0.548 rej=0.222 ent=0.410 gn=2.86 ntok=1213 56.2s
+iter 4/120: tok_reward=0.766 match=0.913 correct=0.667 cost/tok=0.488 rej=0.172 ent=0.337 gn=2.90 ntok=1157 45.4s
+iter 5/120: tok_reward=0.735 match=0.887 correct=0.500 cost/tok=0.466 rej=0.205 ent=0.361 gn=3.09 ntok=1392 61.0s
+iter 6/120: tok_reward=0.707 match=0.846 correct=0.333 cost/tok=0.534 rej=0.227 ent=0.374 gn=2.89 ntok=966 42.0s
+iter 7/120: tok_reward=0.814 match=0.935 correct=0.833 cost/tok=0.416 rej=0.137 ent=0.279 gn=0.93 ntok=813 28.9s
+iter 8/120: tok_reward=0.817 match=0.943 correct=0.833 cost/tok=0.405 rej=0.111 ent=0.259 gn=1.45 ntok=1066 36.7s
+iter 9/120: tok_reward=0.788 match=0.920 correct=0.833 cost/tok=0.416 rej=0.141 ent=0.277 gn=1.85 ntok=799 29.4s
+iter 10/120: tok_reward=0.836 match=0.951 correct=1.000 cost/tok=0.404 rej=0.108 ent=0.241 gn=1.67 ntok=1105 37.2s
+  [ckpt @ 10]
+iter 11/120: tok_reward=0.748 match=0.908 correct=0.833 cost/tok=0.504 rej=0.147 ent=0.345 gn=1.23 ntok=1284 49.5s
+iter 12/120: tok_reward=0.801 match=0.942 correct=0.833 cost/tok=0.440 rej=0.124 ent=0.274 gn=0.95 ntok=1222 43.7s
+iter 13/120: tok_reward=0.829 match=0.952 correct=1.000 cost/tok=0.449 rej=0.130 ent=0.250 gn=1.13 ntok=792 27.4s
+iter 14/120: tok_reward=0.828 match=0.929 correct=0.833 cost/tok=0.380 rej=0.094 ent=0.239 gn=0.74 ntok=1067 34.8s
+iter 15/120: tok_reward=0.831 match=0.949 correct=1.000 cost/tok=0.423 rej=0.114 ent=0.261 gn=1.23 ntok=713 24.4s
+iter 16/120: tok_reward=0.811 match=0.936 correct=0.833 cost/tok=0.437 rej=0.107 ent=0.256 gn=0.87 ntok=1165 38.3s
+iter 17/120: tok_reward=0.838 match=0.957 correct=0.833 cost/tok=0.417 rej=0.094 ent=0.243 gn=1.04 ntok=1129 37.0s
+iter 18/120: tok_reward=0.848 match=0.966 correct=1.000 cost/tok=0.409 rej=0.086 ent=0.221 gn=0.84 ntok=837 26.2s
+iter 19/120: tok_reward=0.834 match=0.955 correct=0.667 cost/tok=0.393 rej=0.086 ent=0.229 gn=0.86 ntok=1297 41.8s
+iter 20/120: tok_reward=0.847 match=0.967 correct=0.667 cost/tok=0.409 rej=0.107 ent=0.222 gn=0.72 ntok=1261 41.9s
+  [ckpt @ 20]
+iter 21/120: tok_reward=0.830 match=0.954 correct=0.833 cost/tok=0.403 rej=0.095 ent=0.237 gn=0.65 ntok=954 31.6s
+iter 22/120: tok_reward=0.847 match=0.950 correct=0.833 cost/tok=0.344 rej=0.087 ent=0.208 gn=0.62 ntok=1159 38.1s
+iter 23/120: tok_reward=0.834 match=0.958 correct=0.833 cost/tok=0.373 rej=0.093 ent=0.231 gn=0.76 ntok=799 28.8s
+iter 24/120: tok_reward=0.850 match=0.965 correct=0.833 cost/tok=0.385 rej=0.091 ent=0.215 gn=0.66 ntok=1214 39.6s
+iter 25/120: tok_reward=0.877 match=0.969 correct=1.000 cost/tok=0.308 rej=0.066 ent=0.175 gn=0.82 ntok=820 25.8s
+iter 26/120: tok_reward=0.863 match=0.949 correct=1.000 cost/tok=0.320 rej=0.082 ent=0.208 gn=0.39 ntok=899 28.3s
+iter 27/120: tok_reward=0.837 match=0.947 correct=0.833 cost/tok=0.371 rej=0.072 ent=0.230 gn=0.63 ntok=1093 34.4s
+iter 28/120: tok_reward=0.808 match=0.929 correct=0.667 cost/tok=0.403 rej=0.097 ent=0.241 gn=0.34 ntok=1173 39.1s
+iter 29/120: tok_reward=0.837 match=0.950 correct=0.833 cost/tok=0.345 rej=0.082 ent=0.216 gn=0.51 ntok=978 32.0s
+iter 30/120: tok_reward=0.864 match=0.961 correct=1.000 cost/tok=0.342 rej=0.081 ent=0.190 gn=0.66 ntok=709 22.3s
+  [ckpt @ 30]
+iter 31/120: tok_reward=0.808 match=0.891 correct=0.500 cost/tok=0.336 rej=0.097 ent=0.206 gn=0.51 ntok=747 24.5s
+iter 32/120: tok_reward=0.808 match=0.920 correct=0.833 cost/tok=0.388 rej=0.096 ent=0.263 gn=0.37 ntok=725 23.9s
+iter 33/120: tok_reward=0.846 match=0.942 correct=0.833 cost/tok=0.321 rej=0.072 ent=0.202 gn=0.55 ntok=968 31.2s
+iter 34/120: tok_reward=0.846 match=0.919 correct=0.500 cost/tok=0.335 rej=0.069 ent=0.187 gn=0.37 ntok=844 25.4s
+iter 35/120: tok_reward=0.830 match=0.944 correct=0.833 cost/tok=0.350 rej=0.089 ent=0.220 gn=0.28 ntok=1112 36.3s
+iter 36/120: tok_reward=0.850 match=0.942 correct=0.667 cost/tok=0.299 rej=0.065 ent=0.187 gn=0.30 ntok=1070 32.7s
+iter 37/120: tok_reward=0.845 match=0.944 correct=0.833 cost/tok=0.315 rej=0.073 ent=0.195 gn=0.53 ntok=1094 33.9s
+iter 38/120: tok_reward=0.847 match=0.940 correct=1.000 cost/tok=0.330 rej=0.073 ent=0.200 gn=0.38 ntok=990 30.4s
+iter 39/120: tok_reward=0.863 match=0.946 correct=1.000 cost/tok=0.300 rej=0.083 ent=0.170 gn=0.30 ntok=1097 35.0s
+iter 40/120: tok_reward=0.849 match=0.948 correct=1.000 cost/tok=0.257 rej=0.062 ent=0.167 gn=0.30 ntok=939 29.7s
+  [ckpt @ 40]
+iter 41/120: tok_reward=0.850 match=0.932 correct=0.833 cost/tok=0.303 rej=0.082 ent=0.177 gn=0.32 ntok=941 30.0s
+iter 42/120: tok_reward=0.847 match=0.935 correct=0.667 cost/tok=0.281 rej=0.055 ent=0.163 gn=0.61 ntok=912 27.7s
+iter 43/120: tok_reward=0.859 match=0.932 correct=1.000 cost/tok=0.280 rej=0.068 ent=0.162 gn=0.42 ntok=750 23.3s
+iter 44/120: tok_reward=0.859 match=0.938 correct=0.500 cost/tok=0.278 rej=0.059 ent=0.158 gn=0.45 ntok=1045 32.3s
+iter 45/120: tok_reward=0.847 match=0.931 correct=0.833 cost/tok=0.290 rej=0.077 ent=0.179 gn=0.19 ntok=1097 35.0s
+iter 46/120: tok_reward=0.864 match=0.949 correct=1.000 cost/tok=0.285 rej=0.075 ent=0.168 gn=0.31 ntok=804 24.4s
+iter 47/120: tok_reward=0.852 match=0.925 correct=0.833 cost/tok=0.298 rej=0.072 ent=0.186 gn=0.24 ntok=795 24.4s
+iter 48/120: tok_reward=0.845 match=0.937 correct=1.000 cost/tok=0.322 rej=0.071 ent=0.190 gn=0.41 ntok=874 26.8s
+iter 49/120: tok_reward=0.845 match=0.942 correct=1.000 cost/tok=0.314 rej=0.084 ent=0.200 gn=0.33 ntok=832 26.1s
+iter 50/120: tok_reward=0.857 match=0.950 correct=0.667 cost/tok=0.310 rej=0.069 ent=0.176 gn=0.23 ntok=1255 38.8s
+  [ckpt @ 50]
+iter 51/120: tok_reward=0.873 match=0.948 correct=1.000 cost/tok=0.240 rej=0.041 ent=0.153 gn=0.33 ntok=650 18.9s
+iter 52/120: tok_reward=0.840 match=0.938 correct=0.667 cost/tok=0.282 rej=0.071 ent=0.187 gn=0.24 ntok=1220 38.4s
+iter 53/120: tok_reward=0.853 match=0.929 correct=0.833 cost/tok=0.246 rej=0.051 ent=0.169 gn=0.27 ntok=920 28.0s
+iter 54/120: tok_reward=0.820 match=0.928 correct=0.667 cost/tok=0.313 rej=0.069 ent=0.193 gn=0.20 ntok=1109 34.5s
+iter 55/120: tok_reward=0.881 match=0.934 correct=0.833 cost/tok=0.239 rej=0.041 ent=0.142 gn=0.17 ntok=1105 32.6s
+iter 56/120: tok_reward=0.828 match=0.912 correct=0.667 cost/tok=0.294 rej=0.079 ent=0.191 gn=0.17 ntok=1083 34.8s
+iter 57/120: tok_reward=0.847 match=0.926 correct=0.833 cost/tok=0.272 rej=0.069 ent=0.157 gn=0.26 ntok=633 19.2s
+iter 58/120: tok_reward=0.879 match=0.933 correct=0.667 cost/tok=0.226 rej=0.033 ent=0.117 gn=0.24 ntok=907 26.0s
+iter 59/120: tok_reward=0.865 match=0.938 correct=1.000 cost/tok=0.234 rej=0.047 ent=0.132 gn=0.26 ntok=931 27.4s
+iter 60/120: tok_reward=0.884 match=0.949 correct=1.000 cost/tok=0.239 rej=0.045 ent=0.143 gn=0.23 ntok=1201 34.7s
+  [ckpt @ 60]
+iter 61/120: tok_reward=0.860 match=0.934 correct=0.833 cost/tok=0.263 rej=0.066 ent=0.161 gn=0.26 ntok=901 27.7s
+iter 62/120: tok_reward=0.848 match=0.941 correct=0.833 cost/tok=0.291 rej=0.066 ent=0.175 gn=0.18 ntok=1011 31.6s
+iter 63/120: tok_reward=0.869 match=0.929 correct=0.833 cost/tok=0.255 rej=0.050 ent=0.131 gn=0.19 ntok=757 22.7s
+iter 64/120: tok_reward=0.845 match=0.898 correct=0.667 cost/tok=0.211 rej=0.042 ent=0.133 gn=0.25 ntok=939 27.7s
+iter 65/120: tok_reward=0.849 match=0.927 correct=0.667 cost/tok=0.285 rej=0.066 ent=0.171 gn=0.56 ntok=564 17.2s
+iter 66/120: tok_reward=0.848 match=0.920 correct=0.667 cost/tok=0.251 rej=0.055 ent=0.158 gn=0.19 ntok=1048 31.1s
+iter 67/120: tok_reward=0.849 match=0.935 correct=0.667 cost/tok=0.284 rej=0.065 ent=0.165 gn=0.29 ntok=944 29.1s
+iter 68/120: tok_reward=0.873 match=0.933 correct=0.833 cost/tok=0.244 rej=0.048 ent=0.149 gn=0.21 ntok=936 28.1s
+iter 69/120: tok_reward=0.839 match=0.938 correct=0.500 cost/tok=0.305 rej=0.071 ent=0.175 gn=0.25 ntok=1551 49.3s
+iter 70/120: tok_reward=0.815 match=0.909 correct=0.500 cost/tok=0.306 rej=0.077 ent=0.183 gn=0.27 ntok=1341 41.6s
+  [ckpt @ 70]
+iter 71/120: tok_reward=0.826 match=0.912 correct=1.000 cost/tok=0.284 rej=0.073 ent=0.163 gn=0.24 ntok=996 30.7s
+iter 72/120: tok_reward=0.863 match=0.927 correct=1.000 cost/tok=0.236 rej=0.041 ent=0.137 gn=0.27 ntok=1186 35.3s
+iter 73/120: tok_reward=0.832 match=0.938 correct=1.000 cost/tok=0.290 rej=0.064 ent=0.176 gn=0.14 ntok=913 29.3s
+iter 74/120: tok_reward=0.829 match=0.916 correct=0.667 cost/tok=0.256 rej=0.054 ent=0.148 gn=0.21 ntok=1071 32.2s
+iter 75/120: tok_reward=0.876 match=0.939 correct=0.833 cost/tok=0.207 rej=0.038 ent=0.116 gn=0.24 ntok=961 28.4s
+iter 76/120: tok_reward=0.840 match=0.911 correct=0.833 cost/tok=0.246 rej=0.054 ent=0.153 gn=0.29 ntok=690 20.5s
+iter 77/120: tok_reward=0.872 match=0.951 correct=0.667 cost/tok=0.264 rej=0.042 ent=0.137 gn=0.33 ntok=1150 33.5s
+iter 78/120: tok_reward=0.843 match=0.931 correct=0.833 cost/tok=0.306 rej=0.081 ent=0.175 gn=0.32 ntok=1120 36.2s
+iter 79/120: tok_reward=0.879 match=0.942 correct=0.833 cost/tok=0.240 rej=0.048 ent=0.135 gn=0.25 ntok=1086 31.9s
+iter 80/120: tok_reward=0.864 match=0.942 correct=1.000 cost/tok=0.260 rej=0.062 ent=0.143 gn=0.29 ntok=530 15.9s
+  [ckpt @ 80]
+iter 81/120: tok_reward=0.837 match=0.912 correct=0.833 cost/tok=0.291 rej=0.062 ent=0.159 gn=0.38 ntok=735 22.2s
+iter 82/120: tok_reward=0.821 match=0.925 correct=1.000 cost/tok=0.317 rej=0.076 ent=0.199 gn=0.35 ntok=837 26.9s
+iter 83/120: tok_reward=0.862 match=0.950 correct=0.833 cost/tok=0.289 rej=0.074 ent=0.153 gn=0.30 ntok=921 28.3s
+iter 84/120: tok_reward=0.875 match=0.945 correct=0.833 cost/tok=0.204 rej=0.039 ent=0.128 gn=0.25 ntok=988 29.5s
+iter 85/120: tok_reward=0.859 match=0.937 correct=1.000 cost/tok=0.263 rej=0.065 ent=0.150 gn=0.32 ntok=1190 38.2s
+iter 86/120: tok_reward=0.847 match=0.940 correct=0.667 cost/tok=0.286 rej=0.071 ent=0.160 gn=0.17 ntok=1364 44.2s
+iter 87/120: tok_reward=0.828 match=0.922 correct=0.500 cost/tok=0.290 rej=0.063 ent=0.153 gn=0.15 ntok=963 29.8s
+iter 88/120: tok_reward=0.862 match=0.934 correct=1.000 cost/tok=0.289 rej=0.076 ent=0.156 gn=0.29 ntok=1014 31.7s
+iter 89/120: tok_reward=0.855 match=0.925 correct=0.667 cost/tok=0.289 rej=0.065 ent=0.143 gn=0.27 ntok=1159 35.9s
+iter 90/120: tok_reward=0.839 match=0.933 correct=1.000 cost/tok=0.240 rej=0.054 ent=0.144 gn=0.13 ntok=859 27.0s
+  [ckpt @ 90]
+iter 91/120: tok_reward=0.865 match=0.930 correct=0.833 cost/tok=0.251 rej=0.050 ent=0.123 gn=0.44 ntok=895 26.4s
+iter 92/120: tok_reward=0.875 match=0.942 correct=1.000 cost/tok=0.218 rej=0.043 ent=0.116 gn=0.18 ntok=916 27.0s
+iter 93/120: tok_reward=0.852 match=0.927 correct=1.000 cost/tok=0.256 rej=0.062 ent=0.140 gn=0.16 ntok=1135 34.6s
+iter 94/120: tok_reward=0.849 match=0.920 correct=0.667 cost/tok=0.246 rej=0.057 ent=0.138 gn=0.23 ntok=1113 34.4s
+iter 95/120: tok_reward=0.838 match=0.915 correct=0.833 cost/tok=0.269 rej=0.071 ent=0.170 gn=0.18 ntok=976 29.9s
+iter 96/120: tok_reward=0.857 match=0.935 correct=1.000 cost/tok=0.261 rej=0.070 ent=0.139 gn=0.16 ntok=794 24.5s
+iter 97/120: tok_reward=0.868 match=0.939 correct=1.000 cost/tok=0.235 rej=0.052 ent=0.129 gn=0.56 ntok=943 27.9s
+iter 98/120: tok_reward=0.840 match=0.913 correct=0.833 cost/tok=0.253 rej=0.056 ent=0.132 gn=0.28 ntok=481 14.4s
+iter 99/120: tok_reward=0.827 match=0.911 correct=1.000 cost/tok=0.273 rej=0.071 ent=0.160 gn=0.21 ntok=976 30.4s
+iter 100/120: tok_reward=0.865 match=0.930 correct=0.500 cost/tok=0.231 rej=0.045 ent=0.121 gn=0.13 ntok=1173 34.9s
+  [ckpt @ 100]
+iter 101/120: tok_reward=0.858 match=0.934 correct=0.833 cost/tok=0.261 rej=0.070 ent=0.137 gn=0.38 ntok=682 20.5s
+iter 102/120: tok_reward=0.839 match=0.926 correct=0.667 cost/tok=0.259 rej=0.058 ent=0.144 gn=0.14 ntok=1210 36.8s
+iter 103/120: tok_reward=0.819 match=0.903 correct=0.500 cost/tok=0.252 rej=0.059 ent=0.151 gn=0.14 ntok=1044 32.3s
+iter 104/120: tok_reward=0.875 match=0.949 correct=1.000 cost/tok=0.264 rej=0.059 ent=0.134 gn=0.25 ntok=1023 30.1s
+iter 105/120: tok_reward=0.878 match=0.935 correct=0.833 cost/tok=0.250 rej=0.058 ent=0.115 gn=0.25 ntok=957 28.5s
+iter 106/120: tok_reward=0.842 match=0.931 correct=0.667 cost/tok=0.296 rej=0.071 ent=0.164 gn=0.11 ntok=1034 33.4s
+iter 107/120: tok_reward=0.846 match=0.925 correct=0.833 cost/tok=0.235 rej=0.054 ent=0.126 gn=0.21 ntok=823 24.6s
+iter 108/120: tok_reward=0.877 match=0.934 correct=0.667 cost/tok=0.213 rej=0.038 ent=0.102 gn=0.16 ntok=1115 32.3s
+iter 109/120: tok_reward=0.862 match=0.931 correct=1.000 cost/tok=0.226 rej=0.049 ent=0.123 gn=0.24 ntok=862 26.0s
+iter 110/120: tok_reward=0.887 match=0.951 correct=1.000 cost/tok=0.228 rej=0.044 ent=0.110 gn=0.43 ntok=1272 37.4s
+  [ckpt @ 110]
+iter 111/120: tok_reward=0.850 match=0.913 correct=0.833 cost/tok=0.253 rej=0.061 ent=0.131 gn=0.20 ntok=830 24.9s
+iter 112/120: tok_reward=0.844 match=0.930 correct=0.833 cost/tok=0.290 rej=0.062 ent=0.146 gn=0.17 ntok=988 30.9s
+iter 113/120: tok_reward=0.862 match=0.929 correct=1.000 cost/tok=0.235 rej=0.060 ent=0.120 gn=0.25 ntok=811 24.2s
+iter 114/120: tok_reward=0.827 match=0.894 correct=0.667 cost/tok=0.261 rej=0.067 ent=0.124 gn=0.27 ntok=756 23.2s
+iter 115/120: tok_reward=0.851 match=0.917 correct=0.833 cost/tok=0.273 rej=0.055 ent=0.141 gn=0.23 ntok=927 27.9s
+iter 116/120: tok_reward=0.861 match=0.937 correct=0.667 cost/tok=0.252 rej=0.060 ent=0.125 gn=0.26 ntok=1031 30.9s
+iter 117/120: tok_reward=0.854 match=0.947 correct=0.667 cost/tok=0.292 rej=0.060 ent=0.141 gn=0.28 ntok=1078 32.9s
+iter 118/120: tok_reward=0.851 match=0.908 correct=0.667 cost/tok=0.196 rej=0.035 ent=0.110 gn=0.40 ntok=780 22.7s
+iter 119/120: tok_reward=0.851 match=0.939 correct=0.833 cost/tok=0.267 rej=0.053 ent=0.144 gn=0.29 ntok=1332 40.9s
+iter 120/120: tok_reward=0.834 match=0.920 correct=0.500 cost/tok=0.298 rej=0.081 ent=0.152 gn=0.15 ntok=1065 33.5s
+  [ckpt @ 120]
+saved -> policy_rl_pt.pt; ckpt -> rl_pt_ckpt.pt; log -> rl_pt_log.jsonl
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 11915.64it/s]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 9998.03it/s]
+keep_mask: [True, True, False, True, True, True, True, False, False, False, True, True, True, False, True, True, True, False, False, False, False, False, False, False, True, False, False, False, True, True, True, False, False, False, False, True, True, True, True, True, False, False, False, True, True, True, True, True] (keep 26/48)
+latencies (ms): t_p1=10.59 t_qp=13.84 t_q=24.58 t_q1=20.63
+
+Using the latest cached version of the dataset since openai/gsm8k couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'main' at /home/ubuntu/.cache/huggingface/datasets/openai___gsm8k/main/0.0.0/740312add88f781978c0658806c59bc2815b9866 (last modified on Sat Jun 20 16:37:46 2026).
+corrected (ms):  t_p1=0.35 t_qp=3.60 t_q=14.34 t_q1=10.39
+bandwidth (ms):  t_p1=0.29 t_qp=5.20 t_q=8.82 t_q1=8.82
+
+running greedy_q ...
+running plain_sd ...
+running via_fixed ...
+running via_imit ...
+running via_rl ...
+
+method         acc    rej accept  escal  q/tok  tok/q   spd spd_cor  spd_bw
+---------------------------------------------------------------------------
+greedy_q     0.900  0.000  0.000  0.000  1.000   1.00 1.00x   1.00x   1.00x
+plain_sd     0.912  0.110  0.000  0.000  0.258   3.87 1.03x   2.50x   3.32x
+via_fixed    0.163  0.211  0.562  0.349  0.233   4.30 0.77x   2.08x   2.13x
+via_imit     0.475  0.301  0.493  0.348  0.235   4.25 0.65x   1.91x   1.90x
+via_rl       0.725  0.072  0.876  0.124  0.106   9.46 1.11x   3.71x   3.47x

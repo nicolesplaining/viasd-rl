@@ -1,0 +1,17 @@
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 10242.76it/s]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 9493.72it/s]
+Using the latest cached version of the dataset since openai/gsm8k couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'main' at /home/ubuntu/.cache/huggingface/datasets/openai___gsm8k/main/0.0.0/740312add88f781978c0658806c59bc2815b9866 (last modified on Sat Jun 20 09:16:20 2026).
+
+plain_sd forward counts (n=8): draft_steps=1700 q_forwards=340 tokens=1214
+
+ ctx_len    t_p1    t_q1     t_q   ovh%  meas_spd  corr_spd
+-----------------------------------------------------------
+     256    9.89   20.13   24.39   47.4     0.97x     2.27x
+    2048    9.94   19.31  123.47   49.8     0.40x     0.30x
+    8192    9.77   20.22  547.00   46.5     0.12x     0.07x
+   32768    9.83   30.20 3316.71   30.2     0.03x     0.02x
+
+bandwidth-model speedup (overhead-free, KV-free ideal): 3.06x
+expectation: meas_spd rises toward corr_spd as ctx grows (overhead dilutes);
+the drafter step stays overhead-bound longest, so convergence is partial.
