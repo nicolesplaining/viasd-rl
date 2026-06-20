@@ -1,0 +1,115 @@
+=== RL box: lam=0.3 iters=80 verifier=Qwen2.5-14B ===
+Sat Jun 20 10:21:41 UTC 2026
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 10238.28it/s]
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files:  12%|█▎        | 1/8 [00:13<01:32, 13.23s/it]Fetching 8 files:  25%|██▌       | 2/8 [00:14<00:36,  6.00s/it]Fetching 8 files:  50%|█████     | 4/8 [00:14<00:09,  2.47s/it]Fetching 8 files: 100%|██████████| 8/8 [00:14<00:00,  1.86s/it]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 10503.17it/s]
+latencies (ms): t_p1=10.91 t_qp=13.92 t_q=24.62 t_q1=21.08
+warm-started from policy_imitation.pt
+Generating train split:   0%|          | 0/7473 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 7473/7473 [00:00<00:00, 642585.46 examples/s]
+Generating test split:   0%|          | 0/1319 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 1319/1319 [00:00<00:00, 447922.19 examples/s]
+iter 1/80: reward=0.860 match=0.884 correct=0.750 cost/tok=1.331 rej=0.216 baseline=0.159
+iter 2/80: reward=0.507 match=0.839 correct=0.250 cost/tok=1.523 rej=0.292 baseline=0.223
+iter 3/80: reward=0.496 match=0.845 correct=0.250 cost/tok=1.577 rej=0.308 baseline=0.272
+iter 4/80: reward=0.531 match=0.854 correct=0.250 cost/tok=1.493 rej=0.281 baseline=0.317
+iter 5/80: reward=0.507 match=0.860 correct=0.250 cost/tok=1.594 rej=0.313 baseline=0.352
+iter 6/80: reward=0.696 match=0.872 correct=0.500 cost/tok=1.418 rej=0.256 baseline=0.416
+iter 7/80: reward=0.451 match=0.863 correct=0.000 cost/tok=1.373 rej=0.234 baseline=0.422
+iter 8/80: reward=0.585 match=0.875 correct=0.250 cost/tok=1.384 rej=0.241 baseline=0.451
+iter 9/80: reward=0.664 match=0.874 correct=0.500 cost/tok=1.533 rej=0.281 baseline=0.494
+iter 10/80: reward=0.906 match=0.922 correct=0.750 cost/tok=1.303 rej=0.206 baseline=0.570
+  [ckpt @ iter 10 -> rl_ckpt.pt]
+iter 11/80: reward=0.468 match=0.834 correct=0.250 cost/tok=1.635 rej=0.331 baseline=0.550
+iter 12/80: reward=0.980 match=0.929 correct=0.750 cost/tok=1.081 rej=0.120 baseline=0.627
+iter 13/80: reward=1.099 match=0.938 correct=1.000 cost/tok=1.129 rej=0.145 baseline=0.714
+iter 14/80: reward=0.896 match=0.923 correct=0.750 cost/tok=1.339 rej=0.203 baseline=0.748
+iter 15/80: reward=0.610 match=0.884 correct=0.250 cost/tok=1.330 rej=0.227 baseline=0.721
+iter 16/80: reward=0.853 match=0.898 correct=0.750 cost/tok=1.401 rej=0.236 baseline=0.743
+iter 17/80: reward=0.670 match=0.869 correct=0.500 cost/tok=1.496 rej=0.279 baseline=0.731
+iter 18/80: reward=1.110 match=0.945 correct=1.000 cost/tok=1.115 rej=0.136 baseline=0.801
+iter 19/80: reward=0.820 match=0.870 correct=0.750 cost/tok=1.418 rej=0.237 baseline=0.807
+iter 20/80: reward=0.922 match=0.927 correct=0.750 cost/tok=1.267 rej=0.188 baseline=0.827
+  [ckpt @ iter 20 -> rl_ckpt.pt]
+iter 21/80: reward=0.794 match=0.910 correct=0.500 cost/tok=1.221 rej=0.180 baseline=0.824
+iter 22/80: reward=0.712 match=0.881 correct=0.500 cost/tok=1.397 rej=0.222 baseline=0.802
+iter 23/80: reward=0.564 match=0.900 correct=0.250 cost/tok=1.535 rej=0.272 baseline=0.756
+iter 24/80: reward=0.823 match=0.930 correct=0.500 cost/tok=1.191 rej=0.161 baseline=0.768
+iter 25/80: reward=0.769 match=0.903 correct=0.500 cost/tok=1.278 rej=0.205 baseline=0.766
+iter 26/80: reward=1.143 match=0.948 correct=1.000 cost/tok=1.015 rej=0.083 baseline=0.836
+iter 27/80: reward=1.139 match=0.963 correct=1.000 cost/tok=1.080 rej=0.114 baseline=0.893
+iter 28/80: reward=0.783 match=0.913 correct=0.500 cost/tok=1.266 rej=0.187 baseline=0.871
+iter 29/80: reward=0.977 match=0.945 correct=0.750 cost/tok=1.146 rej=0.150 baseline=0.888
+iter 30/80: reward=0.810 match=0.935 correct=0.500 cost/tok=1.251 rej=0.172 baseline=0.876
+  [ckpt @ iter 30 -> rl_ckpt.pt]
+iter 31/80: reward=1.100 match=0.958 correct=1.000 cost/tok=1.193 rej=0.153 baseline=0.916
+iter 32/80: reward=0.933 match=0.942 correct=0.750 cost/tok=1.281 rej=0.183 baseline=0.919
+iter 33/80: reward=1.001 match=0.947 correct=0.750 cost/tok=1.069 rej=0.121 baseline=0.933
+iter 34/80: reward=0.975 match=0.956 correct=0.750 cost/tok=1.185 rej=0.148 baseline=0.942
+iter 35/80: reward=0.887 match=0.957 correct=0.500 cost/tok=1.068 rej=0.117 baseline=0.931
+iter 36/80: reward=0.986 match=0.922 correct=0.750 cost/tok=1.036 rej=0.096 baseline=0.943
+iter 37/80: reward=1.174 match=0.971 correct=1.000 cost/tok=0.989 rej=0.077 baseline=0.986
+iter 38/80: reward=0.940 match=0.941 correct=0.750 cost/tok=1.253 rej=0.182 baseline=0.981
+iter 39/80: reward=0.979 match=0.945 correct=0.750 cost/tok=1.138 rej=0.135 baseline=0.983
+iter 40/80: reward=0.994 match=0.958 correct=0.750 cost/tok=1.131 rej=0.128 baseline=0.983
+  [ckpt @ iter 40 -> rl_ckpt.pt]
+iter 41/80: reward=0.951 match=0.945 correct=0.750 cost/tok=1.230 rej=0.163 baseline=0.974
+iter 42/80: reward=1.131 match=0.960 correct=1.000 cost/tok=1.097 rej=0.124 baseline=1.003
+iter 43/80: reward=1.124 match=0.960 correct=1.000 cost/tok=1.120 rej=0.118 baseline=1.026
+iter 44/80: reward=0.975 match=0.947 correct=0.750 cost/tok=1.155 rej=0.132 baseline=1.015
+iter 45/80: reward=1.138 match=0.975 correct=1.000 cost/tok=1.123 rej=0.116 baseline=1.038
+iter 46/80: reward=0.895 match=0.962 correct=0.500 cost/tok=1.057 rej=0.101 baseline=1.014
+iter 47/80: reward=1.027 match=0.938 correct=1.000 cost/tok=1.369 rej=0.199 baseline=1.016
+iter 48/80: reward=0.793 match=0.931 correct=0.500 cost/tok=1.293 rej=0.179 baseline=0.975
+iter 49/80: reward=1.031 match=0.959 correct=0.750 cost/tok=1.013 rej=0.092 baseline=0.983
+iter 50/80: reward=0.993 match=0.957 correct=0.750 cost/tok=1.129 rej=0.127 baseline=0.983
+  [ckpt @ iter 50 -> rl_ckpt.pt]
+iter 51/80: reward=1.107 match=0.955 correct=1.000 cost/tok=1.160 rej=0.127 baseline=1.006
+iter 52/80: reward=1.124 match=0.962 correct=1.000 cost/tok=1.127 rej=0.123 baseline=1.028
+iter 53/80: reward=0.960 match=0.949 correct=0.750 cost/tok=1.215 rej=0.159 baseline=1.016
+iter 54/80: reward=1.113 match=0.963 correct=1.000 cost/tok=1.166 rej=0.136 baseline=1.034
+iter 55/80: reward=1.097 match=0.958 correct=1.000 cost/tok=1.203 rej=0.145 baseline=1.046
+iter 56/80: reward=1.152 match=0.978 correct=1.000 cost/tok=1.085 rej=0.097 baseline=1.065
+iter 57/80: reward=1.102 match=0.954 correct=1.000 cost/tok=1.174 rej=0.142 baseline=1.072
+iter 58/80: reward=1.157 match=0.965 correct=1.000 cost/tok=1.025 rej=0.083 baseline=1.087
+iter 59/80: reward=0.953 match=0.957 correct=0.750 cost/tok=1.262 rej=0.156 baseline=1.064
+iter 60/80: reward=1.122 match=0.968 correct=1.000 cost/tok=1.155 rej=0.134 baseline=1.074
+  [ckpt @ iter 60 -> rl_ckpt.pt]
+iter 61/80: reward=1.151 match=0.975 correct=1.000 cost/tok=1.081 rej=0.104 baseline=1.088
+iter 62/80: reward=0.976 match=0.951 correct=0.750 cost/tok=1.165 rej=0.130 baseline=1.067
+iter 63/80: reward=1.114 match=0.959 correct=1.000 cost/tok=1.149 rej=0.126 baseline=1.076
+iter 64/80: reward=1.117 match=0.958 correct=1.000 cost/tok=1.137 rej=0.120 baseline=1.083
+iter 65/80: reward=1.035 match=0.981 correct=0.750 cost/tok=1.068 rej=0.089 baseline=1.075
+iter 66/80: reward=0.827 match=0.956 correct=0.500 cost/tok=1.265 rej=0.173 baseline=1.028
+iter 67/80: reward=0.971 match=0.965 correct=0.750 cost/tok=1.228 rej=0.162 baseline=1.016
+iter 68/80: reward=1.119 match=0.964 correct=1.000 cost/tok=1.148 rej=0.119 baseline=1.035
+iter 69/80: reward=1.151 match=0.979 correct=1.000 cost/tok=1.091 rej=0.094 baseline=1.057
+iter 70/80: reward=0.969 match=0.957 correct=0.750 cost/tok=1.209 rej=0.147 baseline=1.039
+  [ckpt @ iter 70 -> rl_ckpt.pt]
+iter 71/80: reward=1.134 match=0.961 correct=1.000 cost/tok=1.091 rej=0.112 baseline=1.057
+iter 72/80: reward=0.949 match=0.949 correct=0.750 cost/tok=1.248 rej=0.146 baseline=1.039
+iter 73/80: reward=0.976 match=0.962 correct=0.750 cost/tok=1.203 rej=0.136 baseline=1.027
+iter 74/80: reward=1.009 match=0.971 correct=0.750 cost/tok=1.121 rej=0.111 baseline=1.023
+iter 75/80: reward=0.965 match=0.956 correct=0.750 cost/tok=1.220 rej=0.154 baseline=1.010
+iter 76/80: reward=1.131 match=0.978 correct=1.000 cost/tok=1.157 rej=0.125 baseline=1.032
+iter 77/80: reward=1.003 match=0.969 correct=0.750 cost/tok=1.136 rej=0.118 baseline=1.028
+iter 78/80: reward=0.968 match=0.960 correct=0.750 cost/tok=1.224 rej=0.155 baseline=1.016
+iter 79/80: reward=1.150 match=0.982 correct=1.000 cost/tok=1.104 rej=0.099 baseline=1.041
+iter 80/80: reward=0.995 match=0.972 correct=0.750 cost/tok=1.175 rej=0.130 baseline=1.033
+  [ckpt @ iter 80 -> rl_ckpt.pt]
+saved RL policy -> policy_rl.pt ; checkpoint -> rl_ckpt.pt
+=== BENCHMARK ===
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 12485.61it/s]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 10353.75it/s]
+keep_mask: [True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, True, True] (keep 26/48)
+latencies (ms): t_p1=10.46 t_qp=13.83 t_q=24.61 t_q1=20.36
+
+running greedy_q ...
+running plain_sd ...
+running via_fixed ...
+running via_imit ...
+scripts/run_rl_box.sh: line 15:  4133 Killed                  python scripts/bench.py --n_eval "$N_EVAL" --max_new "$MAX_NEW"

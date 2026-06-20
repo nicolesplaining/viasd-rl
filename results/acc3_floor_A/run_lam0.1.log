@@ -1,0 +1,64 @@
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 10701.07it/s]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 9448.14it/s]
+keep_mask: 26 / 48
+corrected latencies(ms): t_p1=0.34 t_qp=3.80 t_q=14.35 t_q1=10.09
+Using the latest cached version of the dataset since openai/gsm8k couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'main' at /home/ubuntu/.cache/huggingface/datasets/openai___gsm8k/main/0.0.0/740312add88f781978c0658806c59bc2815b9866 (last modified on Sat Jun 20 09:16:20 2026).
+RESUMED from rl_pt_ckpt.pt at iter 20
+iter 21/50: tok_reward=0.939 match=0.985 correct=0.833 cost/tok=0.488 rej=0.094 ent=0.203 gn=0.83 ntok=1144 38.7s
+iter 22/50: tok_reward=0.942 match=0.981 correct=1.000 cost/tok=0.457 rej=0.091 ent=0.184 gn=0.48 ntok=1107 35.7s
+iter 23/50: tok_reward=0.934 match=0.981 correct=1.000 cost/tok=0.472 rej=0.085 ent=0.207 gn=0.57 ntok=904 29.4s
+iter 24/50: tok_reward=0.928 match=0.976 correct=1.000 cost/tok=0.517 rej=0.106 ent=0.215 gn=0.94 ntok=1019 32.8s
+iter 25/50: tok_reward=0.939 match=0.980 correct=1.000 cost/tok=0.440 rej=0.083 ent=0.178 gn=0.80 ntok=913 28.3s
+iter 26/50: tok_reward=0.931 match=0.979 correct=1.000 cost/tok=0.489 rej=0.101 ent=0.195 gn=0.35 ntok=1085 35.9s
+iter 27/50: tok_reward=0.937 match=0.983 correct=0.833 cost/tok=0.493 rej=0.079 ent=0.188 gn=0.71 ntok=1200 37.5s
+iter 28/50: tok_reward=0.919 match=0.979 correct=0.833 cost/tok=0.615 rej=0.142 ent=0.232 gn=0.74 ntok=1306 47.6s
+iter 29/50: tok_reward=0.939 match=0.987 correct=1.000 cost/tok=0.505 rej=0.096 ent=0.183 gn=0.89 ntok=878 27.8s
+iter 30/50: tok_reward=0.949 match=0.992 correct=1.000 cost/tok=0.459 rej=0.096 ent=0.159 gn=0.71 ntok=731 23.2s
+  [ckpt @ 30]
+iter 31/50: tok_reward=0.932 match=0.976 correct=0.833 cost/tok=0.507 rej=0.104 ent=0.167 gn=0.56 ntok=1140 37.1s
+iter 32/50: tok_reward=0.917 match=0.975 correct=1.000 cost/tok=0.596 rej=0.121 ent=0.210 gn=0.54 ntok=805 27.7s
+iter 33/50: tok_reward=0.917 match=0.973 correct=0.833 cost/tok=0.530 rej=0.108 ent=0.177 gn=1.10 ntok=1170 39.5s
+iter 34/50: tok_reward=0.940 match=0.985 correct=1.000 cost/tok=0.464 rej=0.078 ent=0.170 gn=0.62 ntok=851 26.5s
+iter 35/50: tok_reward=0.922 match=0.976 correct=1.000 cost/tok=0.526 rej=0.111 ent=0.175 gn=0.61 ntok=1120 38.5s
+iter 36/50: tok_reward=0.932 match=0.982 correct=0.833 cost/tok=0.506 rej=0.090 ent=0.152 gn=0.38 ntok=1258 40.4s
+iter 37/50: tok_reward=0.937 match=0.983 correct=1.000 cost/tok=0.501 rej=0.094 ent=0.154 gn=0.39 ntok=1182 37.8s
+iter 38/50: tok_reward=0.936 match=0.990 correct=1.000 cost/tok=0.569 rej=0.101 ent=0.167 gn=0.82 ntok=1044 33.7s
+iter 39/50: tok_reward=0.931 match=0.973 correct=1.000 cost/tok=0.488 rej=0.103 ent=0.143 gn=0.53 ntok=1275 42.9s
+iter 40/50: tok_reward=0.944 match=0.982 correct=1.000 cost/tok=0.436 rej=0.078 ent=0.151 gn=0.82 ntok=782 24.7s
+  [ckpt @ 40]
+iter 41/50: tok_reward=0.942 match=0.978 correct=1.000 cost/tok=0.448 rej=0.084 ent=0.135 gn=0.56 ntok=963 29.9s
+iter 42/50: tok_reward=0.950 match=0.987 correct=1.000 cost/tok=0.414 rej=0.078 ent=0.127 gn=0.45 ntok=946 28.8s
+iter 43/50: tok_reward=0.940 match=0.978 correct=1.000 cost/tok=0.443 rej=0.076 ent=0.123 gn=0.35 ntok=946 29.3s
+iter 44/50: tok_reward=0.934 match=0.979 correct=0.667 cost/tok=0.496 rej=0.094 ent=0.139 gn=0.44 ntok=1186 38.8s
+iter 45/50: tok_reward=0.934 match=0.978 correct=0.833 cost/tok=0.515 rej=0.091 ent=0.144 gn=0.45 ntok=1254 40.0s
+iter 46/50: tok_reward=0.944 match=0.978 correct=1.000 cost/tok=0.431 rej=0.085 ent=0.114 gn=0.62 ntok=790 24.2s
+iter 47/50: tok_reward=0.937 match=0.978 correct=1.000 cost/tok=0.462 rej=0.095 ent=0.126 gn=0.47 ntok=899 28.4s
+iter 48/50: tok_reward=0.942 match=0.982 correct=1.000 cost/tok=0.516 rej=0.107 ent=0.118 gn=0.42 ntok=891 29.2s
+iter 49/50: tok_reward=0.936 match=0.988 correct=1.000 cost/tok=0.555 rej=0.121 ent=0.132 gn=0.56 ntok=951 32.9s
+iter 50/50: tok_reward=0.939 match=0.991 correct=1.000 cost/tok=0.520 rej=0.086 ent=0.130 gn=0.66 ntok=1291 41.6s
+  [ckpt @ 50]
+saved -> policy_rl_pt.pt; ckpt -> rl_pt_ckpt.pt; log -> rl_pt_log.jsonl
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 9722.39it/s]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 8958.75it/s]
+keep_mask: [True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, True, True] (keep 26/48)
+latencies (ms): t_p1=10.44 t_qp=13.92 t_q=24.57 t_q1=20.04
+
+Using the latest cached version of the dataset since openai/gsm8k couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'main' at /home/ubuntu/.cache/huggingface/datasets/openai___gsm8k/main/0.0.0/740312add88f781978c0658806c59bc2815b9866 (last modified on Sat Jun 20 09:16:20 2026).
+corrected (ms):  t_p1=0.33 t_qp=3.81 t_q=14.46 t_q1=9.93
+bandwidth (ms):  t_p1=0.29 t_qp=5.20 t_q=8.82 t_q1=8.82
+
+running greedy_q ...
+running plain_sd ...
+running via_fixed ...
+running via_imit ...
+running via_rl ...
+
+method         acc    rej accept  escal  q/tok  tok/q   spd spd_cor  spd_bw
+---------------------------------------------------------------------------
+greedy_q     0.833  0.000  0.000  0.000  1.000   1.00 1.00x   1.00x   1.00x
+plain_sd     0.833  0.105  0.000  0.000  0.255   3.92 1.02x   2.41x   3.35x
+via_fixed    0.300  0.253  0.263  0.670  0.314   3.18 0.66x   1.55x   1.74x
+via_imit     0.233  0.354  0.399  0.459  0.302   3.32 0.57x   1.49x   1.61x
+via_rl       0.733  0.104  0.697  0.302  0.179   5.59 0.94x   2.49x   2.69x

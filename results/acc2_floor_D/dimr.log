@@ -1,0 +1,17 @@
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 11850.39it/s]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 10200.92it/s]
+Using the latest cached version of the dataset since openai/gsm8k couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'main' at /home/ubuntu/.cache/huggingface/datasets/openai___gsm8k/main/0.0.0/740312add88f781978c0658806c59bc2815b9866 (last modified on Sat Jun 20 10:22:10 2026).
+[init evenly-spaced] skip=22/48 score=6.21693
+[random 1] new best score=4.51323
+[hill 1] swap skip24->keep4 score=4.46561
+[hill 2] swap skip2->keep3 score=4.17460
+[hill 3] swap skip21->keep42 score=3.76984
+[hill 4] swap skip7->keep39 score=3.69577
+[hill 5] swap skip8->keep14 score=3.61111
+[hill 6] swap skip13->keep37 score=3.56878
+[hill 7] swap skip42->keep46 score=3.22222
+[hill 8] swap skip22->keep24 score=3.20106
+saved -> dimr_mask.json  (keep 26/48 layers, score=3.20106)

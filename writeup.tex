@@ -6,6 +6,8 @@
 \usepackage{xcolor}
 \usepackage{hyperref}
 \usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric}
 \title{\textbf{Learning the Routing Policy for VIA-SD:\\ RL-Gated Hierarchical Speculative Decoding}}
 \author{viasd-rl experiments}
 \date{\today}
@@ -24,6 +26,65 @@ thresholds} (accuracy $0.21$--$0.40\to0.88$--$0.91$) at fewer expensive verifier
 We also report honest negatives: the slim-verifier middle tier only pays off when the gate is
 learned, and scaling the verifier alone (without the drafter) hurts an accept-heavy policy.
 \end{abstract}
+
+\section{Introduction}
+\textbf{Why speeding up speculative decoding matters.} Autoregressive LLM inference is
+\emph{memory-bandwidth bound}: generating each token streams all model weights from HBM, so latency
+is dominated by a long chain of \emph{sequential} large-model forward passes. For a 14B model this is
+the bottleneck behind both interactive latency and serving cost. \emph{Speculative decoding} (SD)
+attacks it by letting a cheap \emph{drafter} propose several tokens that the large \emph{verifier}
+checks in \emph{parallel} (one forward), amortizing one expensive pass over multiple accepted
+tokens; it is lossless and gives a $1.3$--$2\times$ wall-clock speedup in practice. The single lever
+is the \emph{acceptance rate} --- every rejected token forces a full-model step --- so reducing
+rejections directly buys speed.
+
+\textbf{VIA-SD, and where it can be improved.} VIA-SD inserts a \emph{slim intermediate verifier}
+$q'$ (a layer-skipped copy of the target $q$) so that ``middle-zone'' tokens --- where the drafter is
+plausible but not certain --- are resolved cheaply by $q'$ instead of escalating to the full model.
+This three-tier hierarchy (accept / regenerate-with-$q'$ / escalate-to-$q$) cuts full-model
+invocations. \emph{But} the routing among tiers is decided by two \textbf{hand-tuned global
+thresholds} $(\alpha_1,\alpha_2)$ on $q'$'s confidence: a brittle, context-blind rule that must be
+re-tuned per model and task. That is precisely the opening --- choosing a verification tier per token
+is a sequential, context-dependent control problem, exactly what a \emph{learned} policy should do
+better than fixed thresholds.
+
+\textbf{Our contribution.} We replace the fixed thresholds with a \textbf{learned per-token gating
+policy}: a tiny MLP that, from $q$-free features, routes each drafted token to
+accept/regenerate/escalate (Fig.~\ref{fig:flow}). We train it by imitation then reinforcement
+learning, and study three RL formulations (REINFORCE, GRPO, a per-token reward) together with their
+reward and credit-assignment design. On GSM8K with a Qwen2.5 \mbox{0.5B$\to$14B} pair the learned gate
+beats the fixed-threshold rule by a wide margin (accuracy $0.21$--$0.40\to0.88$--$0.91$) at fewer
+expensive verifier calls --- alongside honest negatives about where the slim tier does and does not pay off.
+
+\begin{figure}[t]\centering
+\begin{tikzpicture}[font=\small,>=Stealth,
+  io/.style={draw,rounded corners,align=center,inner sep=4pt,minimum height=7mm},
+  gate/.style={draw,very thick,fill=blue!12,rounded corners,align=center,minimum width=34mm,minimum height=14mm},
+  act/.style={draw,rounded corners,fill=gray!10,align=center,inner sep=3pt,minimum height=9mm,minimum width=24mm},
+  rl/.style={draw,dashed,thick,fill=orange!12,rounded corners,align=center,inner sep=5pt,minimum width=46mm}]
+% main vertical flow, gate at the center
+\node[io] (feat) {per-token $q$-free features $s_t$\\[-2pt]{\scriptsize drafter \& $q'$ confidence, agreement, $\mathrm{KL}$, position}};
+\node[gate,below=8mm of feat] (gate) {\textbf{GATE}\quad $\pi_\theta(a_t\mid s_t)$\\[-1pt]{\scriptsize learned MLP}};
+\node[act,below=12mm of gate,xshift=-37mm] (acc) {\textsc{accept}\\drafter $p$\\{\scriptsize cheap}};
+\node[act,below=12mm of gate] (reg) {\textsc{regenerate}\\with $q'$\\{\scriptsize medium}};
+\node[act,below=12mm of gate,xshift=37mm] (esc) {\textsc{escalate}\\to $q$\\{\scriptsize expensive}};
+\draw[->,thick](feat)--(gate);
+\draw[->,thick](gate)--(acc); \draw[->,thick](gate)--(reg); \draw[->,thick](gate)--(esc);
+% RL slots in: ONE dashed box that just updates the gate's parameters
+\node[rl,right=15mm of gate] (rl) {\textbf{RL (training only)}\\[2pt]
+  reward $r_t=\text{match}_t-\lambda\,\text{cost}_t$\\{\scriptsize($q$ consulted off-line)}\\[2pt]
+  $\Rightarrow$ policy gradient $\nabla_\theta J$};
+\draw[->,dashed,thick] (rl.west) -- node[above,font=\scriptsize]{update $\theta$} (gate.east);
+\draw[->,dashed] (esc.east) to[out=0,in=-90] node[right,font=\scriptsize,pos=0.35]{outcome} (rl.south);
+\end{tikzpicture}
+\caption{Method overview --- the learned \textbf{gate} is the core. For each drafted token it reads
+$q$-free features $s_t$ and routes to \textsc{accept} (drafter), \textsc{regenerate} (slim $q'$), or
+\textsc{escalate} (full $q$). \textbf{RL slots in only at training time} (dashed): each action's
+outcome yields a reward $r_t=\text{match}_t-\lambda\,\text{cost}_t$ (with $q$ consulted off-line), and a
+policy-gradient step updates the gate parameters $\theta$. At inference the dashed path is removed and
+the gate runs from $q$-free features alone.}
+\label{fig:flow}
+\end{figure}
 
 \section{Background: VIA-SD and DIMR}
 \textbf{Speculative decoding (SD).} A cheap \emph{drafter} $p$ autoregressively proposes a block of
@@ -148,14 +209,37 @@ precisely on the mixed-difficulty prompts where some of the $G$ rollouts succeed
 \textbf{v2} uses batch-normalized per-token advantages (contextual-bandit REINFORCE) with an
 entropy bonus and gradient clipping.
 
+\subsection{Gradient updates}
+Let $\pi_\theta(a_t\mid s_t)$ be the gate and $\mathcal{H}$ its entropy. The three methods maximize
+$J(\theta)$ by the following gradients (all with an entropy bonus $+\eta\,\mathcal{H}[\pi_\theta]$):
+\begin{align}
+\text{REINFORCE:}\quad
+&\nabla_\theta J = \mathbb{E}\!\Big[(R-b)\textstyle\sum_t \nabla_\theta\log\pi_\theta(a_t\mid s_t)\Big],
+\qquad b \leftarrow (1{-}\tau)\,b + \tau\,R \\[2pt]
+\text{GRPO:}\quad
+&\nabla_\theta J = \mathbb{E}\!\Big[\textstyle\sum_t \nabla_\theta \min\!\big(\rho_t A_i,\,
+\mathrm{clip}(\rho_t,1{-}\epsilon,1{+}\epsilon)\,A_i\big)\Big] - \beta\,\nabla_\theta\mathrm{KL}\!\big[\pi_\theta\Vert\pi_{\mathrm{ref}}\big], \notag\\
+&\rho_t = \frac{\pi_\theta(a_t\mid s_t)}{\pi_{\theta_{\mathrm{old}}}(a_t\mid s_t)},
+\qquad A_i = \frac{R_i-\mathrm{mean}_{j\in\mathcal{G}}R_j}{\mathrm{std}_{j\in\mathcal{G}}R_j+\varepsilon} \\[2pt]
+\text{per-token (v2):}\quad
+&\nabla_\theta J = \mathbb{E}\!\Big[\textstyle\sum_t \hat A_t\,\nabla_\theta\log\pi_\theta(a_t\mid s_t)\Big],
+\qquad \hat A_t = \frac{r_t-\mathrm{mean}_{\mathrm{batch}}\,r}{\mathrm{std}_{\mathrm{batch}}\,r+\varepsilon}
+\end{align}
+where $R$ is the trajectory return (Eq.~1/3), $r_t$ the per-token reward (Eq.~2), $b$ a global EMA
+baseline (decay $\tau$), $\mathcal{G}$ a group of $G$ rollouts of one prompt, $\pi_{\mathrm{ref}}$ the
+frozen warm-start policy, and $(\epsilon,\beta,\eta)$ the clip / KL / entropy coefficients. REINFORCE
+and GRPO broadcast one (trajectory) advantage over all steps; v2 assigns each step its own $\hat A_t$.
+
 \subsection{What we observed}
 Fig.~3: \textbf{v2 per-token} is the lowest-variance and drives rejection lowest; \textbf{GRPO} is
 noisiest (group-level binary-ish reward); \textbf{REINFORCE} is intermediate; all converge to
 match$\approx$0.95. On the efficiency metric, GRPO pushed q-calls/token lowest among the
 match-rewarded variants (0.162), while the v2 reward drove escalation to $0.12$ (fastest). Because
 the match-based rewards are match-dominated, the resulting RL is close to \emph{on-policy imitation}
-(it fixes exposure bias rather than discovering exotic routing); the correctness-focused GRPO
-(Eq.~3) is the formulation that targets the true objective directly.
+(it fixes exposure bias rather than discovering exotic routing). Optimizing the \emph{true} sparse
+objective (Eq.~3) directly is harder: there is a narrow $\lambda$ window between a cost-dominated
+collapse to ``accept everything'' and a reward-free collapse to ``escalate everything'' ($=$greedy);
+we are sweeping $\lambda$ and the warm-start base to locate it.
 
 \section{Results}
 \begin{table}[H]\centering\small

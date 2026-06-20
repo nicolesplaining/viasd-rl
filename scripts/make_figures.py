@@ -35,10 +35,13 @@ COLORS = {"baseline": "#888888", "wallclock": "#111111", "fixed": "#d62728",
 # ---- live points parsed from bench logs (auto-refresh as runs finish) ----
 # (label, logpath, group). via_rl row of each = the trained policy of that run.
 LIVE = [
-    ("v2 lam0.1",     os.path.join(RES, "A_lam0.1_n50", "bench_n50.log"), "learned"),
-    ("v2 lam0.2",     os.path.join(RES, "B_lam0.2_n50", "bench_n50.log"), "learned"),
-    ("v2 3B->14B",    os.path.join(RES, "bigger_drafter_3B_14B", "bench_n50.log"), "learned"),
-    ("GRPO acc-focus",os.path.join(RES, "E_dimr_bench_and_latency", "run_grpo_acc_bench.log"), "acc-rl"),
+    ("v2 lam0.1",          os.path.join(RES, "A_lam0.1_n50", "bench_n50.log"), "learned"),
+    ("v2 lam0.2",          os.path.join(RES, "B_lam0.2_n50", "bench_n50.log"), "learned"),
+    ("v2 3B->14B",         os.path.join(RES, "bigger_drafter_3B_14B", "bench_n50.log"), "learned"),
+    # accuracy-optimization alternatives (collapsed correctness-GRPO removed):
+    ("acc-RL v2base l0.01",os.path.join(RES, "acc1_v2base_E", "bench_acc1.log"), "acc-rl"),
+    ("acc-floor REINF+DIMR",os.path.join(RES, "acc2_floor_D", "bench_acc2.log"), "acc-rl"),
+    ("acc-floor REINF naive",os.path.join(RES, "acc3_floor_A", "bench_acc3.log"), "acc-rl"),
 ]
 
 def parse_bench(path, method="via_rl"):
@@ -110,7 +113,6 @@ def rl_curves():
         ("REINFORCE",   load_reinforce(os.path.join(RES, "A_reinforce_14B_lam0.3", "run.log")), "#2ca02c"),
         ("GRPO",        load_jsonl(os.path.join(RES, "D_grpo_and_dimr_14B", "grpo_log.jsonl")), "#ff7f0e"),
         ("v2 per-token",load_jsonl(os.path.join(RES, "F_pertoken_rl_14B", "rl_pt_log.jsonl")), "#1f77b4"),
-        ("GRPO acc-focus", load_jsonl(os.path.join(RES, "E_dimr_bench_and_latency", "grpo_acc_log.jsonl")), "#9467bd"),
     ]
     fig, axes = plt.subplots(1, 3, figsize=(14, 4))
     for metric, ax, title in [("reward", axes[0], "Reward (own objective)"),

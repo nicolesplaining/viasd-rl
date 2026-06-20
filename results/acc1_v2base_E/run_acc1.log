@@ -1,0 +1,58 @@
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 12205.35it/s]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 10436.37it/s]
+keep_mask: 26 / 48
+latencies(ms): t_p1=10.42 t_qp=13.77 t_q=24.45 t_q1=20.45
+Using the latest cached version of the dataset since openai/gsm8k couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'main' at /home/ubuntu/.cache/huggingface/datasets/openai___gsm8k/main/0.0.0/740312add88f781978c0658806c59bc2815b9866 (last modified on Sat Jun 20 16:37:46 2026).
+iter 1/45: reward=0.659(±0.47) match=0.916 correct=0.667 cost/tok=0.778 rej=0.034 kl=0.0002 ent=0.100 clip=0.00 gn=0.21 11.1s
+iter 2/45: reward=0.657(±0.47) match=0.925 correct=0.667 cost/tok=0.950 rej=0.072 kl=0.0003 ent=0.092 clip=0.00 gn=0.26 19.4s
+iter 3/45: reward=0.991(±0.00) match=0.930 correct=1.000 cost/tok=0.917 rej=0.075 kl=0.0006 ent=0.146 clip=0.00 gn=0.36 23.4s
+iter 4/45: reward=0.993(±0.00) match=0.967 correct=1.000 cost/tok=0.726 rej=0.014 kl=0.0024 ent=0.074 clip=0.02 gn=0.12 18.6s
+iter 5/45: reward=0.491(±0.50) match=0.872 correct=0.500 cost/tok=0.870 rej=0.064 kl=0.0028 ent=0.126 clip=0.01 gn=0.42 18.3s
+iter 6/45: reward=0.825(±0.37) match=0.918 correct=0.833 cost/tok=0.834 rej=0.051 kl=0.0016 ent=0.273 clip=0.17 gn=1.33 39.3s
+iter 7/45: reward=0.992(±0.00) match=0.961 correct=1.000 cost/tok=0.837 rej=0.039 kl=0.0007 ent=0.105 clip=0.00 gn=0.14 17.5s
+iter 8/45: reward=0.991(±0.00) match=0.952 correct=1.000 cost/tok=0.881 rej=0.058 kl=0.0047 ent=0.163 clip=0.01 gn=0.34 28.5s
+iter 9/45: reward=0.992(±0.00) match=0.933 correct=1.000 cost/tok=0.820 rej=0.050 kl=0.0100 ent=0.116 clip=0.04 gn=0.16 35.1s
+iter 10/45: reward=0.157(±0.37) match=0.843 correct=0.167 cost/tok=0.921 rej=0.087 kl=0.0160 ent=0.189 clip=0.00 gn=0.45 45.3s
+  [ckpt @ iter 10 -> acc1_ckpt.pt]
+iter 11/45: reward=0.993(±0.00) match=0.954 correct=1.000 cost/tok=0.715 rej=0.014 kl=0.0059 ent=0.039 clip=0.01 gn=0.19 38.4s
+iter 12/45: reward=0.158(±0.37) match=0.861 correct=0.167 cost/tok=0.889 rej=0.076 kl=0.0167 ent=0.169 clip=0.02 gn=1.03 60.0s
+iter 13/45: reward=0.992(±0.00) match=0.925 correct=1.000 cost/tok=0.824 rej=0.043 kl=0.0161 ent=0.120 clip=0.00 gn=0.18 13.0s
+iter 14/45: reward=0.992(±0.00) match=0.938 correct=1.000 cost/tok=0.770 rej=0.031 kl=0.0141 ent=0.084 clip=0.01 gn=0.11 19.6s
+iter 15/45: reward=0.659(±0.47) match=0.900 correct=0.667 cost/tok=0.744 rej=0.030 kl=0.0178 ent=0.073 clip=0.00 gn=0.13 26.1s
+iter 16/45: reward=-0.008(±0.00) match=0.871 correct=0.000 cost/tok=0.787 rej=0.039 kl=0.0307 ent=0.226 clip=0.04 gn=0.69 46.3s
+iter 17/45: reward=0.491(±0.50) match=0.898 correct=0.500 cost/tok=0.854 rej=0.062 kl=0.0113 ent=0.183 clip=0.03 gn=0.38 37.3s
+iter 18/45: reward=0.325(±0.47) match=0.924 correct=0.333 cost/tok=0.816 rej=0.048 kl=0.0041 ent=0.112 clip=0.00 gn=0.35 36.5s
+iter 19/45: reward=0.325(±0.47) match=0.906 correct=0.333 cost/tok=0.863 rej=0.059 kl=0.0006 ent=0.119 clip=0.00 gn=0.44 32.4s
+iter 20/45: reward=0.990(±0.00) match=0.902 correct=1.000 cost/tok=0.959 rej=0.091 kl=0.0030 ent=0.129 clip=0.03 gn=0.39 34.2s
+  [ckpt @ iter 20 -> acc1_ckpt.pt]
+iter 21/45: reward=0.993(±0.00) match=0.978 correct=1.000 cost/tok=0.704 rej=0.014 kl=0.0050 ent=0.175 clip=0.00 gn=0.47 22.0s
+iter 22/45: reward=0.992(±0.00) match=0.927 correct=1.000 cost/tok=0.768 rej=0.034 kl=0.0072 ent=0.140 clip=0.00 gn=0.16 31.6s
+iter 23/45: reward=0.158(±0.37) match=0.891 correct=0.167 cost/tok=0.819 rej=0.048 kl=0.0103 ent=0.160 clip=0.00 gn=0.29 33.5s
+iter 24/45: reward=0.492(±0.50) match=0.852 correct=0.500 cost/tok=0.760 rej=0.026 kl=0.0055 ent=0.129 clip=0.00 gn=0.54 22.1s
+iter 25/45: reward=0.992(±0.00) match=0.907 correct=1.000 cost/tok=0.843 rej=0.053 kl=0.0043 ent=0.152 clip=0.01 gn=0.15 20.8s
+iter 26/45: reward=0.992(±0.00) match=0.946 correct=1.000 cost/tok=0.791 rej=0.042 kl=0.0068 ent=0.074 clip=0.02 gn=0.14 30.5s
+iter 27/45: reward=0.825(±0.37) match=0.876 correct=0.833 cost/tok=0.799 rej=0.045 kl=0.0101 ent=0.138 clip=0.00 gn=0.17 27.7s
+iter 28/45: reward=0.825(±0.37) match=0.919 correct=0.833 cost/tok=0.800 rej=0.046 kl=0.0041 ent=0.107 clip=0.04 gn=0.09 37.3s
+iter 29/45: reward=0.991(±0.00) match=0.948 correct=1.000 cost/tok=0.863 rej=0.054 kl=0.0015 ent=0.065 clip=0.00 gn=0.19 17.6s
+iter 30/45: reward=0.993(±0.00) match=0.962 correct=1.000 cost/tok=0.731 rej=0.024 kl=0.0043 ent=0.053 clip=0.01 gn=0.18 48.6s
+  [ckpt @ iter 30 -> acc1_ckpt.pt]
+iter 31/45: reward=0.159(±0.37) match=0.910 correct=0.167 cost/tok=0.816 rej=0.051 kl=0.0001 ent=0.000 clip=0.00 gn=0.00 54.4s
+iter 32/45: reward=0.992(±0.00) match=0.928 correct=1.000 cost/tok=0.827 rej=0.060 kl=0.0025 ent=0.127 clip=0.00 gn=0.47 25.4s
+iter 33/45: reward=0.491(±0.50) match=0.913 correct=0.500 cost/tok=0.858 rej=0.046 kl=0.0014 ent=0.158 clip=0.00 gn=0.26 30.3s
+iter 34/45: reward=0.823(±0.37) match=0.900 correct=0.833 cost/tok=1.030 rej=0.117 kl=0.0008 ent=0.176 clip=0.00 gn=0.67 45.8s
+iter 35/45: reward=0.991(±0.00) match=0.963 correct=1.000 cost/tok=0.872 rej=0.060 kl=0.0017 ent=0.142 clip=0.00 gn=0.43 13.1s
+iter 36/45: reward=0.992(±0.00) match=0.957 correct=1.000 cost/tok=0.821 rej=0.034 kl=0.0051 ent=0.140 clip=0.03 gn=0.26 24.4s
+iter 37/45: reward=0.992(±0.00) match=0.940 correct=1.000 cost/tok=0.762 rej=0.027 kl=0.0002 ent=0.025 clip=0.00 gn=0.03 15.7s
+iter 38/45: reward=0.993(±0.00) match=0.940 correct=1.000 cost/tok=0.707 rej=0.012 kl=0.0004 ent=0.030 clip=0.00 gn=0.13 22.2s
+iter 39/45: reward=0.823(±0.37) match=0.865 correct=0.833 cost/tok=0.986 rej=0.107 kl=0.0050 ent=0.178 clip=0.04 gn=0.28 25.9s
+iter 40/45: reward=0.992(±0.00) match=0.953 correct=1.000 cost/tok=0.787 rej=0.043 kl=0.0021 ent=0.061 clip=0.00 gn=0.39 17.2s
+  [ckpt @ iter 40 -> acc1_ckpt.pt]
+iter 41/45: reward=0.658(±0.47) match=0.889 correct=0.667 cost/tok=0.892 rej=0.083 kl=0.0014 ent=0.140 clip=0.00 gn=0.83 23.9s
+iter 42/45: reward=0.991(±0.00) match=0.928 correct=1.000 cost/tok=0.872 rej=0.061 kl=0.0031 ent=0.105 clip=0.00 gn=0.26 12.6s
+iter 43/45: reward=0.992(±0.00) match=0.957 correct=1.000 cost/tok=0.766 rej=0.030 kl=0.0044 ent=0.077 clip=0.01 gn=0.21 41.2s
+iter 44/45: reward=0.825(±0.37) match=0.937 correct=0.833 cost/tok=0.820 rej=0.042 kl=0.0025 ent=0.128 clip=0.01 gn=0.37 26.5s
+iter 45/45: reward=0.992(±0.00) match=0.949 correct=1.000 cost/tok=0.775 rej=0.034 kl=0.0030 ent=0.135 clip=0.00 gn=0.53 32.0s
+saved GRPO policy -> policy_acc1.pt; ckpt -> acc1_ckpt.pt; log -> acc1_log.jsonl

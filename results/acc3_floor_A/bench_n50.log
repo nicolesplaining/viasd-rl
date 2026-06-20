@@ -1,0 +1,23 @@
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 10540.64it/s]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 9195.18it/s]
+keep_mask: [True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, True, True] (keep 26/48)
+latencies (ms): t_p1=10.16 t_qp=13.79 t_q=24.46 t_q1=20.40
+
+Using the latest cached version of the dataset since openai/gsm8k couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'main' at /home/ubuntu/.cache/huggingface/datasets/openai___gsm8k/main/0.0.0/740312add88f781978c0658806c59bc2815b9866 (last modified on Sat Jun 20 09:16:20 2026).
+corrected (ms):  t_p1=0.35 t_qp=3.98 t_q=14.65 t_q1=10.60
+bandwidth (ms):  t_p1=0.29 t_qp=5.20 t_q=8.82 t_q1=8.82
+
+running greedy_q ...
+running plain_sd ...
+running via_fixed ...
+running via_imit ...
+running via_rl ...
+
+method         acc    rej accept  escal  q/tok  tok/q   spd spd_cor  spd_bw
+---------------------------------------------------------------------------
+greedy_q     0.860  0.000  0.000  0.000  1.000   1.00 1.00x   1.00x   1.00x
+plain_sd     0.880  0.107  0.000  0.000  0.257   3.89 1.06x   2.51x   3.34x
+via_fixed    0.400  0.246  0.262  0.673  0.310   3.22 0.69x   1.63x   1.77x
+via_imit     0.280  0.341  0.416  0.444  0.295   3.39 0.60x   1.59x   1.65x
+via_rl       0.800  0.102  0.703  0.297  0.180   5.55 0.98x   2.58x   2.68x

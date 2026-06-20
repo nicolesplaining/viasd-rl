@@ -1,22 +1,17 @@
 /usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
   warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
-Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 12030.43it/s]
-Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 9704.58it/s]
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 11851.09it/s]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 10312.85it/s]
 keep_mask: [True, True, False, True, True, True, True, False, False, False, True, True, True, False, True, True, True, False, False, False, False, False, False, False, True, False, False, False, True, True, True, False, False, False, False, True, True, True, True, True, False, False, False, True, True, True, True, True] (keep 26/48)
-latencies (ms): t_p1=10.39 t_qp=13.85 t_q=24.60 t_q1=20.45
+latencies (ms): t_p1=10.61 t_qp=13.84 t_q=24.61 t_q1=20.63
 
 Using the latest cached version of the dataset since openai/gsm8k couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'main' at /home/ubuntu/.cache/huggingface/datasets/openai___gsm8k/main/0.0.0/740312add88f781978c0658806c59bc2815b9866 (last modified on Sat Jun 20 16:37:46 2026).
-running subset: ['greedy_q', 'via_fixed', 'via_rl']
-corrected (ms):  t_p1=0.35 t_qp=3.81 t_q=14.56 t_q1=10.41
+Found the latest cached dataset configuration 'main' at /home/ubuntu/.cache/huggingface/datasets/openai___gsm8k/main/0.0.0/740312add88f781978c0658806c59bc2815b9866 (last modified on Sat Jun 20 10:22:10 2026).
+running subset: ['greedy_q', 'via_rl']
+corrected (ms):  t_p1=0.35 t_qp=3.57 t_q=14.34 t_q1=10.37
 bandwidth (ms):  t_p1=0.29 t_qp=5.20 t_q=8.82 t_q1=8.82
 
 
 method         acc    rej accept  escal  q/tok  tok/q   spd spd_cor  spd_bw
 ---------------------------------------------------------------------------
 running greedy_q ...
-greedy_q     0.860  0.000  0.000  0.000  1.000   1.00 1.00x   1.00x   1.00x
-running via_fixed ...
-via_fixed    0.140  0.220  0.561  0.346  0.236   4.24 0.77x   2.00x   2.10x
-running via_rl ...
-via_rl       0.460  0.005  0.994  0.006  0.006 169.03 1.49x   8.46x   6.17x
