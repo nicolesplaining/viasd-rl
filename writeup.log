@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.22)  20 JUN 2026 15:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.22)  20 JUN 2026 15:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -157,6 +157,17 @@ LaTeX Info: Redefining \Relbar on input line 970.
 LaTeX Info: Redefining \[ on input line 2950.
 LaTeX Info: Redefining \] on input line 2951.
 )
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
 (/usr/local/texlive/2026/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
 
@@ -612,24 +623,24 @@ File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 (./writeup.aux)
 \openout1 = `writeup.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -687,29 +698,40 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 15.
+Package hyperref Info: Link coloring OFF on input line 16.
 
 (./writeup.out) (./writeup.out)
 \@outlinefile=\write4
 \openout4 = `writeup.out'.
 
- [1
+LaTeX Font Info:    Trying to load font information for U+msa on input line 18.
+
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 18.
+
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [1
 
 {/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.123 
+l.124 
       ]
-Overfull \hbox (11.73967pt too wide) in paragraph at lines 142--147
+Overfull \hbox (11.73967pt too wide) in paragraph at lines 143--148
 []\OT1/cmr/bx/n/10.95 Metrics. \OT1/cmr/m/it/10.95 q-calls/token \OT1/cmr/m/n/1
 0.95 (full-verifier in-vo-ca-tions per to-ken; ex-act, hardware-independent), G
 SM8K
  []
 
 [3]
-Overfull \hbox (0.9838pt too wide) in paragraph at lines 171--174
+Overfull \hbox (0.9838pt too wide) in paragraph at lines 172--175
 []\OT1/cmr/bx/n/10.95 Cost. \OT1/cmr/m/n/10.95 Per-action la-tency in \OT1/cmr/
 m/it/10.95 overhead-corrected \OT1/cmr/m/n/10.95 units: $[][] = (\OML/cmm/m/it/
 10.95 t[] \OT1/cmr/m/n/10.95 + \OML/cmm/m/it/10.95 t[]=^^M \OT1/cmr/m/n/10.95 +
@@ -717,127 +739,53 @@ m/it/10.95 overhead-corrected \OT1/cmr/m/n/10.95 units: $[][] = (\OML/cmm/m/it/
 /n/10.95 )\OML/cmm/m/it/10.95 =t[]$
  []
 
-! Undefined control sequence.
-l.192 ...uting decisions: $\nabla_\theta J=\mathbb
-                                                  {E}[A\sum_t\nabla\log\pi(a...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<argument> ...:}\quad &\nabla _\theta J = \mathbb 
-                                                  {E}\!\Big [(R-b)\textstyle...
-l.227 \end{align}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<argument> ...:}\quad &\nabla _\theta J = \mathbb 
-                                                  {E}\!\Big [\textstyle \sum...
-l.227 \end{align}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<argument> ...:}\quad &\nabla _\theta J = \mathbb 
-                                                  {E}\!\Big [\textstyle \sum...
-l.227 \end{align}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<argument> ...:}\quad &\nabla _\theta J = \mathbb 
-                                                  {E}\!\Big [(R-b)\textstyle...
-l.227 \end{align}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<argument> ...:}\quad &\nabla _\theta J = \mathbb 
-                                                  {E}\!\Big [\textstyle \sum...
-l.227 \end{align}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<argument> ...:}\quad &\nabla _\theta J = \mathbb 
-                                                  {E}\!\Big [\textstyle \sum...
-l.227 \end{align}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 [4{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
-}]
-<results/figures/speedup_bar.png, id=104, 650.43pt x 325.215pt>
+}] [5]
+<results/figures/speedup_bar.png, id=113, 650.43pt x 325.215pt>
 File: results/figures/speedup_bar.png Graphic file (type png)
 <use results/figures/speedup_bar.png>
 Package pdftex.def Info: results/figures/speedup_bar.png  used on input line 27
-1.
+5.
 (pdftex.def)             Requested size: 338.22418pt x 169.11774pt.
-<results/figures/pareto.png, id=106, 578.16pt x 419.166pt>
+<results/figures/pareto.png, id=115, 578.16pt x 419.166pt>
 File: results/figures/pareto.png Graphic file (type png)
 <use results/figures/pareto.png>
-Package pdftex.def Info: results/figures/pareto.png  used on input line 277.
+Package pdftex.def Info: results/figures/pareto.png  used on input line 281.
 (pdftex.def)             Requested size: 291.2458pt x 211.14949pt.
- [5
+<results/figures/rl_curves.png, id=116, 1004.0712pt x 297.2706pt>
+File: results/figures/rl_curves.png Graphic file (type png)
+<use results/figures/rl_curves.png>
+Package pdftex.def Info: results/figures/rl_curves.png  used on input line 287.
+
+(pdftex.def)             Requested size: 469.75502pt x 139.07762pt.
+ [6
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has
  been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.281 \end{figure}
-                  ]
-<results/figures/rl_curves.png, id=118, 1004.0712pt x 297.2706pt>
-File: results/figures/rl_curves.png Graphic file (type png)
-<use results/figures/rl_curves.png>
-Package pdftex.def Info: results/figures/rl_curves.png  used on input line 283.
-
-(pdftex.def)             Requested size: 469.75502pt x 139.07762pt.
- [6
+l.290 \end{figure}
+                  
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.287 
-      
+l.290 \end{figure}
+                   <./results/figures/speedup_bar.png>] [7
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.287 
-       <./results/figures/speedup_bar.png> <./results/figures/pareto.png>]
-[7
+l.303 \item \textbf
+                   {Honest negatives}: the $q'$ middle tier's per-block over...
+
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.320 
-       <./results/figures/rl_curves.png>] [8] (./writeup.aux)
+l.303 \item \textbf
+                   {Honest negatives}: the $q'$ middle tier's per-block over...
+ <./results/figures/pareto.png> <./results/figures/rl_curves.png>] [8]
+(./writeup.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -846,11 +794,11 @@ Package rerunfilecheck Info: File `writeup.out' has not changed.
 (rerunfilecheck)             Checksum: 86CFF01FF533AFB753E5B2C2C80B7A35;2377.
  ) 
 Here is how much of TeX's memory you used:
- 21252 strings out of 467525
- 401117 string characters out of 5418982
- 818069 words of memory out of 5000000
- 49790 multiletter control sequences out of 15000+600000
- 638834 words of font info for 78 fonts, out of 8000000 for 9000
+ 21786 strings out of 467525
+ 407310 string characters out of 5418982
+ 818677 words of memory out of 5000000
+ 50305 multiletter control sequences out of 15000+600000
+ 641722 words of font info for 92 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,12n,94p,725b,901s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
@@ -872,13 +820,14 @@ e/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2
 exmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2026/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2026/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2026/texmf
--dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/local/texlive/2026/texmf-d
-ist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2026/texmf-dis
-t/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on writeup.pdf (8 pages, 597232 bytes).
+-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2026/t
+exmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/local/texlive/2026/tex
+mf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2026/texmf
+-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
+Output written on writeup.pdf (8 pages, 598679 bytes).
 PDF statistics:
- 249 PDF objects out of 1000 (max. 8388607)
- 187 compressed objects within 2 object streams
+ 254 PDF objects out of 1000 (max. 8388607)
+ 190 compressed objects within 2 object streams
  40 named destinations out of 1000 (max. 500000)
  140 words of extra memory for PDF output out of 10000 (max. 10000000)
 

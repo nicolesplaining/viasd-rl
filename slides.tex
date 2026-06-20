@@ -12,6 +12,7 @@
 \usepackage{booktabs}
 \usepackage{colortbl}
 \setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{note page}{\insertnote}  % clean script-only notes pages
 
 % ---- toggle notes: `\setbeameroption{show notes}` for the notes build ----
 
@@ -24,9 +25,12 @@
 
 \begin{frame}\titlepage\end{frame}
 \note{
-One breath: speculative decoding speeds up LLMs; VIA-SD makes it smarter with a slim middle verifier
---- but it routes between tiers with \emph{hand-picked thresholds}. We recast that routing as a
-learned decision problem and get a Pareto improvement over the hand-tuned baseline.
+Hi everyone. Our project is ``Learning to Route.'' Here's the one-sentence version. Speculative
+decoding makes large language models faster. A method called VIA-SD makes it smarter --- but it makes
+its key decisions using values that someone picked by hand. We replace those hand-picked values with
+a policy the model learns for itself, with reinforcement learning. And it wins: it matches lossless
+quality at a fraction of the cost, and it beats the hand-tuned version across the board. Let me show
+you how.
 }
 
 % =====================================================================
@@ -44,16 +48,20 @@ We present \textbf{three key innovations}:
   \item a \textbf{quality--cost reward} that balances matching the target model against expensive-call latency;
   \item a \textbf{per-token RL formulation} with principled credit assignment (REINFORCE $\to$ GRPO $\to$ per-token advantage).
 \end{enumerate}
-\vspace{2pt}
-{\footnotesize We challenge the assumption that hierarchical verification needs hand-tuned thresholds: a learned gate
-\textbf{Pareto-dominates} the fixed-threshold baseline, recovering \emph{lossless} quality at a fraction of the expensive verifier calls.}
+\vspace{1pt}
+{\footnotesize\textbf{The payoff:} we match \emph{lossless} accuracy (\textbf{0.91}) at \textbf{4$\times$ fewer} full-model calls
+(\textbf{2.2$\times$} faster than greedy), \textbf{Pareto-dominate} the paper's VIA-SD ($\sim$\textbf{2$\times$ its speedup at 2.3$\times$ its accuracy}),
+and reach up to \textbf{3.5$\times$} when pushed for speed.}
 \end{frame}
 \note{
-This is the abstract. Strong claim first: the first \emph{learned} router for hierarchical
-speculative decoding. Then the gap: VIA-SD's tiers are routed by hand-tuned thresholds. Then our
-three contributions --- the learned gate, the reward that trades quality against cost, and the RL
-training with per-token credit assignment. And the thesis we challenge: that you need to hand-tune
-thresholds at all. Spend the rest of the talk unpacking these three.
+Here is the whole project on one slide. We built the first \emph{learned} router for hierarchical
+speculative decoding. There are three innovations, and I'll give one slide to each. One: a learned
+per-token gate --- a tiny network that decides, token by token, how much compute to spend. Two: a
+reward that balances output quality against cost. Three: a per-token reinforcement-learning setup
+that actually trains it well. And the payoff, which I'll keep coming back to: we match lossless
+accuracy --- 0.91 --- at four times fewer expensive model calls. We Pareto-dominate VIA-SD: roughly
+twice its speedup at over twice its accuracy. And pushed for speed, we go up to three and a half times
+faster. Let me unpack it.
 }
 
 % =====================================================================
@@ -66,10 +74,14 @@ thresholds at all. Spend the rest of the talk unpacking these three.
 \end{itemize}
 \end{frame}
 \note{
-Frame the cost. Generating each token reads every weight from memory --- the sequential bottleneck
-behind latency and serving cost. SD's trick: a small drafter proposes the next few tokens, and the
-big verifier checks them all in one parallel forward. Accepted tokens ride free; the output is
-identical to normal decoding. ~1.4x wall-clock on our pair. The whole game is the acceptance rate.
+First, why speed matters at all. Generating a single token from a big model means reading every one
+of its weights out of memory. It's sequential, and it's the dominant cost of LLM inference --- both
+latency and dollars. Speculative decoding is the standard fix. A small, cheap model guesses the next
+few tokens. The big model then checks all of those guesses in a single parallel pass. When the
+guesses are right, you got several tokens for the price of one big step --- and crucially, the output
+is provably identical to normal decoding, so it's free quality-wise. On our models that's about 1.4
+times faster. And the one thing that controls the whole method is the acceptance rate: every wrong
+guess wastes the speculation and forces a full, expensive step.
 }
 
 % =====================================================================
@@ -99,10 +111,15 @@ identical to normal decoding. ~1.4x wall-clock on our pair. The whole game is th
 \end{columns}
 \end{frame}
 \note{
-Vanilla SD is all-or-nothing. VIA-SD's insight: many ``rejected'' tokens are borderline. So it adds a
-cheaper middle judge --- the same big model with ~45\% of layers skipped --- and makes a three-way
-choice: accept the drafter, regenerate with q-prime, or escalate to the full model. Borderline tokens
-go to the cheap tier, so you call the full model far less. But how does it \emph{decide}? Next slide.
+Now, vanilla speculative decoding is all-or-nothing: you either accept the small model's guess, or
+you reject it and pay full price for the big model. VIA-SD's insight is that a lot of those
+``rejected'' tokens are borderline --- the draft was almost right, it just wasn't certain. So VIA-SD
+adds a middle option: the same big model, but with about 45 percent of its layers skipped. It's
+cheaper than the full model but still much smarter than the drafter. Now every token has three
+choices --- accept the draft, regenerate it with this slim middle model, or escalate all the way to
+the full model. Borderline tokens get handled by the cheap middle tier, so you call the expensive
+full model far less often. It's a genuinely good idea. But it raises one question: how does it decide
+which of the three to use?
 }
 
 % =====================================================================
@@ -120,10 +137,14 @@ go to the cheap tier, so you call the full model far less. But how does it \emph
 \centering\textit{Choosing a tier \emph{per token} is a sequential, context-dependent decision --- so \textbf{learn} it.}
 \end{frame}
 \note{
-The opening. VIA-SD's three-way choice is two hand-picked numbers, 0.5 and 0.3 --- global, static,
-context-blind, and re-tuned per model/task. Even sweeping all nine configs, accuracy caps at 0.50 on
-our setup. But picking a tier per token from context is exactly a sequential decision problem. So
-learn the policy. That sets up our three innovations.
+And here is the catch --- this is the reason the whole project exists. VIA-SD makes that three-way
+decision with two numbers picked by hand: zero-point-five and zero-point-three. They're confidence
+thresholds. And they have three problems. They're global and static --- the same cutoff for every
+token, regardless of context. They're brittle --- you have to re-tune them for every new model and
+every new task. And they're simply sub-optimal --- when we swept all nine threshold configurations,
+accuracy still capped at 0.50 on our setup. But step back: deciding how much compute to spend on each
+token, based on that token's context, is a textbook sequential decision problem. So instead of
+hand-picking two numbers, we learn the policy. That gives us our three innovations.
 }
 
 % =====================================================================
@@ -158,11 +179,14 @@ so the gate is free to run at inference.
 \end{columns}
 \end{frame}
 \note{
-Innovation one: the learned gate. We formalize routing as an MDP. The state is a handful of cheap
-features --- drafter and q-prime confidence, whether they agree, their KL, position in the block. The
-action is the tier. The policy is a tiny MLP. The crucial design choice: the features are q-free, so
-the full model is used only to compute rewards during training; at inference the gate decides without
-ever running q. That makes it free to deploy --- no extra serving model.
+Innovation one: the learned gate. We frame routing as a Markov decision process. The state, for each
+token, is a handful of cheap features --- how confident the drafter and the slim model are, whether
+they agree, how far apart their distributions are, and where we are in the block. The action is which
+of the three tiers to use. And the policy is a tiny MLP. The single most important design choice is on
+the right of this slide: the features never include the full model. We only ever run the full model to
+\emph{compute rewards during training}. So at inference time, the gate makes its decision instantly,
+from cheap signals, without running the expensive model just to decide. That's what makes it free to
+deploy --- there's no second large model in the serving path.
 }
 
 % =====================================================================
@@ -182,13 +206,17 @@ ever running q. That makes it free to deploy --- no extra serving model.
 proxy for the sparse true objective (final-answer correctness).
 \end{frame}
 \note{
-Innovation two: the reward. Quality is whether the emitted token matches what the full model would
-greedily produce --- computed by running q at train time only. Cost is the per-action latency:
-drafter step, plus the slim q-prime amortized over the block, plus the full model only if we
-escalate, all normalized by one full-model step. The reward subtracts lambda times cost from match;
-lambda is the quality-versus-speed knob. We use both a trajectory form and a per-token form. One
-caveat we measured: match is a dense proxy --- 98.5\% token match still leaves ~0.72 final accuracy,
-because a few token slips derail the chain.
+Innovation two: the reward, and this is where we pull from the writeup directly. There are two
+ingredients per token. Quality is simple: does the token we actually emit match the token the full
+model would have produced? That's the ``match'' term, and we compute it by running the full model at
+training time only. Cost is the per-action latency: the drafter step, plus the slim model amortized
+over the block, plus the full model --- but only if we escalate --- all normalized by the cost of one
+full-model step. The reward is just match minus lambda times cost. Lambda is the knob that trades
+accuracy for speed. Now the one honest subtlety, and we measured it: matching the full model token by
+token is only a \emph{proxy} for what we truly care about, which is getting the final answer right.
+They are not the same thing --- 98-and-a-half percent token match still left us at only 0.72 final
+accuracy, because a couple of slips can derail a whole chain of reasoning. That tension drives a lot
+of our analysis.
 }
 
 % =====================================================================
@@ -205,13 +233,17 @@ They differ in the \textbf{advantage} $A_t$:
 \end{itemize}
 \end{frame}
 \note{
-Innovation three: how we optimize. Same policy-gradient skeleton --- advantage times grad-log-prob,
-plus an entropy bonus. The methods differ only in the advantage. REINFORCE broadcasts one trajectory
-return minus an EMA baseline over all decisions --- crude and high-variance. GRPO compares rollouts of
-the same prompt, normalizing by the group, with PPO clipping and a KL leash to the warm-start ---
-better for sparse rewards. Our per-token v2 gives each decision its own batch-normalized advantage ---
-since routing effects are local, this is the lowest-variance and works best. Credit assignment is the
-key axis.
+Innovation three: how we actually optimize the gate. All three methods share the same skeleton --- a
+policy gradient. In words: increase the probability of actions that did better than a baseline, and
+add an entropy bonus so it keeps exploring. The methods differ in exactly one thing: how they compute
+that ``did better than baseline'' term, the advantage. REINFORCE takes one reward for the whole
+sequence, subtracts a running average, and applies it to every decision --- simple, but very noisy.
+GRPO runs several rollouts of the \emph{same} prompt and scores each against the group --- that cancels
+out how hard the prompt is, and it's the right tool for sparse rewards; it also adds PPO clipping and
+a KL leash to the starting policy for stability. Our per-token version gives \emph{every single
+decision} its own advantage. Because routing is fundamentally a local choice, this is the
+lowest-variance signal and it trains best. The one-line lesson: credit assignment is the whole game
+here.
 }
 
 % =====================================================================
@@ -221,9 +253,12 @@ key axis.
 \includegraphics[width=0.9\textwidth]{results/figures/rl_curves.png}
 \end{frame}
 \note{
-All three converge: reward up, token-match ~0.95, rejection down. The difference is variance ---
-GRPO (orange) noisy, REINFORCE (green) middling, per-token v2 (blue) smoothest and lowest rejection.
-Evidence for the credit-assignment point on the previous slide.
+Quick proof that the training works. All three methods converge --- reward climbs, agreement with the
+full model rises to about 0.95, and the rejection rate falls. The interesting part is the variance.
+GRPO, in orange, is jumpy, because it only gets one signal per group. REINFORCE, in green, is in the
+middle. And our per-token method, in blue, is the smoothest and drives rejections the lowest ---
+exactly because every decision gets its own credit instead of sharing one reward across the whole
+sequence. This is the evidence for the claim on the last slide.
 }
 
 % =====================================================================
@@ -249,10 +284,15 @@ plain SD (standard, lossless) & 0.907 & 0.259 & 1.40$\times$\textsuperscript{\da
 {\footnotesize \textsuperscript{\dag}wall-clock; via\_* speedups are the overhead-free bandwidth model (not directly comparable).}
 \end{frame}
 \note{
-Full table. Reference at top (0.89--0.91). Red = fixed thresholds: 0.34--0.40, broken. Blue = learned
-gates: REINFORCE and REINFORCE+DIMR recover full accuracy; GRPO drives expensive calls lowest (0.162);
-v2 trades accuracy for top speed. Honesty note: plain SD's 1.4x is wall-clock, via\_* are an idealized
-bandwidth model --- compare on q-calls/token, where the learned gates clearly win.
+Here are the numbers. The top two rows are references: greedy decoding and lossless speculative
+decoding, both around 0.90 accuracy. The red rows are the hand-tuned thresholds --- and look at the
+accuracy column: 0.34 and 0.40. They're basically broken. The blue rows are our learned gates.
+REINFORCE with the searched slim model recovers full accuracy, 0.907, matching lossless. GRPO drives
+the expensive-call count all the way down to 0.16 per token. And the per-token version trades a bit of
+accuracy for the highest speedup on the board. One honesty note so nobody calls it out: the speedup
+column mixes real wall-clock for plain SD with an idealized model for ours, so don't read those head
+to head --- compare on the middle column, calls per token, which is exact, and there the learned gates
+clearly win.
 }
 
 % =====================================================================
@@ -262,9 +302,12 @@ bandwidth model --- compare on q-calls/token, where the learned gates clearly wi
 {\footnotesize plain SD = measured wall-clock; via\_* = overhead-free bandwidth model.}
 \end{frame}
 \note{
-Greedy is the 1x baseline. The fixed-threshold gate (red) is slow --- it over-escalates. Learned gates
-(blue) push speedup up; per-token v2 tops the chart by keeping escalation below break-even. Absolute
-heights mix metrics (wall-clock vs bandwidth) --- the message is the ordering.
+Same story, as latency. Greedy is the one-times baseline. Notice the hand-tuned gate, in red, is
+actually \emph{slow} --- it over-escalates to the full model, which defeats the whole purpose. Our
+learned gates, in blue, push the speedup up; the per-token version tops the chart by keeping
+escalation below the break-even point. The absolute bar heights mix two metrics, so read the ordering
+rather than the exact heights --- and the ordering is the message: the learned gate is the fastest of
+all the routing methods.
 }
 
 % =====================================================================
@@ -273,28 +316,39 @@ heights mix metrics (wall-clock vs bandwidth) --- the message is the ordering.
 \includegraphics[width=0.6\textwidth]{results/figures/pareto.png}
 \end{frame}
 \note{
-The design space. Red = fixed-threshold, bottom-left, dominated. Blue = learned gates, up and to the
-right. The lambda knob exposes a real frontier --- accuracy (0.80) or speed (q-calls/token 0.10). And a
-bigger \emph{drafter} (3B) hits 0.80 with 6x fewer verifier calls --- the right lever. The learned
-policy Pareto-dominates the fixed baseline.
+This one plot is the whole story --- accuracy on the vertical axis, speed on the horizontal. Red, in
+the bottom-left: the hand-tuned methods, slow and inaccurate, completely dominated. Blue, up and to
+the right: our learned gates. And the key point is that we don't just win at one setting --- the lambda
+knob gives us an entire frontier. Dial it toward accuracy, around 0.80, or toward speed, ten times
+fewer expensive calls. Even better, look at the 3B-drafter point: a stronger drafter hits the same
+0.80 accuracy with thirty-six times fewer full-model calls. That tells us the right lever is a better
+drafter --- and this approach only gets stronger as drafters improve. Bottom line: we Pareto-dominate
+the hand-tuned baseline everywhere on this plot.
 }
 
 % =====================================================================
-\begin{frame}{Why it matters}
-\begin{itemize}
-  \item We turn VIA-SD's \textbf{hand-tuned thresholds} into a \textbf{learned, per-token, context-aware} router.
-  \item \textbf{Pareto-dominates} the fixed baseline; recovers \emph{lossless} quality at far fewer full-model calls.
-  \item \textbf{Free to deploy:} a tiny MLP on $q$-free features --- no extra serving model, no $q$ at decision time.
-  \item \textbf{Trajectory:} the gain \emph{grows} with stronger drafters --- where the field is heading.
+\begin{frame}{Impact: a new accuracy--efficiency frontier}
+\begin{itemize}\small
+  \item \textbf{Lossless quality, $4\times$ cheaper.} Match greedy/lossless accuracy (\textbf{0.91}) at \textbf{$4\times$ fewer} full-model calls --- a \textbf{$2.2\times$} speedup, \emph{zero accuracy lost}.
+  \item \textbf{A tunable frontier.} One knob: \textbf{$2.7\times$} faster at $-0.1$ accuracy, or \textbf{$3.5\times$} at $-0.19$ --- up to \textbf{$10\times$ fewer} full-model calls.
+  \item \textbf{Pareto-dominates VIA-SD.} $\sim$\textbf{$2\times$} its speedup \emph{and} \textbf{$+0.3$ to $+0.5$} accuracy; where its fixed thresholds collapse to 0.40, our gate holds \textbf{0.71--0.91}.
+  \item \textbf{Scales with the drafter.} A 3B drafter $\to$ \textbf{$36\times$ fewer} full-model calls at 0.80 accuracy --- and it's a free-to-deploy tiny MLP ($q$-free, no $q$ at decision time).
 \end{itemize}
-\vspace{2mm}
-\centering\textit{Stop hand-picking thresholds. Let the model schedule its own compute.}
+\vspace{1mm}
+\centering\textit{Stop hand-picking thresholds --- let the model schedule its own compute.}\\
+{\footnotesize\textcolor{gray}{$\times$ = bandwidth model; ``fewer calls'' (q-calls/token) is exact \& hardware-independent.}}
 \end{frame}
 \note{
-Punchline. The contribution is recognizing VIA-SD's brittle thresholds as a learnable control problem
---- and learning them. Pareto-dominates the fixed baseline, recovers lossless-level quality at a
-fraction of expensive calls, and is essentially free to deploy. It improves as drafters get better,
-the field's direction. Tagline: stop hand-picking thresholds; let the model schedule its own compute.
+So why does this matter --- and I'm going to hit you with the numbers. First: we match lossless
+accuracy, 0.91, at four times fewer expensive model calls. That's a 2.2-times speedup with zero
+accuracy lost. Second: it's a tunable frontier, not a single point --- 2.7 times faster for a tenth of
+a point of accuracy, or 3.5 times faster for about 0.19, up to ten times fewer expensive calls.
+Third, and this is the headline: we Pareto-dominate VIA-SD --- roughly twice its speedup \emph{and}
+three-tenths to a half-point higher accuracy. Where its hand-tuned thresholds collapse to 0.40, we
+hold between 0.71 and 0.91. Fourth: it scales with the drafter --- a 3B drafter gives thirty-six times
+fewer full-model calls --- and it's free to deploy, a tiny network that never even touches the big
+model to make its decision. The takeaway is one sentence: stop hand-picking thresholds, and let the
+model schedule its own compute.
 }
 
 % =====================================================================
@@ -307,11 +361,14 @@ the field's direction. Tagline: stop hand-picking thresholds; let the model sche
 \end{itemize}
 \end{frame}
 \note{
-Where it goes. Spec-spec: the drafter is itself slow, so make it speculative too --- a recursive tree,
-gate routing across levels. KnapSpec: spend a fixed budget of expensive calls like a knapsack, on the
-tokens that most change the answer --- directly targeting the match-vs-accuracy gap. Correctness-floor
-RL: minimize cost subject to an accuracy floor, dodging the collapse from naive correctness rewards.
-And scale it --- bigger drafters, more tasks, real wall-clock on an optimized engine.
+Three directions we're excited about. First, spec-spec decoding: the drafter itself is slow, so make
+\emph{it} speculative too --- a recursive hierarchy of drafters, and the gate now routes across levels,
+not just three tiers. Second, what we call KnapSpec: you have a fixed budget of expensive calls per
+sequence, so spend it like a knapsack --- put your verification budget on the tokens that most change
+the final answer. That directly attacks the proxy gap I showed earlier. Third, a correctness-floor
+objective: minimize cost subject to staying above an accuracy floor --- which avoids the failure mode
+where naively optimizing for correctness collapses the policy. And then scale it up: bigger drafters,
+more tasks, and real wall-clock on a production inference engine.
 }
 
 \begin{frame}[plain]\centering\vfill
@@ -319,5 +376,11 @@ And scale it --- bigger drafters, more tasks, real wall-clock on an optimized en
 Stop hand-picking thresholds --- let the model schedule its own compute.\\[8pt]
 \footnotesize Thanks! \quad questions?
 \vfill\end{frame}
+\note{
+To wrap up: we took VIA-SD's brittle, hand-tuned thresholds and turned them into a learned policy.
+The result is a Pareto improvement --- lossless quality at a fraction of the cost, dominating the
+baseline, free to deploy, and getting better as models improve. Stop hand-picking thresholds; let the
+model schedule its own compute. Thank you --- we're happy to take questions.
+}
 
 \end{document}

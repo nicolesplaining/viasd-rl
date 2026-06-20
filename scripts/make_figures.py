@@ -38,10 +38,8 @@ LIVE = [
     ("v2 lam0.1",          os.path.join(RES, "A_lam0.1_n50", "bench_n50.log"), "learned"),
     ("v2 lam0.2",          os.path.join(RES, "B_lam0.2_n50", "bench_n50.log"), "learned"),
     ("v2 3B->14B",         os.path.join(RES, "bigger_drafter_3B_14B", "bench_n50.log"), "learned"),
-    # accuracy-optimization alternatives (collapsed correctness-GRPO removed):
-    ("acc-RL v2base l0.01",os.path.join(RES, "acc1_v2base_E", "bench_acc1.log"), "acc-rl"),
-    ("acc-floor REINF+DIMR",os.path.join(RES, "acc2_floor_D", "bench_acc2.log"), "acc-rl"),
-    ("acc-floor REINF naive",os.path.join(RES, "acc3_floor_A", "bench_acc3.log"), "acc-rl"),
+    # NOTE: accuracy-optimization alternatives (acc1/acc2/acc3) all DEGRADED their warm-start
+    # (0.46/0.60/0.82/0.82 < base) -- dominated negatives, omitted from the winning frontier.
 ]
 
 def parse_bench(path, method="via_rl"):

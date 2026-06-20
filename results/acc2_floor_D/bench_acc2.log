@@ -15,3 +15,6 @@ bandwidth (ms):  t_p1=0.29 t_qp=5.20 t_q=8.82 t_q1=8.82
 method         acc    rej accept  escal  q/tok  tok/q   spd spd_cor  spd_bw
 ---------------------------------------------------------------------------
 running greedy_q ...
+greedy_q     0.860  0.000  0.000  0.000  1.000   1.00 1.00x   1.00x   1.00x
+running via_rl ...
+via_rl       0.820  0.120  0.371  0.614  0.241   4.15 0.87x   2.13x   2.26x

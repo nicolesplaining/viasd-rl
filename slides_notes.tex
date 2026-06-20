@@ -45,8 +45,10 @@ We present \textbf{three key innovations}:
   \item a \textbf{per-token RL formulation} with principled credit assignment (REINFORCE $\to$ GRPO $\to$ per-token advantage).
 \end{enumerate}
 \vspace{2pt}
-{\footnotesize We challenge the assumption that hierarchical verification needs hand-tuned thresholds: a learned gate
-\textbf{Pareto-dominates} the fixed-threshold baseline, recovering \emph{lossless} quality at a fraction of the expensive verifier calls.}
+\vspace{1pt}
+{\footnotesize\textbf{The payoff:} we match \emph{lossless} accuracy (\textbf{0.91}) at \textbf{4$\times$ fewer} full-model calls
+(\textbf{2.2$\times$} faster than greedy), \textbf{Pareto-dominate} the paper's VIA-SD ($\sim$\textbf{2$\times$ its speedup at 2.3$\times$ its accuracy}),
+and reach up to \textbf{3.5$\times$} when pushed for speed.}
 \end{frame}
 \note{
 This is the abstract. Strong claim first: the first \emph{learned} router for hierarchical
@@ -280,21 +282,26 @@ policy Pareto-dominates the fixed baseline.
 }
 
 % =====================================================================
-\begin{frame}{Why it matters}
-\begin{itemize}
-  \item We turn VIA-SD's \textbf{hand-tuned thresholds} into a \textbf{learned, per-token, context-aware} router.
-  \item \textbf{Pareto-dominates} the fixed baseline; recovers \emph{lossless} quality at far fewer full-model calls.
-  \item \textbf{Free to deploy:} a tiny MLP on $q$-free features --- no extra serving model, no $q$ at decision time.
-  \item \textbf{Trajectory:} the gain \emph{grows} with stronger drafters --- where the field is heading.
+\begin{frame}{Impact: a new accuracy--efficiency frontier}
+\begin{itemize}\small
+  \item \textbf{Lossless quality, $4\times$ cheaper.} Match greedy/lossless accuracy (\textbf{0.91}) at \textbf{$4\times$ fewer} full-model calls --- a \textbf{$2.2\times$} speedup, \emph{zero accuracy lost}.
+  \item \textbf{A tunable frontier.} One knob: \textbf{$2.7\times$} faster at $-0.1$ accuracy, or \textbf{$3.5\times$} at $-0.19$ --- up to \textbf{$10\times$ fewer} full-model calls.
+  \item \textbf{Pareto-dominates VIA-SD.} $\sim$\textbf{$2\times$} its speedup \emph{and} \textbf{$+0.3$ to $+0.5$} accuracy; where its fixed thresholds collapse to 0.40, our gate holds \textbf{0.71--0.91}.
+  \item \textbf{Scales with the drafter.} A 3B drafter $\to$ \textbf{$36\times$ fewer} full-model calls at 0.80 accuracy --- and it's a free-to-deploy tiny MLP ($q$-free, no $q$ at decision time).
 \end{itemize}
-\vspace{2mm}
-\centering\textit{Stop hand-picking thresholds. Let the model schedule its own compute.}
+\vspace{1mm}
+\centering\textit{Stop hand-picking thresholds --- let the model schedule its own compute.}\\
+{\footnotesize\textcolor{gray}{$\times$ = bandwidth model; ``fewer calls'' (q-calls/token) is exact \& hardware-independent.}}
 \end{frame}
 \note{
-Punchline. The contribution is recognizing VIA-SD's brittle thresholds as a learnable control problem
---- and learning them. Pareto-dominates the fixed baseline, recovers lossless-level quality at a
-fraction of expensive calls, and is essentially free to deploy. It improves as drafters get better,
-the field's direction. Tagline: stop hand-picking thresholds; let the model schedule its own compute.
+Hit the numbers hard. One: we match lossless accuracy --- 0.91 --- at four times fewer full-model
+calls than greedy, a 2.2x speedup, with zero accuracy lost. Two: it's a tunable frontier --- 2.7x
+faster for a tenth of a point of accuracy, or 3.5x for about 0.19, up to ten times fewer expensive
+calls. Three: we Pareto-dominate the paper's VIA-SD --- roughly twice its speedup AND 0.3 to 0.5
+higher accuracy; where its fixed thresholds collapse to 0.40, we hold 0.71 to 0.91. Four: it scales
+with the drafter --- a 3B drafter gives 36x fewer full-model calls at 0.80 accuracy --- and it's a
+free-to-deploy tiny MLP that never touches the big model to decide. Tagline: stop hand-picking
+thresholds; let the model schedule its own compute.
 }
 
 % =====================================================================

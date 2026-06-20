@@ -3,6 +3,7 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{xcolor}
 \usepackage{hyperref}
 \usepackage{float}
@@ -237,9 +238,12 @@ match$\approx$0.95. On the efficiency metric, GRPO pushed q-calls/token lowest a
 match-rewarded variants (0.162), while the v2 reward drove escalation to $0.12$ (fastest). Because
 the match-based rewards are match-dominated, the resulting RL is close to \emph{on-policy imitation}
 (it fixes exposure bias rather than discovering exotic routing). Optimizing the \emph{true} sparse
-objective (Eq.~3) directly is harder: there is a narrow $\lambda$ window between a cost-dominated
-collapse to ``accept everything'' and a reward-free collapse to ``escalate everything'' ($=$greedy);
-we are sweeping $\lambda$ and the warm-start base to locate it.
+objective (Eq.~3) directly is harder. We swept $\lambda$ and the warm-start base (v2, REINFORCE+DIMR,
+REINFORCE-naive); \emph{every} correctness/accuracy-floor variant we tried \textbf{degraded its
+warm-start} (final accuracy $0.46$/$0.60$/$0.82$/$0.82$, all below the respective base) --- a
+cost-dominated drift toward more acceptance or mis-targeted escalation that the $q$-free features
+cannot correct. The match-proxy-trained \texttt{REINFORCE+DIMR} policy ($0.907$) remains our best
+accuracy operating point; directly optimizing correctness does not beat it at this scale.
 
 \section{Results}
 \begin{table}[H]\centering\small
