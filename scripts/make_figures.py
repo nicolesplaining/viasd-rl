@@ -38,7 +38,7 @@ LIVE = [
     ("v2 lam0.1",     os.path.join(RES, "A_lam0.1_n50", "bench_n50.log"), "learned"),
     ("v2 lam0.2",     os.path.join(RES, "B_lam0.2_n50", "bench_n50.log"), "learned"),
     ("v2 3B->14B",    os.path.join(RES, "bigger_drafter_3B_14B", "bench_n50.log"), "learned"),
-    ("GRPO acc-focus",os.path.join(RES, "E_dimr_bench_and_latency", "run_grpo_acc.log"), "acc-rl"),
+    ("GRPO acc-focus",os.path.join(RES, "E_dimr_bench_and_latency", "run_grpo_acc_bench.log"), "acc-rl"),
 ]
 
 def parse_bench(path, method="via_rl"):
