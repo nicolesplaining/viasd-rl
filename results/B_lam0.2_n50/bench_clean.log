@@ -1,0 +1,25 @@
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 8377.23it/s]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights: 100%|██████████| 579/579 [00:00<00:00, 8453.31it/s]
+keep_mask: [True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, True, True] (keep 26/48)
+latencies (ms): t_p1=12.99 t_qp=13.88 t_q=24.56 t_q1=25.49
+
+Using the latest cached version of the dataset since openai/gsm8k couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'main' at /home/ubuntu/.cache/huggingface/datasets/openai___gsm8k/main/0.0.0/740312add88f781978c0658806c59bc2815b9866 (last modified on Sat Jun 20 09:53:22 2026).
+corrected (ms):  t_p1=0.43 t_qp=1.32 t_q=12.01 t_q1=12.93
+bandwidth (ms):  t_p1=0.29 t_qp=5.20 t_q=8.82 t_q1=8.82
+
+running greedy_q ...
+running plain_sd ...
+running via_fixed ...
+running via_imit ...
+running via_rl ...
+
+method         acc    rej accept  escal  q/tok  tok/q   spd spd_cor  spd_bw
+---------------------------------------------------------------------------
+greedy_q     0.850  0.000  0.000  0.000  1.000   1.00 1.00x   1.00x   1.00x
+plain_sd     0.850  0.106  0.000  0.000  0.256   3.90 1.11x   3.56x   3.34x
+via_fixed    0.350  0.247  0.262  0.672  0.311   3.22 0.74x   2.63x   1.76x
+via_imit     0.275  0.345  0.411  0.448  0.296   3.38 0.64x   2.59x   1.64x
+via_rl       0.775  0.108  0.415  0.583  0.248   4.03 0.97x   3.34x   2.26x

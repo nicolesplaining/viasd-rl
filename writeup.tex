@@ -17,43 +17,148 @@
 We reimplement VIA-SD (arXiv:2606.12243) --- speculative decoding with a slim,
 layer-skipped intermediate verifier $q'$ --- and replace its hand-tuned
 $(\alpha_1,\alpha_2)$ confidence thresholds with a \textbf{learned per-token gating
-policy} trained by imitation and reinforcement learning (REINFORCE, GRPO, and a
-per-token-reward variant). On a GSM8K slice with a Qwen2.5 \mbox{0.5B$\to$14B} drafter/verifier
-pair, the learned gate \textbf{dramatically outperforms the paper's fixed thresholds}
-(accuracy $0.21$--$0.40 \to 0.88$--$0.91$) at fewer expensive verifier calls. We
-also report honest negative results: plain lossless speculative decoding remains
-Pareto-competitive at this model gap, and the slim-verifier middle tier only pays off
-when the gate is learned.
+policy}. We study three RL formulations (REINFORCE, GRPO, and a per-token-reward
+variant) and their reward/credit-assignment design. On a GSM8K slice with a Qwen2.5
+\mbox{0.5B$\to$14B} pair, the learned gate \textbf{dramatically outperforms the paper's fixed
+thresholds} (accuracy $0.21$--$0.40\to0.88$--$0.91$) at fewer expensive verifier calls.
+We also report honest negatives: plain lossless speculative decoding stays
+Pareto-competitive at this gap, and the slim-verifier tier only pays off when the gate is learned.
 \end{abstract}
 
-\section{Methodology (outline)}
-\begin{itemize}\itemsep2pt
-\item \textbf{Pipeline.} Drafter $p$ (0.5B) proposes a $\gamma$-token block; for each token a
-gate routes to one of three actions: \emph{accept} $p$'s token (cheap), \emph{regenerate}
-with the slim verifier $q'$ (a layer-skipped copy of the full verifier $q$, medium),
-or \emph{escalate} to the full $q$ (expensive). $q$ is Qwen2.5-14B.
-\item \textbf{Learned gate.} The fixed $(\alpha_1,\alpha_2)$ thresholds are replaced by a tiny
-MLP over \emph{$q$-free} features (drafter/$q'$ entropy, confidence ratio, agreement, KL,
-position). $q$ is used only at training time, never as a policy input.
-\item \textbf{Training.} (1) \emph{Imitation}: an oracle that may consult $q$ labels the
-cost-minimal route reproducing greedy-$q$; the MLP is fit with class-weighted cross-entropy.
-(2) \emph{RL refinement}: REINFORCE (global baseline), GRPO (group-relative advantage), and a
-\emph{v2 per-token} variant (per-token reward $r_t=\text{match}_t-\lambda\,\text{cost}_t$ with
-per-token advantages and an overhead-corrected cost term).
-\item \textbf{Slim verifier $q'$.} Built by skipping $\sim$45\% of $q$'s layers. The skip mask is
-chosen by DIMR, an offline search minimizing the paper's Eq.~11 margin-violation cost between
-$q$ and $q'$ (faithful metric; $\sim$50\% lower than an evenly-spaced mask).
-\item \textbf{Metrics.} \emph{q-calls/token} (full-verifier invocations per token;
-hardware-independent), GSM8K accuracy, and speedup. Speculative decoding's win is
-\emph{latency}, but measured wall-clock here is dominated by a $\sim$10\,ms eager
-per-call overhead floor; we report an \textbf{overhead-free bandwidth-model speedup}
-(per-forward cost $=$ active-params$\times$2\,bytes$/$HBM-bandwidth), validated against a
-measure-and-subtract estimate.
-\end{itemize}
+\section{Background: VIA-SD and DIMR}
+\textbf{Speculative decoding (SD).} A cheap \emph{drafter} $p$ autoregressively proposes a block of
+$\gamma$ candidate tokens; the expensive \emph{target} verifier $q$ scores all $\gamma$ in a single
+parallel forward and accepts the longest prefix consistent with its own distribution, recomputing
+the first rejected token. This is \emph{lossless} (output equals sampling/greedy from $q$) and trades
+extra compute for fewer \emph{sequential} large-model steps. Its single lever is the
+\emph{acceptance rate}: each rejection truncates the block and forces a full-model step.
 
-\section{Best results}
-\begin{table}[H]\centering
-\small
+\textbf{VIA-SD's contribution.} The paper observes that many rejected tokens lie in a ``middle zone''
+--- the drafter is close but not fully reliable --- and do not actually need the full model. It
+inserts a \emph{slim intermediate verifier} $q'$ between $p$ and $q$, turning the binary
+accept/reject into a three-way \emph{hierarchical} decision per token: \textbf{accept} $p$'s token
+when $q'$ is highly confident; \textbf{regenerate} with $q'$ for medium-confidence (middle-zone)
+tokens; \textbf{escalate} to the full $q$ only for low-confidence tokens. By resolving middle-zone
+tokens at $q'$, it reduces how often the expensive $q$ is invoked relative to plain SD. The routing
+is governed by two fixed confidence thresholds $(\alpha_1,\alpha_2)$ on $q'$'s confidence ratio
+(reported best at $\alpha_1{=}0.5,\alpha_2{=}0.3$); the scheme is mildly \emph{lossy}, with a
+tolerance $\alpha$ controlling how far accepted tokens may deviate. The paper motivates the
+intermediate stage information-theoretically: in KL geometry an intermediate distribution can lower
+the \emph{cumulative} divergence on the path $p\!\to\!q'\!\to\!q$ below the direct $p\!\to\!q$,
+whereas total-variation (which exactly equals the lossless rejection rate) forbids this.
+
+\textbf{DIMR (Dynamic Intra-Model Routing): how $q'$ is built.} Rather than a separate model, $q'$ is
+a \emph{routed sub-model of $q$ itself}: a binary mask $z\in\{0,1\}^L$ selects which of $q$'s $L$
+decoder layers to keep, $q'=\Pi_z(q)$, skipping the rest (each decoder block is residual, so dropping
+it is an identity on the residual stream --- dimensionally safe). $q'$ \emph{shares} $q$'s embeddings
+and output head, so it adds no parameters and only changes inference dynamics. DIMR is the
+\emph{offline search} for the mask $z^*$: it minimizes an accumulated KL-style cost between $q$ and
+$q'_z$ over a calibration window (the paper's Eq.~12), combining random search with Bayesian/greedy
+refinement, keeping first/last layers and skipping $\sim$45\% of the middle. The cost is \emph{not}
+raw $\mathrm{KL}(q\Vert q')$ but the Eq.~11 \emph{margin-violation} cost --- a two-term ReLU penalty
+(acceptance-threshold $+$ residual-replacement, at $(\alpha,\beta)$) that is the quantity actually
+governing the $q'\!\to\!q$ gate's rejection rate. The paper shows DIMR-selected masks beat random/
+evenly-spaced ones; our faithful search confirms this ($\sim$50\% lower cost than evenly-spaced).
+
+\section{Methodology (our extension)}
+\textbf{Pipeline.} Drafter $p$ (0.5B) proposes a $\gamma{=}5$-token block; for each token a gate
+chooses one of three actions: \emph{accept} $p$'s token (cheap), \emph{regenerate} with the
+slim verifier $q'$ (a layer-skipped copy of the full verifier $q$=14B, medium), or
+\emph{escalate} to $q$ (expensive). The block commits up to the first changed token, then redrafts.
+
+\textbf{Learned gate.} The fixed $(\alpha_1,\alpha_2)$ thresholds are replaced by a tiny MLP over
+\emph{$q$-free} features (drafter/$q'$ entropy, top-1 prob, confidence ratio $q'(v)/\max q'$,
+$p$/$q'$ agreement, $\mathrm{KL}(p\Vert q')$, block position). Crucially, $q$ is \emph{never} a
+policy input --- it is used only at training time to compute rewards/labels --- so the gate is
+deployable without running the full model to decide.
+
+\textbf{Slim verifier $q'$ / DIMR.} $q'$ skips $\sim$45\% of $q$'s decoder layers (residual blocks
+$\Rightarrow$ identity, dimensionally safe). The skip mask is found by an offline DIMR search
+minimizing the paper's Eq.~11 \emph{margin-violation} cost between $q$ and $q'$ (the two-term
+ReLU acceptance/residual cost, not raw $\mathrm{KL}$); the searched mask is $\sim$50\% lower-cost
+than an evenly-spaced one.
+
+\textbf{Metrics.} \emph{q-calls/token} (full-verifier invocations per token; exact, hardware-independent),
+GSM8K accuracy, and speedup. SD's win is latency, but measured wall-clock is dominated by a
+$\sim$10\,ms eager per-call overhead floor; we report an \textbf{overhead-free bandwidth-model
+speedup} (per-forward cost $=$ active-params$\times2$\,bytes$/$HBM-bw), cross-validated by a
+measure-and-subtract estimate (they agree for single-tier methods).
+
+\section{Reinforcement Learning for the Gating Policy}
+
+\subsection{Problem framing}
+Each drafted-and-gated token is a decision step: state $s_t$ = the $q$-free feature vector,
+action $a_t\in\{\textsc{accept},\textsc{regen},\textsc{escalate}\}$, policy $\pi_\theta$ a 2-layer MLP.
+Routing effects are largely \emph{local} (the action at $t$ sets token $t$ and perturbs nearby
+context), which motivates a contextual-bandit view. All policies are \textbf{warm-started from an
+imitation policy} (below); RL then refines on the policy's \emph{own} rollout distribution.
+
+\subsection{Imitation warm-start and exposure bias}
+An oracle that may consult $q$ labels the cost-minimal route reproducing greedy-$q$
+(\textsc{accept} if $p$'s token $=\arg\max q$; \textsc{regen} if $\arg\max q'=\arg\max q$;
+else \textsc{escalate}); the MLP is fit with class-weighted cross-entropy. Imitation alone
+reaches only $\sim$0.33 GSM8K accuracy: trained on oracle-visited (near-greedy) states, it
+over-accepts at its \emph{own} states where errors compound --- classic \textbf{exposure bias}.
+RL's primary value here is fixing this by training on-policy, lifting accuracy to $0.88$+.
+
+\subsection{Reward design}
+The decoding goal is to reproduce the target model's output cheaply, giving two ingredients:
+\emph{quality} and \emph{cost}.
+\begin{itemize}\itemsep1pt
+\item \textbf{Quality (dense proxy).} $\text{match}_t=\mathbf{1}[\,\text{emitted}_t=\arg\max q(\cdot\mid x_{<t})\,]$,
+computed by running $q$ at every position \emph{at training time only} (not charged to cost).
+\item \textbf{Cost.} Per-action latency in \emph{overhead-corrected} units:
+$\text{cost}_t=(t_{p1}+t_{q'}/\gamma+\mathbf{1}[\textsc{escalate}]\,t_q)/t_{q1}$ --- accept $\approx0.1$,
+escalate $\approx1.5$.
+\item \textbf{Correctness (sparse, true objective).} $\text{correct}\in\{0,1\}$, GSM8K final-answer match.
+\end{itemize}
+We compare three reward forms:
+\begin{align}
+\text{REINFORCE/GRPO (trajectory):}\quad & R=\text{match\_rate}+r_c\,\text{correct}-\lambda\,\overline{\text{cost}} \\
+\text{v2 (per-token):}\quad & r_t=\text{match}_t-\lambda\,\text{cost}_t+\tfrac{r_c\,\text{correct}}{T} \\
+\text{correctness-focused GRPO:}\quad & R=\text{correct}-\lambda\,\overline{\text{cost}}
+\end{align}
+\textbf{The proxy gap.} \texttt{match} is a \emph{dense surrogate} for the \emph{sparse} true
+objective (correctness). We measured the disconnect: a policy matching greedy-$q$ on 98.5\% of
+tokens still scores only $\sim$0.72 GSM8K accuracy, because a few deviations per chain derail the
+final answer. This motivates the correctness-focused reward (Eq.~3), which optimizes the true
+objective directly; its ceiling is bounded by the $q$-free features (a confidently-\emph{wrong}
+drafter token looks safe without $q$). A cost penalty is retained or it collapses to
+``escalate everything'' $=$ greedy.
+
+\subsection{Credit assignment: per-trajectory vs.\ per-token}
+\textbf{Trajectory-level (REINFORCE, GRPO).} One scalar $R$ per rollout is applied to \emph{all}
+$\sim$150 routing decisions: $\nabla_\theta J=\mathbb{E}[A\sum_t\nabla\log\pi(a_t\mid s_t)]$.
+Crude --- a good and a bad decision in the same rollout receive identical credit --- and
+high-variance.
+\textbf{Per-token (v2).} Each decision is treated as a local bandit step with its \emph{own}
+$r_t$ and advantage, exploiting the locality of routing. This is far lower-variance and more
+precise; empirically it produces the smoothest training curves (Fig.~3) and the lowest cost/token.
+
+\subsection{Advantage estimation: REINFORCE vs.\ GRPO}
+\textbf{REINFORCE} uses $A=R-b$ with $b$ a \emph{global EMA} of reward across \emph{all} prompts.
+This conflates per-\emph{problem} difficulty (easy prompts give high $R$ regardless of routing)
+with policy quality, injecting variance.
+\textbf{GRPO} samples a \emph{group} of $G$ rollouts of the \emph{same} prompt and sets
+$A_i=(R_i-\mathrm{mean}_{\text{group}})/(\mathrm{std}_{\text{group}}+\epsilon)$, cancelling problem
+difficulty with no value network; it adds a PPO-clipped surrogate (clip $0.2$, $K{=}3$ inner
+epochs), a KL penalty to the frozen warm-start reference, and an entropy bonus. GRPO is the right
+tool for the \emph{sparse correctness} reward (Eq.~3): the group baseline yields a gradient
+precisely on the mixed-difficulty prompts where some of the $G$ rollouts succeed and others fail.
+\textbf{v2} uses batch-normalized per-token advantages (contextual-bandit REINFORCE) with an
+entropy bonus and gradient clipping.
+
+\subsection{What we observed}
+Fig.~3: \textbf{v2 per-token} is the lowest-variance and drives rejection lowest; \textbf{GRPO} is
+noisiest (group-level binary-ish reward); \textbf{REINFORCE} is intermediate; all converge to
+match$\approx$0.95. On the efficiency metric, GRPO pushed q-calls/token lowest among the
+match-rewarded variants (0.162), while the v2 reward drove escalation to $0.12$ (fastest). Because
+the match-based rewards are match-dominated, the resulting RL is close to \emph{on-policy imitation}
+(it fixes exposure bias rather than discovering exotic routing); the correctness-focused GRPO
+(Eq.~3) is the formulation that targets the true objective directly.
+
+\section{Results}
+\begin{table}[H]\centering\small
 \begin{tabular}{lccc}
 \toprule
 Method & GSM8K acc & q-calls/tok & speedup (bw) \\
@@ -71,55 +176,46 @@ via\_rl v2 per-token ($\lambda{=}0.3$) & 0.713 & 0.104 & \textbf{3.53$\times$} \
 \bottomrule
 \end{tabular}
 \caption{Headline comparison (0.5B$\to$14B, GSM8K). \textsuperscript{*}via\_fixed peaks at
-$\approx$0.50 even under a full 9-config threshold sweep. q-calls/token is exact and
-hardware-independent; bandwidth speedup is reported where measured. Accuracy uses
-$n{=}80$--$150$ (see caveats).}
+$\approx$0.50 even under a full 9-config threshold sweep. q-calls/token is exact; bandwidth
+speedup reported where measured. Accuracy uses $n{=}80$--$150$ (see caveats).}
 \end{table}
 
 \begin{figure}[H]\centering
-\includegraphics[width=0.74\textwidth]{results/figures/speedup_bar.png}
-\caption{Overhead-free (bandwidth-model) speedup by method. The learned v2 gate and
-plain SD reach $\sim$3.3--3.5$\times$; the paper's fixed-threshold gate is slow because it
-over-escalates to the full model.}
+\includegraphics[width=0.72\textwidth]{results/figures/speedup_bar.png}
+\caption{Overhead-free speedup by method. The learned v2 gate and plain SD reach $\sim$3.3--3.5$\times$;
+the fixed-threshold gate is slow because it over-escalates to the full model.}
 \end{figure}
-
 \begin{figure}[H]\centering
-\includegraphics[width=0.66\textwidth]{results/figures/pareto.png}
-\caption{Accuracy vs.\ speedup. \textcolor{blue}{Learned} gates dominate
-\textcolor{red}{fixed-threshold} ones. \texttt{REINFORCE+DIMR} matches plain SD's accuracy
-(0.907) at lower speed (the $q'$ tier overhead); the v2 per-token reward trades accuracy
-for speed.}
+\includegraphics[width=0.62\textwidth]{results/figures/pareto.png}
+\caption{Accuracy vs.\ speedup. \textcolor{blue}{Learned} gates dominate \textcolor{red}{fixed}
+ones; \texttt{REINFORCE+DIMR} matches plain SD's accuracy (0.907) at lower speed (the $q'$ overhead);
+v2 trades accuracy for speed.}
 \end{figure}
-
 \begin{figure}[H]\centering
 \includegraphics[width=\textwidth]{results/figures/rl_curves.png}
-\caption{RL training curves. The v2 per-token reward (blue) is the lowest-variance and
-drives rejection lowest; GRPO (orange) is noisiest (group-level reward); REINFORCE (green)
-is intermediate. All converge to match$\approx$0.95 with the full model.}
+\caption{RL training curves. v2 per-token (blue) is lowest-variance and drives rejection lowest;
+GRPO (orange) is noisiest; REINFORCE (green) intermediate; all reach match$\approx$0.95.}
 \end{figure}
 
 \section{Findings}
 \begin{enumerate}\itemsep2pt
-\item \textbf{Learned gate $\gg$ fixed thresholds.} via\_rl reaches $0.88$--$0.91$ accuracy vs.\
-via\_fixed's $0.21$--$0.40$ (and $\le 0.50$ even fully tuned), at lower q-calls/token. This is
-the central result and is robust across masks and capacity gaps.
-\item \textbf{RL fixes imitation's exposure bias.} Imitation alone is $0.33$; RL lifts it to
-$0.88$+ by training on the policy's own rollout distribution.
-\item \textbf{DIMR helps only the learned gate.} A faithful, better $q'$ lifts via\_rl
-$0.88\to0.91$ but does not rescue via\_fixed --- the fixed rule is brittle regardless of $q'$.
-\item \textbf{The v2 per-token reward unlocks VIA-SD $>$ plain-SD \emph{on speed}}
-(escalation drops below the break-even, $3.53\times>3.30\times$), but overshoots on accuracy
-($0.71$) at $\lambda{=}0.3$; lower $\lambda$ trades back toward accuracy.
-\item \textbf{Honest negatives.} (i) Plain lossless SD stays Pareto-competitive at this gap ---
-the $q'$ middle tier's per-block overhead doesn't pay off. (ii) A \emph{bigger verifier} (32B)
-\emph{hurts} an accept-heavy policy (accuracy $0.33$) because the fixed small drafter is then
-relatively weaker; a bigger \emph{drafter} is the indicated lever.
+\item \textbf{Learned gate $\gg$ fixed thresholds} ($0.88$--$0.91$ vs.\ $0.21$--$0.40$, and $\le0.50$
+fully tuned), at lower q-calls/token --- robust across masks and capacity gaps.
+\item \textbf{RL fixes imitation's exposure bias} ($0.33\to0.88$+) by training on-policy.
+\item \textbf{DIMR helps only the learned gate} (via\_rl $0.88\to0.91$); the fixed rule stays brittle.
+\item \textbf{Credit assignment matters}: per-token (v2) is far lower-variance than trajectory-level
+REINFORCE/GRPO and reaches the lowest escalation; GRPO's group baseline beats REINFORCE's global one.
+\item \textbf{v2 unlocks VIA-SD $>$ plain-SD \emph{on speed}} ($3.53\times>3.30\times$, escalation below
+break-even) but overshoots accuracy ($0.71$) at $\lambda{=}0.3$.
+\item \textbf{Honest negatives}: plain lossless SD stays Pareto-competitive (the $q'$ tier overhead
+doesn't pay off at this gap); a bigger \emph{verifier} (32B) hurts an accept-heavy policy (acc $0.33$)
+--- a bigger \emph{drafter} is the indicated lever.
 \end{enumerate}
 
 \section{Caveats}
-Accuracy at $n{=}24$--$50$ carries a $\pm0.06$--$0.10$ CI, so small accuracy gaps are within
-noise; the large gaps (learned vs.\ fixed) are not. Speedups are an overhead-free cost
-\emph{model}, not a stopwatch on an optimized engine (CUDA-graphs/static-cache were incompatible
-with the dynamic KV-cache loop). Single task (GSM8K), single pair family (Qwen2.5).
+Accuracy at small $n$ ($24$--$50$) carries a $\pm0.06$--$0.10$ CI, so small accuracy gaps are within
+noise (large ones are not). Speedups are an overhead-free cost \emph{model}, not a stopwatch on an
+optimized engine (CUDA-graphs/static-cache were incompatible with the dynamic KV-cache loop). Single
+task (GSM8K), single model family (Qwen2.5).
 
 \end{document}
