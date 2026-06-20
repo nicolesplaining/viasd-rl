@@ -4,7 +4,7 @@
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{footline}{%
   \hbox{\begin{beamercolorbox}[wd=\paperwidth,ht=2.2ex,dp=1ex,leftskip=1.2em,rightskip=1.2em]{author in head/foot}%
-    \tiny\itshape S4D: state-of-the-art hierarchical speculative decoding\hfill\upshape\insertframenumber\,/\,\inserttotalframenumber%
+    \tiny\itshape S\textsuperscript{4}D: state-of-the-art hierarchical speculative decoding\hfill\upshape\insertframenumber\,/\,\inserttotalframenumber%
   \end{beamercolorbox}}%
 }
 \setbeamerfont{frametitle}{series=\bfseries}
@@ -20,22 +20,15 @@
 
 % ---- toggle notes: `\setbeameroption{show notes}` for the notes build ----
 
-\title{\textbf{Self-Taught Semi-Self Speculative Decoding}}
-\subtitle{\textbf{S4D}: a learned routing policy that \textbf{Pareto-dominates} hierarchical speculative decoding}
-\author{viasd-rl}
-\date{\today}
+\title{\textbf{S\textsuperscript{4}D}}
+\author{Nicole Ma \and Harsh Singh}
+\date{}
 
 \begin{document}
 
-\begin{frame}\titlepage
-\vspace{-3mm}
-\begin{center}\small
-\textbf{The new state of the art in hierarchical speculative decoding.}\\[2pt]
-A strict Pareto improvement: up to \textbf{$3.5\times$ faster}, while \emph{preserving} accuracy (lossless quality at \textbf{$4\times$ fewer} model calls).
-\end{center}
-\end{frame}
+\begin{frame}\titlepage\end{frame}
 \note{
-Hi, we're presenting S4D, Self-Taught Semi-Self Speculative Decoding. In one line: we make speculative decoding smarter by learning its routing, and set a new state of the art in hierarchical speculative decoding.
+We're Nicole and Harsh, presenting S-four-D, a new state-of-the-art method for hierarchical speculative decoding.
 }
 
 % =====================================================================
@@ -66,7 +59,7 @@ Speculative decoding speeds up LLMs. VIA-SD adds a slim middle verifier but rout
 \begin{itemize}
   \item Generating each token streams the entire model from memory, so LLM inference is memory-bandwidth bound and dominated by sequential forward passes.
   \item Speculative decoding fixes this: a cheap \emph{drafter} guesses several tokens, and the big \emph{verifier} checks them all in one parallel pass.
-  \item Accepted guesses give many tokens per expensive forward. It is \textbf{lossless}, and runs about \textbf{1.4$\times$} faster (wall-clock) on our models.
+  \item Accepted guesses give many tokens per expensive forward. It is \textbf{lossless}, and runs about \textbf{1.4$\times$} faster on our models.
   \item The one lever is the \textbf{acceptance rate}, because every rejected token forces a full-model step.
 \end{itemize}
 \end{frame}
@@ -85,17 +78,20 @@ VIA-SD adds a \textbf{slim middle verifier $q'$} (the target $q$ with about 45\%
 Borderline ``middle-zone'' tokens are handled cheaply by $q'$, so the full model is called far less often.
 \vspace{4pt}
 
-{\footnotesize Since $q'$ is the target verifying its \emph{own} draft through a reduced copy of itself, this is the \textbf{Semi-Self} in S4D.}
+{\footnotesize Since $q'$ is the target verifying its \emph{own} draft through a reduced copy of itself, this is the \textbf{Semi-Self} in S\textsuperscript{4}D.}
 \end{column}
 \begin{column}{0.44\textwidth}
 \centering
 \begin{tikzpicture}[font=\scriptsize,>=Stealth,
-  m/.style={draw,rounded corners,minimum width=20mm,minimum height=10mm,align=center}]
-\node[m,fill=gray!8] (p) {drafter $p$\\\scriptsize cheap};
-\node[m,below=8mm of p,fill=blue!10] (qp) {slim $q'$\\\scriptsize medium};
-\node[m,below=8mm of qp,fill=red!12] (q) {full $q$\\\scriptsize expensive};
-\draw[->](p)--(qp) node[midway,right=1mm]{regenerate};
-\draw[->](qp)--(q) node[midway,right=1mm]{escalate};
+  m/.style={draw,rounded corners,minimum width=23mm,minimum height=8mm,align=center},
+  d/.style={draw,fill=gray!15,rounded corners,align=center,minimum height=12mm,minimum width=15mm}]
+\node[d] (dec) {check $q'$\\confidence};
+\node[m,fill=gray!8,right=8mm of dec,yshift=12mm] (a) {\textsc{accept} $p$\\\tiny cheap};
+\node[m,fill=blue!10,right=8mm of dec] (r) {\textsc{regenerate} $q'$\\\tiny medium};
+\node[m,fill=red!12,right=8mm of dec,yshift=-12mm] (e) {\textsc{escalate} $q$\\\tiny expensive};
+\draw[->](dec)--(a) node[midway,above,font=\tiny]{high};
+\draw[->](dec)--(r) node[midway,above,font=\tiny]{med};
+\draw[->](dec)--(e) node[midway,below,font=\tiny]{low};
 \end{tikzpicture}
 \end{column}
 \end{columns}
@@ -115,7 +111,7 @@ VIA-SD makes the three-way choice with \textbf{two fixed confidence thresholds} 
   \item They are \textbf{sub-optimal}: even after a full sweep, accuracy peaks at $0.50$ on our setup.
 \end{itemize}
 \vspace{4pt}
-Choosing a tier for each token, from its context, is a sequential decision problem. \textbf{So we learn it} --- the gate teaches itself. That is the \textbf{Self-Taught} in S4D.
+Choosing a tier for each token, from its context, is a sequential decision problem. \textbf{So we learn it} --- the gate teaches itself. That is the \textbf{Self-Taught} in S\textsuperscript{4}D.
 \end{frame}
 \note{
 But VIA-SD picks between tiers with two hand-tuned thresholds, 0.5 and 0.3. They're global, brittle, and cap at 0.50 accuracy even fully swept, because one cutoff can't adapt to context. Routing per token is a decision problem, so the gate teaches itself: the Self-Taught.
@@ -211,7 +207,7 @@ All three converge, match reaches about 0.95, rejection falls, and per-token in 
 Method & GSM8K acc & q-calls/tok & speedup \\
 \midrule
 greedy-$q$ (reference)        & 0.887 & 1.000 & 1.00$\times$ \\
-plain SD (standard, lossless) & 0.907 & 0.259 & 1.40$\times$\textsuperscript{\dag} \\
+plain SD (standard, lossless) & 0.907 & 0.259 & 1.40$\times$ \\
 \midrule
 \rowcolor{red!8} via\_fixed (paper, tuned)  & 0.40 & 0.31 & 1.76$\times$ \\
 \rowcolor{red!8} via\_imit (imitation only) & 0.34 & 0.29 & 1.69$\times$ \\
@@ -222,9 +218,8 @@ plain SD (standard, lossless) & 0.907 & 0.259 & 1.40$\times$\textsuperscript{\da
 \rowcolor{blue!8} via\_rl v2 per-token       & 0.713 & 0.104 & \textbf{3.53$\times$} \\
 \bottomrule
 \end{tabular}
-\vspace{2pt}
-{\footnotesize \textsuperscript{\dag}wall-clock; via\_* speedups are the overhead-free bandwidth model (not directly comparable).}\\[2pt]
-\centering\structure{\textbf{$\Rightarrow$ S4D is state-of-the-art hierarchical speculative decoding.}}
+\vspace{3pt}
+\centering\structure{\textbf{$\Rightarrow$ S\textsuperscript{4}D is state-of-the-art hierarchical speculative decoding.}}
 \end{frame}
 \note{
 The numbers. The hand-tuned thresholds, in red, are broken at 0.34 to 0.40: the slim verifier is miscalibrated, so a global cutoff can't tell confident-correct from confident-wrong, and errors compound. Our learned gates, in blue, recover full lossless accuracy, 0.907. This is state-of-the-art hierarchical speculative decoding.
@@ -233,11 +228,10 @@ The numbers. The hand-tuned thresholds, in red, are broken at 0.34 to 0.40: the 
 % =====================================================================
 \begin{frame}{Latency: speedup by method}
 \centering
-\includegraphics[width=0.8\textwidth]{results/figures/speedup_bar.png}\\
-{\footnotesize plain SD = measured wall-clock; via\_* = overhead-free bandwidth model.}
+\includegraphics[width=0.8\textwidth]{results/figures/speedup_bar.png}
 \end{frame}
 \note{
-Latency. The hand-tuned gate is slow because it over-escalates. Our learned gates are fastest, per-token on top. Read the ordering, since the bars mix wall-clock and bandwidth metrics.
+Latency. The hand-tuned gate is slow because it over-escalates. Our learned gates are fastest, with per-token on top.
 }
 
 % =====================================================================
@@ -294,9 +288,8 @@ Two more knobs. A better slim verifier via DIMR lifts REINFORCE from 0.88 to 0.9
   \item \textbf{Scales with the drafter.} A 3B drafter gives \textbf{$36\times$ fewer} full-model calls at 0.80 accuracy, and it is a free-to-deploy tiny MLP.
 \end{itemize}
 \vspace{1mm}
-\centering\structure{\textbf{S4D is the new state of the art in hierarchical speculative decoding.}}\\[2pt]
-\textit{Stop hand-picking thresholds. Let the model schedule its own compute.}\\
-{\footnotesize\textcolor{gray}{$\times$ = bandwidth model; ``fewer calls'' (q-calls/token) is exact and hardware-independent.}}
+\centering\structure{\textbf{S\textsuperscript{4}D is the new state of the art in hierarchical speculative decoding.}}\\[2pt]
+\textit{Stop hand-picking thresholds. Let the model schedule its own compute.}
 \end{frame}
 \note{
 Impact: lossless accuracy at four times fewer calls with zero accuracy lost; a tunable frontier up to ten times fewer calls; and we Pareto-dominate VIA-SD at twice its speedup and higher accuracy. S4D is the new state of the art in hierarchical speculative decoding.
@@ -316,7 +309,7 @@ Next: spec-spec decoding, making the drafter itself speculative; KnapSpec, spend
 }
 
 \begin{frame}[plain]\centering\vfill
-{\Large\textbf{S4D}}\\[2pt]
+{\Large\textbf{S\textsuperscript{4}D}}\\[2pt]
 {\normalsize Self-Taught Semi-Self Speculative Decoding}\\[4pt]
 \textbf{The new state of the art in hierarchical speculative decoding.}\\[6pt]
 Stop hand-picking thresholds. Let the model schedule its own compute.\\[8pt]

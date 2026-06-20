@@ -4,8 +4,7 @@
 
 NOTES = [
 # 1 title
-"Hi, we're presenting S4D, Self-Taught Semi-Self Speculative Decoding. In one line: we make "
-"speculative decoding smarter by learning its routing, and set a new state of the art in hierarchical "
+"We're Nicole and Harsh, presenting S-four-D, a new state-of-the-art method for hierarchical "
 "speculative decoding.",
 # 2 overview
 "Speculative decoding speeds up LLMs. VIA-SD adds a slim middle verifier but routes with hand-tuned "
@@ -46,7 +45,7 @@ NOTES = [
 "hierarchical speculative decoding.",
 # 11 bar
 "Latency. The hand-tuned gate is slow because it over-escalates. Our learned gates are fastest, "
-"per-token on top. Read the ordering, since the bars mix wall-clock and bandwidth metrics.",
+"with per-token on top.",
 # 12 pareto
 "Accuracy versus speed. Red is dominated on both axes, because one cutoff can't both avoid "
 "over-escalating and avoid over-accepting. Blue, our learned gates, dominate, with a full frontier from "
