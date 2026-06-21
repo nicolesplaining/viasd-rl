@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.22)  20 JUN 2026 16:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.22)  20 JUN 2026 17:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -715,92 +715,81 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 18.
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
+)
+Overfull \hbox (0.50858pt too wide) in paragraph at lines 20--36
+[]\OT1/cmr/m/n/10 We present S$[]$D (Self-Taught Semi-Self Spec-u-la-tive De-co
+d-ing), the first reinforcement-learned
+ []
 
-{/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2
+[1
+
+{/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+[2
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.124 
-      ]
-Overfull \hbox (11.73967pt too wide) in paragraph at lines 143--148
-[]\OT1/cmr/bx/n/10.95 Metrics. \OT1/cmr/m/it/10.95 q-calls/token \OT1/cmr/m/n/1
-0.95 (full-verifier in-vo-ca-tions per to-ken; ex-act, hardware-independent), G
-SM8K
- []
-
-[3]
-Overfull \hbox (0.9838pt too wide) in paragraph at lines 172--175
-[]\OT1/cmr/bx/n/10.95 Cost. \OT1/cmr/m/n/10.95 Per-action la-tency in \OT1/cmr/
-m/it/10.95 overhead-corrected \OT1/cmr/m/n/10.95 units: $[][] = (\OML/cmm/m/it/
-10.95 t[] \OT1/cmr/m/n/10.95 + \OML/cmm/m/it/10.95 t[]=^^M \OT1/cmr/m/n/10.95 +
- \OT1/cmr/bx/n/10.95 1\OT1/cmr/m/n/10.95 [[]] \OML/cmm/m/it/10.95 t[]\OT1/cmr/m
-/n/10.95 )\OML/cmm/m/it/10.95 =t[]$
- []
-
-[4{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
-}] [5]
-<results/figures/speedup_bar.png, id=113, 650.43pt x 325.215pt>
+l.122 
+      ] [3] [4{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-s
+uper-ts1.enc}] [5] [6]
+<results/figures/speedup_bar.png, id=115, 650.43pt x 325.215pt>
 File: results/figures/speedup_bar.png Graphic file (type png)
 <use results/figures/speedup_bar.png>
-Package pdftex.def Info: results/figures/speedup_bar.png  used on input line 27
-5.
+Package pdftex.def Info: results/figures/speedup_bar.png  used on input line 32
+1.
 (pdftex.def)             Requested size: 338.22418pt x 169.11774pt.
-<results/figures/pareto.png, id=115, 578.16pt x 419.166pt>
+<results/figures/pareto.png, id=117, 578.16pt x 419.166pt>
 File: results/figures/pareto.png Graphic file (type png)
 <use results/figures/pareto.png>
-Package pdftex.def Info: results/figures/pareto.png  used on input line 281.
+Package pdftex.def Info: results/figures/pareto.png  used on input line 326.
 (pdftex.def)             Requested size: 291.2458pt x 211.14949pt.
-<results/figures/rl_curves.png, id=116, 1004.0712pt x 297.2706pt>
+<results/figures/rl_curves.png, id=118, 1004.0712pt x 297.2706pt>
 File: results/figures/rl_curves.png Graphic file (type png)
 <use results/figures/rl_curves.png>
-Package pdftex.def Info: results/figures/rl_curves.png  used on input line 287.
+Package pdftex.def Info: results/figures/rl_curves.png  used on input line 332.
 
 (pdftex.def)             Requested size: 469.75502pt x 139.07762pt.
- [6
+ [7
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has
  been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.290 \end{figure}
+l.336 \end{figure}
                   
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.290 \end{figure}
-                   <./results/figures/speedup_bar.png>] [7
+l.336 \end{figure}
+                   <./results/figures/speedup_bar.png>] [8
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.304 \item \textbf
-                   {The v2 per-token reward drives escalation below break-ev...
-
+l.360 
+      
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.304 \item \textbf
-                   {The v2 per-token reward drives escalation below break-ev...
- <./results/figures/pareto.png> <./results/figures/rl_curves.png>] [8]
-(./writeup.aux)
+l.360 
+       <./results/figures/pareto.png> <./results/figures/rl_curves.png>]
+[9] (./writeup.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
 Package rerunfilecheck Info: File `writeup.out' has not changed.
-(rerunfilecheck)             Checksum: 86CFF01FF533AFB753E5B2C2C80B7A35;2377.
+(rerunfilecheck)             Checksum: B3C8DC4C8C503F3655C64B2B07DF3429;2312.
  ) 
 Here is how much of TeX's memory you used:
- 21786 strings out of 467525
- 407310 string characters out of 5418982
- 818699 words of memory out of 5000000
- 50305 multiletter control sequences out of 15000+600000
- 641722 words of font info for 92 fonts, out of 8000000 for 9000
+ 21769 strings out of 467525
+ 407105 string characters out of 5418982
+ 816766 words of memory out of 5000000
+ 50297 multiletter control sequences out of 15000+600000
+ 640532 words of font info for 88 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,12n,94p,725b,901s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,12n,94p,729b,901s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb>
@@ -818,16 +807,12 @@ e/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2
 26/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2026
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2026/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2026/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2026/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2026/texmf
--dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2026/t
-exmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/local/texlive/2026/tex
-mf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2026/texmf
--dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on writeup.pdf (8 pages, 642573 bytes).
+mf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2026
+/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
+Output written on writeup.pdf (9 pages, 588531 bytes).
 PDF statistics:
- 254 PDF objects out of 1000 (max. 8388607)
- 190 compressed objects within 2 object streams
- 40 named destinations out of 1000 (max. 500000)
+ 229 PDF objects out of 1000 (max. 8388607)
+ 172 compressed objects within 2 object streams
+ 35 named destinations out of 1000 (max. 500000)
  140 words of extra memory for PDF output out of 10000 (max. 10000000)
 
