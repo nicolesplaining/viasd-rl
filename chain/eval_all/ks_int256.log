@@ -1,0 +1,520 @@
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+[ENV] device=cuda, device_map=auto, dtype=torch.float16
+[CFG] strategy=autoregressive, start_idx=0, end_idx=None, num_samples=30
+[GEN] temperature=0.0, top_k=50, top_p=1.0, sample=False
+[MODEL] id='Qwen/Qwen2.5-14B-Instruct'
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:  12%|█▎        | 1/8 [00:00<00:05,  1.22it/s]Loading checkpoint shards:  25%|██▌       | 2/8 [00:01<00:04,  1.21it/s]Loading checkpoint shards:  38%|███▊      | 3/8 [00:02<00:04,  1.20it/s]Loading checkpoint shards:  50%|█████     | 4/8 [00:03<00:03,  1.21it/s]Loading checkpoint shards:  62%|██████▎   | 5/8 [00:04<00:02,  1.22it/s]Loading checkpoint shards:  75%|███████▌  | 6/8 [00:04<00:01,  1.22it/s]Loading checkpoint shards:  88%|████████▊ | 7/8 [00:05<00:00,  1.23it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:06<00:00,  1.49it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:06<00:00,  1.31it/s]
+[GPU] Memory allocated: 27.51 GB
+[GPU] Memory reserved: 27.97 GB
+[DATA] Loading gsm8k dataset...
+[DATA] GSM8K grade-school math word problems (openai/gsm8k, test) - math_reasoning
+[DATA] Sliced to 30 examples (original indices 0 to 30)
+[DATA] Loaded 30 examples
+Running profiling to determine C1, C2, C3...
+[Profiling] Profiling model on device: cuda:0...
+[Profiling] Detected: heads=40, kv_heads=8, head_dim=128
+[Profiling] Starting measurement loop...
+[Profiling] Done. c_1=0.345416, c_2=9.407000e-05, c_3=0.476807
+seq_lengths = [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000, 16000, 17000, 18000, 19000, 20000, 21000, 22000, 23000, 24000, 25000]
+attn_times = [0.571699196100235, 0.7277567923069, 0.7414784014225007, 0.8632319927215576, 0.9872384071350098, 1.091481614112854, 1.2197888016700744, 1.2253184080123902, 1.2654592037200927, 1.3650943994522096, 1.4599168181419373, 1.5566848039627075, 1.6622592210769653, 1.7519615769386292, 1.8566143989562989, 1.9567615985870361, 2.0571136474609375, 2.1668863534927367, 2.262118363380432, 2.3559167861938475, 2.4683520078659056, 2.563379240036011, 2.672332739830017, 2.774220848083496, 2.86986243724823]
+mlp_times = [0.3465216040611267, 0.3446784049272537, 0.3441664010286331, 0.34467839896678926, 0.3442688018083572, 0.34570240676403047, 0.3447807997465134, 0.3356671929359436, 0.3330047994852066, 0.3359744012355804, 0.33198079466819763, 0.5270528048276901, 0.3330047905445099, 0.3341311991214752, 0.3349503934383392, 0.3355647921562195, 0.3330047965049744, 0.3378175973892212, 0.3352575957775116, 0.3354624003171921, 0.3360767960548401, 0.3348479956388474, 0.3363839954137802, 0.3368959933519363, 0.3335167974233627]
+Profiling complete: C1=0.3454156781435012, C2=9.406999656328788e-05, C3=0.47680716699361814
+[CFG] Running comparison mode with strategies: ['autoregressive', 'knapspec']
+
+========================================
+Running Strategy: autoregressive
+========================================
+
+[autoregressive] SAMPLE 1/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 20.6 tok/s
+[autoregressive] SAMPLE 2/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 20.7 tok/s
+[autoregressive] SAMPLE 3/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 17.4 tok/s
+[autoregressive] SAMPLE 4/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 5/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 6/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 7/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 8/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 9/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 10/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 11/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 12/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 13/30
+[AR] Generated 0 tokens...[METRICS] 464 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 14/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 15/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 16/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 17/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 18/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 19/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 20/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 21/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 22/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 23/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 24/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 25/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 26/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 27/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 28/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 29/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[autoregressive] SAMPLE 30/30
+[AR] Generated 0 tokens...[METRICS] 512 tokens, 10.9 tok/s
+[SAVE] bench_out/ks_int256/results_20260620_201152_autoregressive_Qwen_Qwen2.5-14B-Instruct_gsm8k_0.json
+[autoregressive SUMMARY] 11.8 tok/s avg, 11.4 tok/s avg(micro), 510.4 tokens avg
+
+========================================
+Running Strategy: knapspec
+========================================
+
+[knapspec] SAMPLE 1/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 31 attn_skips 19 mlp_skips 12 best_cos_avg 0.8725 best_alpha 0.9211 best_tpt 0.0297 past_len 129
+[OPT STATS] Duration: 4.4314s
+[OPT STATS] Total Forward Branches: 3420
+[OPT STATS] g[-1] entries: 41
+[OPT STATS] Avg g entries per layer: 36.43
+Average Skip_num 31.0
+[TIMING] Draft: 35.417s (69.8%)
+[TIMING] Verify: 10.898s (21.5%)
+[TIMING] Optimization: 4.433s (8.7%)
+[TIMING] D+V+O measured: 50.748s / Total: 50.899s
+[METRICS] 512 tokens, 10.1 tok/s, acc_rate: 0.708
+[TIMING] D:69.8% V:21.5% O:8.7%
+[knapspec] SAMPLE 2/30
+[Knapspec] New skip set [0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 18 attn_skips 9 mlp_skips 9 best_cos_avg 0.9863 best_alpha 1.0000 best_tpt 0.0306 past_len 59
+[OPT STATS] Duration: 2.6401s
+[OPT STATS] Total Forward Branches: 3418
+[OPT STATS] g[-1] entries: 47
+[OPT STATS] Avg g entries per layer: 36.47
+Average Skip_num 18.0
+[TIMING] Draft: 34.255s (77.2%)
+[TIMING] Verify: 7.447s (16.8%)
+[TIMING] Optimization: 2.642s (6.0%)
+[TIMING] D+V+O measured: 44.344s / Total: 44.485s
+[METRICS] 512 tokens, 11.5 tok/s, acc_rate: 0.941
+[TIMING] D:77.2% V:16.8% O:6.0%
+[knapspec] SAMPLE 3/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 28 attn_skips 17 mlp_skips 11 best_cos_avg 0.8857 best_alpha 0.9714 best_tpt 0.0312 past_len 113
+[OPT STATS] Duration: 4.0992s
+[OPT STATS] Total Forward Branches: 3428
+[OPT STATS] g[-1] entries: 44
+[OPT STATS] Avg g entries per layer: 36.55
+Average Skip_num 28.0
+[TIMING] Draft: 36.107s (74.7%)
+[TIMING] Verify: 8.150s (16.9%)
+[TIMING] Optimization: 4.101s (8.5%)
+[TIMING] D+V+O measured: 48.358s / Total: 48.502s
+[METRICS] 512 tokens, 10.6 tok/s, acc_rate: 0.772
+[TIMING] D:74.7% V:16.9% O:8.5%
+[knapspec] SAMPLE 4/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 35 attn_skips 20 mlp_skips 15 best_cos_avg 0.8606 best_alpha 0.9615 best_tpt 0.0331 past_len 87
+[OPT STATS] Duration: 3.4079s
+[OPT STATS] Total Forward Branches: 3420
+[OPT STATS] g[-1] entries: 45
+[OPT STATS] Avg g entries per layer: 36.47
+Average Skip_num 35.0
+[TIMING] Draft: 34.089s (72.5%)
+[TIMING] Verify: 9.494s (20.2%)
+[TIMING] Optimization: 3.410s (7.3%)
+[TIMING] D+V+O measured: 46.992s / Total: 47.141s
+[METRICS] 512 tokens, 10.9 tok/s, acc_rate: 0.723
+[TIMING] D:72.5% V:20.2% O:7.3%
+[knapspec] SAMPLE 5/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 25 attn_skips 12 mlp_skips 13 best_cos_avg 0.9181 best_alpha 1.0000 best_tpt 0.0329 past_len 166
+[OPT STATS] Duration: 3.4266s
+[OPT STATS] Total Forward Branches: 3421
+[OPT STATS] g[-1] entries: 46
+[OPT STATS] Avg g entries per layer: 36.49
+Average Skip_num 25.0
+[TIMING] Draft: 35.407s (76.3%)
+[TIMING] Verify: 7.574s (16.3%)
+[TIMING] Optimization: 3.429s (7.4%)
+[TIMING] D+V+O measured: 46.410s / Total: 46.555s
+[METRICS] 512 tokens, 11.0 tok/s, acc_rate: 0.857
+[TIMING] D:76.3% V:16.3% O:7.4%
+[knapspec] SAMPLE 6/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0]
+skips 42 attn_skips 20 mlp_skips 22 best_cos_avg 0.6862 best_alpha 0.8333 best_tpt 0.0297 past_len 97
+[OPT STATS] Duration: 3.2381s
+[OPT STATS] Total Forward Branches: 3424
+[OPT STATS] g[-1] entries: 45
+[OPT STATS] Avg g entries per layer: 36.52
+Average Skip_num 42.0
+[TIMING] Draft: 28.785s (66.2%)
+[TIMING] Verify: 11.483s (26.4%)
+[TIMING] Optimization: 3.240s (7.4%)
+[TIMING] D+V+O measured: 43.508s / Total: 43.667s
+[METRICS] 512 tokens, 11.7 tok/s, acc_rate: 0.751
+[TIMING] D:66.2% V:26.4% O:7.4%
+[knapspec] SAMPLE 7/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 33 attn_skips 18 mlp_skips 15 best_cos_avg 0.8991 best_alpha 0.9167 best_tpt 0.0301 past_len 83
+[OPT STATS] Duration: 3.2495s
+[OPT STATS] Total Forward Branches: 3422
+[OPT STATS] g[-1] entries: 44
+[OPT STATS] Avg g entries per layer: 36.48
+Average Skip_num 33.0
+[TIMING] Draft: 34.143s (73.7%)
+[TIMING] Verify: 8.922s (19.3%)
+[TIMING] Optimization: 3.251s (7.0%)
+[TIMING] D+V+O measured: 46.317s / Total: 46.461s
+[METRICS] 512 tokens, 11.0 tok/s, acc_rate: 0.754
+[TIMING] D:73.7% V:19.3% O:7.0%
+[knapspec] SAMPLE 8/30
+[Knapspec] New skip set [0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 27 attn_skips 17 mlp_skips 10 best_cos_avg 0.9496 best_alpha 0.9091 best_tpt 0.0284 past_len 109
+[OPT STATS] Duration: 2.9161s
+[OPT STATS] Total Forward Branches: 3420
+[OPT STATS] g[-1] entries: 49
+[OPT STATS] Avg g entries per layer: 36.52
+Average Skip_num 27.0
+[TIMING] Draft: 29.602s (70.8%)
+[TIMING] Verify: 9.271s (22.2%)
+[TIMING] Optimization: 2.918s (7.0%)
+[TIMING] D+V+O measured: 41.791s / Total: 41.943s
+[METRICS] 512 tokens, 12.2 tok/s, acc_rate: 0.916
+[TIMING] D:70.8% V:22.2% O:7.0%
+[knapspec] SAMPLE 9/30
+[Knapspec] New skip set [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 1 attn_skips 0 mlp_skips 1 best_cos_avg 0.9896 best_alpha 0.9444 best_tpt 0.0249 past_len 139
+[OPT STATS] Duration: 2.6462s
+[OPT STATS] Total Forward Branches: 3229
+[OPT STATS] g[-1] entries: 46
+[OPT STATS] Avg g entries per layer: 34.47
+Average Skip_num 1.0
+[TIMING] Draft: 34.385s (77.2%)
+[TIMING] Verify: 7.488s (16.8%)
+[TIMING] Optimization: 2.648s (5.9%)
+[TIMING] D+V+O measured: 44.521s / Total: 44.667s
+[METRICS] 512 tokens, 11.5 tok/s, acc_rate: 0.995
+[TIMING] D:77.2% V:16.8% O:5.9%
+[knapspec] SAMPLE 10/30
+[Knapspec] New skip set [0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 24 attn_skips 12 mlp_skips 12 best_cos_avg 0.9545 best_alpha 0.9565 best_tpt 0.0289 past_len 100
+[OPT STATS] Duration: 3.1073s
+[OPT STATS] Total Forward Branches: 3418
+[OPT STATS] g[-1] entries: 48
+[OPT STATS] Avg g entries per layer: 36.48
+Average Skip_num 24.0
+[TIMING] Draft: 26.473s (65.9%)
+[TIMING] Verify: 10.584s (26.4%)
+[TIMING] Optimization: 3.109s (7.7%)
+[TIMING] D+V+O measured: 40.167s / Total: 40.321s
+[METRICS] 512 tokens, 12.7 tok/s, acc_rate: 0.907
+[TIMING] D:65.9% V:26.4% O:7.7%
+[knapspec] SAMPLE 11/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 40 attn_skips 20 mlp_skips 20 best_cos_avg 0.8234 best_alpha 0.8788 best_tpt 0.0306 past_len 110
+[OPT STATS] Duration: 2.6966s
+[OPT STATS] Total Forward Branches: 3430
+[OPT STATS] g[-1] entries: 47
+[OPT STATS] Avg g entries per layer: 36.60
+Average Skip_num 40.0
+[TIMING] Draft: 26.506s (66.7%)
+[TIMING] Verify: 10.546s (26.5%)
+[TIMING] Optimization: 2.698s (6.8%)
+[TIMING] D+V+O measured: 39.750s / Total: 39.878s
+[METRICS] 512 tokens, 12.8 tok/s, acc_rate: 0.703
+[TIMING] D:66.7% V:26.5% O:6.8%
+[knapspec] SAMPLE 12/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 35 attn_skips 19 mlp_skips 16 best_cos_avg 0.8816 best_alpha 0.9394 best_tpt 0.0316 past_len 115
+[OPT STATS] Duration: 3.7774s
+[OPT STATS] Total Forward Branches: 3418
+[OPT STATS] g[-1] entries: 41
+[OPT STATS] Avg g entries per layer: 36.41
+Average Skip_num 35.0
+[TIMING] Draft: 24.514s (71.1%)
+[TIMING] Verify: 6.163s (17.9%)
+[TIMING] Optimization: 3.779s (11.0%)
+[TIMING] D+V+O measured: 34.456s / Total: 34.599s
+[METRICS] 512 tokens, 14.8 tok/s, acc_rate: 0.901
+[TIMING] D:71.1% V:17.9% O:11.0%
+[knapspec] SAMPLE 13/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 29 attn_skips 17 mlp_skips 12 best_cos_avg 0.9313 best_alpha 0.9200 best_tpt 0.0291 past_len 116
+[OPT STATS] Duration: 2.8208s
+[OPT STATS] Total Forward Branches: 3424
+[OPT STATS] g[-1] entries: 47
+[OPT STATS] Avg g entries per layer: 36.54
+Average Skip_num 29.0
+[TIMING] Draft: 24.076s (71.6%)
+[TIMING] Verify: 6.741s (20.0%)
+[TIMING] Optimization: 2.823s (8.4%)
+[TIMING] D+V+O measured: 33.640s / Total: 33.836s
+[METRICS] 464 tokens, 13.7 tok/s, acc_rate: 0.923
+[TIMING] D:71.6% V:20.0% O:8.4%
+[knapspec] SAMPLE 14/30
+[Knapspec] New skip set [0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 30 attn_skips 17 mlp_skips 13 best_cos_avg 0.8941 best_alpha 0.7500 best_tpt 0.0260 past_len 120
+[OPT STATS] Duration: 2.9367s
+[OPT STATS] Total Forward Branches: 3416
+[OPT STATS] g[-1] entries: 46
+[OPT STATS] Avg g entries per layer: 36.44
+Average Skip_num 30.0
+[TIMING] Draft: 31.592s (74.1%)
+[TIMING] Verify: 8.092s (19.0%)
+[TIMING] Optimization: 2.938s (6.9%)
+[TIMING] D+V+O measured: 42.623s / Total: 42.739s
+[METRICS] 512 tokens, 12.0 tok/s, acc_rate: 0.722
+[TIMING] D:74.1% V:19.0% O:6.9%
+[knapspec] SAMPLE 15/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 29 attn_skips 16 mlp_skips 13 best_cos_avg 0.8897 best_alpha 0.9412 best_tpt 0.0298 past_len 103
+[OPT STATS] Duration: 2.9636s
+[OPT STATS] Total Forward Branches: 3416
+[OPT STATS] g[-1] entries: 45
+[OPT STATS] Avg g entries per layer: 36.43
+Average Skip_num 29.0
+[TIMING] Draft: 31.534s (74.7%)
+[TIMING] Verify: 7.727s (18.3%)
+[TIMING] Optimization: 2.966s (7.0%)
+[TIMING] D+V+O measured: 42.226s / Total: 42.344s
+[METRICS] 512 tokens, 12.1 tok/s, acc_rate: 0.775
+[TIMING] D:74.7% V:18.3% O:7.0%
+[knapspec] SAMPLE 16/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 30 attn_skips 17 mlp_skips 13 best_cos_avg 0.9208 best_alpha 0.9286 best_tpt 0.0295 past_len 144
+[OPT STATS] Duration: 3.4528s
+[OPT STATS] Total Forward Branches: 3430
+[OPT STATS] g[-1] entries: 49
+[OPT STATS] Avg g entries per layer: 36.62
+Average Skip_num 30.0
+[TIMING] Draft: 27.092s (69.8%)
+[TIMING] Verify: 8.255s (21.3%)
+[TIMING] Optimization: 3.455s (8.9%)
+[TIMING] D+V+O measured: 38.802s / Total: 38.950s
+[METRICS] 512 tokens, 13.1 tok/s, acc_rate: 0.903
+[TIMING] D:69.8% V:21.3% O:8.9%
+[knapspec] SAMPLE 17/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 18 attn_skips 11 mlp_skips 7 best_cos_avg 0.9844 best_alpha 1.0000 best_tpt 0.0307 past_len 98
+[OPT STATS] Duration: 2.4445s
+[OPT STATS] Total Forward Branches: 3418
+[OPT STATS] g[-1] entries: 48
+[OPT STATS] Avg g entries per layer: 36.48
+Average Skip_num 18.0
+[TIMING] Draft: 30.113s (76.3%)
+[TIMING] Verify: 6.900s (17.5%)
+[TIMING] Optimization: 2.446s (6.2%)
+[TIMING] D+V+O measured: 39.460s / Total: 39.574s
+[METRICS] 512 tokens, 12.9 tok/s, acc_rate: 0.916
+[TIMING] D:76.3% V:17.5% O:6.2%
+[knapspec] SAMPLE 18/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 37 attn_skips 20 mlp_skips 17 best_cos_avg 0.9019 best_alpha 0.8333 best_tpt 0.0286 past_len 93
+[OPT STATS] Duration: 2.7133s
+[OPT STATS] Total Forward Branches: 3417
+[OPT STATS] g[-1] entries: 47
+[OPT STATS] Avg g entries per layer: 36.46
+Average Skip_num 37.0
+[TIMING] Draft: 23.937s (69.1%)
+[TIMING] Verify: 7.972s (23.0%)
+[TIMING] Optimization: 2.715s (7.8%)
+[TIMING] D+V+O measured: 34.625s / Total: 34.770s
+[METRICS] 512 tokens, 14.7 tok/s, acc_rate: 0.826
+[TIMING] D:69.1% V:23.0% O:7.8%
+[knapspec] SAMPLE 19/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 36 attn_skips 19 mlp_skips 17 best_cos_avg 0.8166 best_alpha 0.8421 best_tpt 0.0285 past_len 93
+[OPT STATS] Duration: 3.7467s
+[OPT STATS] Total Forward Branches: 3418
+[OPT STATS] g[-1] entries: 44
+[OPT STATS] Avg g entries per layer: 36.44
+Average Skip_num 36.0
+[TIMING] Draft: 30.276s (72.6%)
+[TIMING] Verify: 7.691s (18.4%)
+[TIMING] Optimization: 3.749s (9.0%)
+[TIMING] D+V+O measured: 41.716s / Total: 41.855s
+[METRICS] 512 tokens, 12.2 tok/s, acc_rate: 0.773
+[TIMING] D:72.6% V:18.4% O:9.0%
+[knapspec] SAMPLE 20/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 22 attn_skips 10 mlp_skips 12 best_cos_avg 0.9241 best_alpha 1.0000 best_tpt 0.0318 past_len 119
+[OPT STATS] Duration: 3.0125s
+[OPT STATS] Total Forward Branches: 3420
+[OPT STATS] g[-1] entries: 44
+[OPT STATS] Avg g entries per layer: 36.46
+Average Skip_num 22.0
+[TIMING] Draft: 31.466s (76.9%)
+[TIMING] Verify: 6.412s (15.7%)
+[TIMING] Optimization: 3.014s (7.4%)
+[TIMING] D+V+O measured: 40.892s / Total: 41.031s
+[METRICS] 512 tokens, 12.5 tok/s, acc_rate: 0.868
+[TIMING] D:76.9% V:15.7% O:7.4%
+[knapspec] SAMPLE 21/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 42 attn_skips 19 mlp_skips 23 best_cos_avg 0.7997 best_alpha 0.8214 best_tpt 0.0292 past_len 108
+[OPT STATS] Duration: 2.6017s
+[OPT STATS] Total Forward Branches: 3426
+[OPT STATS] g[-1] entries: 49
+[OPT STATS] Avg g entries per layer: 36.58
+Average Skip_num 42.0
+[TIMING] Draft: 28.456s (65.0%)
+[TIMING] Verify: 12.695s (29.0%)
+[TIMING] Optimization: 2.603s (5.9%)
+[TIMING] D+V+O measured: 43.754s / Total: 43.891s
+[METRICS] 512 tokens, 11.7 tok/s, acc_rate: 0.668
+[TIMING] D:65.0% V:29.0% O:5.9%
+[knapspec] SAMPLE 22/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 23 attn_skips 11 mlp_skips 12 best_cos_avg 0.9181 best_alpha 0.9394 best_tpt 0.0280 past_len 97
+[OPT STATS] Duration: 2.7646s
+[OPT STATS] Total Forward Branches: 3418
+[OPT STATS] g[-1] entries: 45
+[OPT STATS] Avg g entries per layer: 36.45
+Average Skip_num 23.0
+[TIMING] Draft: 28.078s (75.8%)
+[TIMING] Verify: 6.192s (16.7%)
+[TIMING] Optimization: 2.767s (7.5%)
+[TIMING] D+V+O measured: 37.037s / Total: 37.151s
+[METRICS] 512 tokens, 13.8 tok/s, acc_rate: 0.937
+[TIMING] D:75.8% V:16.7% O:7.5%
+[knapspec] SAMPLE 23/30
+[Knapspec] New skip set [0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0]
+skips 41 attn_skips 21 mlp_skips 20 best_cos_avg 0.7140 best_alpha 0.8333 best_tpt 0.0296 past_len 91
+[OPT STATS] Duration: 1.9955s
+[OPT STATS] Total Forward Branches: 3418
+[OPT STATS] g[-1] entries: 44
+[OPT STATS] Avg g entries per layer: 36.44
+Average Skip_num 41.0
+[TIMING] Draft: 28.924s (66.8%)
+[TIMING] Verify: 12.363s (28.6%)
+[TIMING] Optimization: 1.998s (4.6%)
+[TIMING] D+V+O measured: 43.285s / Total: 43.430s
+[METRICS] 512 tokens, 11.8 tok/s, acc_rate: 0.626
+[TIMING] D:66.8% V:28.6% O:4.6%
+[knapspec] SAMPLE 24/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]
+skips 38 attn_skips 20 mlp_skips 18 best_cos_avg 0.5536 best_alpha 0.9189 best_tpt 0.0316 past_len 100
+[OPT STATS] Duration: 2.9521s
+[OPT STATS] Total Forward Branches: 3422
+[OPT STATS] g[-1] entries: 40
+[OPT STATS] Avg g entries per layer: 36.44
+Average Skip_num 38.0
+[TIMING] Draft: 29.706s (70.8%)
+[TIMING] Verify: 9.312s (22.2%)
+[TIMING] Optimization: 2.954s (7.0%)
+[TIMING] D+V+O measured: 41.972s / Total: 42.097s
+[METRICS] 512 tokens, 12.2 tok/s, acc_rate: 0.692
+[TIMING] D:70.8% V:22.2% O:7.0%
+[knapspec] SAMPLE 25/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 21 attn_skips 13 mlp_skips 8 best_cos_avg 0.9603 best_alpha 1.0000 best_tpt 0.0319 past_len 89
+[OPT STATS] Duration: 3.3896s
+[OPT STATS] Total Forward Branches: 3430
+[OPT STATS] g[-1] entries: 46
+[OPT STATS] Avg g entries per layer: 36.59
+Average Skip_num 21.0
+[TIMING] Draft: 33.833s (76.4%)
+[TIMING] Verify: 7.034s (15.9%)
+[TIMING] Optimization: 3.392s (7.7%)
+[TIMING] D+V+O measured: 44.259s / Total: 44.399s
+[METRICS] 512 tokens, 11.5 tok/s, acc_rate: 0.924
+[TIMING] D:76.4% V:15.9% O:7.7%
+[knapspec] SAMPLE 26/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]
+skips 42 attn_skips 21 mlp_skips 21 best_cos_avg 0.6302 best_alpha 0.8333 best_tpt 0.0298 past_len 112
+[OPT STATS] Duration: 2.7974s
+[OPT STATS] Total Forward Branches: 3425
+[OPT STATS] g[-1] entries: 49
+[OPT STATS] Avg g entries per layer: 36.57
+Average Skip_num 42.0
+[TIMING] Draft: 29.879s (67.8%)
+[TIMING] Verify: 11.414s (25.9%)
+[TIMING] Optimization: 2.799s (6.3%)
+[TIMING] D+V+O measured: 44.092s / Total: 44.251s
+[METRICS] 512 tokens, 11.6 tok/s, acc_rate: 0.722
+[TIMING] D:67.8% V:25.9% O:6.3%
+[knapspec] SAMPLE 27/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 21 attn_skips 13 mlp_skips 8 best_cos_avg 0.9031 best_alpha 1.0000 best_tpt 0.0318 past_len 121
+[OPT STATS] Duration: 4.1082s
+[OPT STATS] Total Forward Branches: 3420
+[OPT STATS] g[-1] entries: 42
+[OPT STATS] Avg g entries per layer: 36.44
+Average Skip_num 21.0
+[TIMING] Draft: 35.942s (75.7%)
+[TIMING] Verify: 7.428s (15.6%)
+[TIMING] Optimization: 4.110s (8.7%)
+[TIMING] D+V+O measured: 47.480s / Total: 47.625s
+[METRICS] 512 tokens, 10.8 tok/s, acc_rate: 0.864
+[TIMING] D:75.7% V:15.6% O:8.7%
+[knapspec] SAMPLE 28/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 38 attn_skips 22 mlp_skips 16 best_cos_avg 0.7855 best_alpha 0.8182 best_tpt 0.0286 past_len 107
+[OPT STATS] Duration: 3.1200s
+[OPT STATS] Total Forward Branches: 3421
+[OPT STATS] g[-1] entries: 42
+[OPT STATS] Avg g entries per layer: 36.45
+Average Skip_num 38.0
+[TIMING] Draft: 29.986s (66.4%)
+[TIMING] Verify: 12.045s (26.7%)
+[TIMING] Optimization: 3.122s (6.9%)
+[TIMING] D+V+O measured: 45.153s / Total: 45.316s
+[METRICS] 512 tokens, 11.3 tok/s, acc_rate: 0.730
+[TIMING] D:66.4% V:26.7% O:6.9%
+[knapspec] SAMPLE 29/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 17 attn_skips 9 mlp_skips 8 best_cos_avg 0.9424 best_alpha 1.0000 best_tpt 0.0301 past_len 105
+[OPT STATS] Duration: 4.3323s
+[OPT STATS] Total Forward Branches: 3418
+[OPT STATS] g[-1] entries: 42
+[OPT STATS] Avg g entries per layer: 36.42
+Average Skip_num 17.0
+[TIMING] Draft: 36.282s (75.1%)
+[TIMING] Verify: 7.725s (16.0%)
+[TIMING] Optimization: 4.335s (9.0%)
+[TIMING] D+V+O measured: 48.342s / Total: 48.487s
+[METRICS] 512 tokens, 10.6 tok/s, acc_rate: 0.907
+[TIMING] D:75.1% V:16.0% O:9.0%
+[knapspec] SAMPLE 30/30
+[Knapspec] New skip set [0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+skips 37 attn_skips 17 mlp_skips 20 best_cos_avg 0.7942 best_alpha 0.9310 best_tpt 0.0315 past_len 115
+[OPT STATS] Duration: 3.5074s
+[OPT STATS] Total Forward Branches: 3425
+[OPT STATS] g[-1] entries: 45
+[OPT STATS] Avg g entries per layer: 36.53
+Average Skip_num 37.0
+[TIMING] Draft: 34.159s (70.2%)
+[TIMING] Verify: 10.999s (22.6%)
+[TIMING] Optimization: 3.509s (7.2%)
+[TIMING] D+V+O measured: 48.667s / Total: 48.830s
+[METRICS] 512 tokens, 10.5 tok/s, acc_rate: 0.697
+[TIMING] D:70.2% V:22.6% O:7.2%
+[SAVE] bench_out/ks_int256/results_20260620_201152_knapspec_Qwen_Qwen2.5-14B-Instruct_gsm8k_0.json
+[knapspec SUMMARY] 12.0 tok/s avg, 11.9 tok/s avg(micro), 510.4 tokens avg, 0.813 acc rate, 0.0117 tpl
+[TIMING AVG] Draft: 30.8336s (72.0%) | Verify: 8.8340s (20.6%) | Optimize: 3.1785s (7.4%)
+[DONE ALL]
+

@@ -1,0 +1,18 @@
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:00<00:00, 84.52it/s]
+L=48 gamma=5  (q' forward over ctx+gamma tokens, ms)
+ctx                   full-q       DIMR-block-26          sub-attn22    sub-attn22-mlp22
+256                    68.1m               41.9m               57.5m               64.6m
+1024                  182.2m              103.2m              156.4m              110.7m
+4096                  803.7m              449.2m              640.1m              480.0m
+8192                 1987.7m             1102.3m             1473.2m             1162.4m
+16384                5649.5m             3107.7m             3839.2m             3211.0m
+
+speedup of sub-attn22 vs DIMR-block (>1 = sublayer cheaper):
+  ctx=256    sub-attn22/DIMR = 0.73x cheaper
+  ctx=1024   sub-attn22/DIMR = 0.66x cheaper
+  ctx=4096   sub-attn22/DIMR = 0.70x cheaper
+  ctx=8192   sub-attn22/DIMR = 0.75x cheaper
+  ctx=16384  sub-attn22/DIMR = 0.81x cheaper
+[DONE_SWEEP]

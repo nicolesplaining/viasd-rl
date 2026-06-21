@@ -1,0 +1,20 @@
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:00<00:00, 86.83it/s]
+keep_mask: [True, False, False, False, True, True, False, False, True, True, True, True, False, False, True, True, True, True, True, True, True, True, False, True, True, True, False, True, True, True, True, True, True, True, True, True, True, True, True, True, True, False, True, True, True, True, True, True] (keep 38/48)
+latencies (ms): t_p1=20.41 t_qp=52.30 t_q=65.25 t_q1=39.98
+
+corrected (ms):  t_p1=0.68 t_qp=32.57 t_q=45.52 t_q1=20.25
+bandwidth (ms):  t_p1=0.29 t_qp=7.17 t_q=8.82 t_q1=8.82
+
+running greedy_q ...
+running plain_sd ...
+running via_fixed ...
+running via_rl ...
+
+method         acc    rej accept  escal  q/tok  tok/q   spd spd_cor  spd_bw
+---------------------------------------------------------------------------
+greedy_q     0.800  0.000  0.000  0.000  1.000   1.00 1.00x   1.00x   1.00x
+plain_sd     0.800  0.111  0.000  0.000  0.259   3.87 0.92x   1.60x   3.31x
+via_fixed    0.533  0.100  0.829  0.138  0.117   8.54 0.86x   1.41x   2.74x
+via_rl       0.667  0.106  0.743  0.246  0.163   6.14 0.80x   1.22x   2.42x

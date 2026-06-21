@@ -1,54 +1,57 @@
 #!/usr/bin/env python3
-# make_pareto_s5d.py — Nicole's accuracy-vs-speedup Pareto + our Full-Self-SD point(s).
-# Nicole's points are MEASURED (from her make_figures BASE). Ours are clearly split into
-# MEASURED (0.5B-draft re-bench, when available) and PROJECTED (self-spec draft @125 steps).
-import os
-import matplotlib
-matplotlib.use("Agg")
+# make_pareto_s5d.py — accuracy vs speedup (spd_bw, consistent axis).
+# MEASURED: our n=150 re-bench + baselines (chain/eval_data.json). PROJECTED: Full-Self self-spec.
+# Nicole's via_rl points are her reported spd_bw. (Her deck plotted plain SD at 1.4x wall-clock;
+# here everything is the overhead-free bandwidth model for a fair, consistent comparison.)
+import os, json
+import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 
 HERE = os.path.dirname(__file__)
+D = json.load(open(os.path.join(HERE, "eval_data.json")))
+def pt(tag, m="via_rl"): c=D[tag][m]; return c["acc"], c["spd_bw"]
 
-# --- Nicole's measured points: (label, acc, speedup, group) ---
-NICOLE = [
-    ("greedy_q",                0.900, 1.00, "baseline"),
-    ("plain SD (wall-clock)",   0.907, 1.40, "wallclock"),
-    ("via_fixed (paper)",       0.400, 1.76, "fixed"),
-    ("via_imit",                0.340, 1.69, "fixed"),
-    ("via_rl REINFORCE+DIMR",   0.907, 2.22, "semiself"),
-    ("via_rl v2 (lam0.6)",      0.800, 2.70, "semiself"),
-    ("via_rl v2 (lam0.3)",      0.713, 3.53, "semiself"),
-]
-# --- OUR Full-Self-SD: projected @125 steps (self-spec draft). acc anchored to Nicole's
-#     speed-favoring (v2) regime since match->0.95 + lambda high; SPEED is the honest projection. ---
-OURS_PROJ = [
-    ("Full-Self-SD k20 λ0.6 (PROJ)", 0.72, 1.47, "fullself"),
-    ("Full-Self-SD k26 λ0.6 (PROJ)", 0.74, 1.34, "fullself"),
-]
-COL = {"baseline":"#7f7f7f","wallclock":"#000000","fixed":"#d62728",
-       "semiself":"#1f77b4","fullself":"#2ca02c"}
+# --- baselines (MEASURED, n=150) ---
+ar_acc, ar_spd = pt("r_G_dimr","greedy_q")
+ps_acc, ps_spd = pt("r_G_dimr","plain_sd")
+# --- our MEASURED n=150 routed points ---
+gk_acc, gk_spd = pt("r_G_ksm26")     # GRPO + KnapSpec-q'
+gd_acc, gd_spd = pt("r_G_dimr")      # GRPO + DIMR
+fk_acc, fk_spd = pt("r_F_ksm26")     # F (speed) + KnapSpec-q'
 
-fig, ax = plt.subplots(figsize=(11, 7))
-for label, acc, spd, grp in NICOLE:
-    ax.scatter(spd, acc, s=120, color=COL[grp], zorder=3, edgecolor="white", linewidth=0.5)
-    ax.annotate(label, (spd, acc), textcoords="offset points", xytext=(7, 4), fontsize=8)
-for label, acc, spd, grp in OURS_PROJ:
-    ax.scatter(spd, acc, s=240, marker="*", color=COL[grp], zorder=4, edgecolor="black", linewidth=0.8)
-    ax.annotate(label, (spd, acc), textcoords="offset points", xytext=(7, -10), fontsize=8, color=COL["fullself"])
+MEAS_BASE = [("greedy (AR)", ar_acc, ar_spd, "base"), ("plain SD (lossless)", ps_acc, ps_spd, "base")]
+MEAS_OURS = [("GRPO + KnapSpec-q′ (ours)", gk_acc, gk_spd),
+             ("GRPO + DIMR-q′ (ours)",     gd_acc, gd_spd),
+             ("F + KnapSpec-q′ (ours, speed)", fk_acc, fk_spd)]
+# Nicole's reported learned points (spd_bw)
+NICOLE = [("via_rl REINFORCE+DIMR (Nicole)", 0.907, 2.22),
+          ("via_rl v2 λ0.3 (Nicole)",        0.713, 3.53)]
+# Full-Self (self-spec draft) PROJECTED @125 steps
+PROJ = [("Full-Self-SD (PROJECTED)", 0.72, 1.47)]
 
-# legend
-from matplotlib.lines import Line2D
-leg = [Line2D([0],[0],marker='o',color='w',markerfacecolor=COL[g],markersize=10,label=n) for g,n in
-       [("baseline","greedy (AR)"),("wallclock","plain SD"),("fixed","fixed-threshold (paper)"),
-        ("semiself","Semi-Self + learned RL (Nicole)")]]
-leg.append(Line2D([0],[0],marker='*',color='w',markerfacecolor=COL["fullself"],markeredgecolor='black',markersize=16,label="Full-Self-SD (ours, PROJECTED @125 steps)"))
-ax.legend(handles=leg, loc="lower right", fontsize=9)
-ax.set_xlabel("Speedup vs greedy  (overhead-free; ↑ = faster / lower latency)", fontsize=11)
+fig, ax = plt.subplots(figsize=(11.5, 7))
+for lbl, a, s, _ in MEAS_BASE:
+    ax.scatter(s, a, s=130, color="#7f7f7f", zorder=3, edgecolor="white")
+    ax.annotate(lbl, (s, a), textcoords="offset points", xytext=(7,5), fontsize=8)
+for lbl, a, s in NICOLE:
+    ax.scatter(s, a, s=120, color="#1f77b4", zorder=3, edgecolor="white")
+    ax.annotate(lbl, (s, a), textcoords="offset points", xytext=(7,5), fontsize=8, color="#1f77b4")
+for lbl, a, s in MEAS_OURS:
+    ax.scatter(s, a, s=240, marker="*", color="#2ca02c", zorder=5, edgecolor="black", linewidth=0.8)
+    ax.annotate(lbl, (s, a), textcoords="offset points", xytext=(7,-12), fontsize=8.5, color="#2ca02c", weight="bold")
+for lbl, a, s in PROJ:
+    ax.scatter(s, a, s=240, marker="*", facecolor="none", edgecolor="#9467bd", linewidth=1.6, zorder=5)
+    ax.annotate(lbl, (s, a), textcoords="offset points", xytext=(7,5), fontsize=8, color="#9467bd")
+
+ax.axhline(0.90, ls=":", color="gray", alpha=0.5); ax.text(1.05, 0.905, "lossless ceiling (full model)", fontsize=7, color="gray")
+leg = [Line2D([0],[0],marker='o',color='w',markerfacecolor="#7f7f7f",markersize=10,label="baselines (measured)"),
+       Line2D([0],[0],marker='o',color='w',markerfacecolor="#1f77b4",markersize=10,label="Nicole's learned (reported)"),
+       Line2D([0],[0],marker='*',color='w',markerfacecolor="#2ca02c",markeredgecolor='black',markersize=15,label="ours: KnapSpec-q′ + RL (MEASURED n=150)"),
+       Line2D([0],[0],marker='*',color='w',markerfacecolor='none',markeredgecolor="#9467bd",markersize=15,label="Full-Self-SD (PROJECTED)")]
+ax.legend(handles=leg, loc="lower left", fontsize=9)
+ax.set_xlabel("Speedup vs greedy  (bandwidth model, overhead-free; ↑ faster)", fontsize=11)
 ax.set_ylabel("GSM8K accuracy", fontsize=11)
-ax.set_title("Accuracy vs Speedup — Semi-Self (Nicole) → Full-Self (ours)", fontsize=13)
+ax.set_title("Accuracy vs Speedup — S⁴D Pareto frontier (measured + projected)", fontsize=13)
 ax.grid(True, alpha=0.3)
-ax.axhline(0.887, ls=":", color="gray", alpha=0.5)
-ax.text(3.0, 0.892, "lossless ceiling (greedy acc)", fontsize=7, color="gray")
-plt.tight_layout()
-out = os.path.join(HERE, "pareto_s5d.png")
-plt.savefig(out, dpi=150); print("[WROTE]", out)
+plt.tight_layout(); out = os.path.join(HERE, "pareto_s5d.png"); plt.savefig(out, dpi=150); print("[WROTE]", out)

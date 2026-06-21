@@ -1,0 +1,98 @@
+=== k32l45 draft=knapspec_keep32.json qp=dimr_mask.json lam=0.45 :: IMITATION ===
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:00<00:00, 85.92it/s]
+[SELF-SPEC DRAFT] verifier with keep 32/48 layers (KnapSpec-tuned draft); separate Qwen/Qwen2.5-0.5B-Instruct loaded but UNUSED
+keep_mask: [True, True, False, True, True, True, True, False, False, False, True, True, True, False, True, True, True, False, False, False, False, False, False, False, True, False, False, False, True, True, True, False, False, False, False, True, True, True, True, True, False, False, False, True, True, True, True, True]
+[collect 1/24] samples=69 acc_so_far=1.000
+[collect 2/24] samples=164 acc_so_far=0.500
+[collect 3/24] samples=156 acc_so_far=0.667
+[collect 4/24] samples=133 acc_so_far=0.750
+[collect 5/24] samples=99 acc_so_far=0.800
+[collect 6/24] samples=160 acc_so_far=0.667
+[collect 7/24] samples=97 acc_so_far=0.714
+[collect 8/24] samples=147 acc_so_far=0.750
+[collect 9/24] samples=161 acc_so_far=0.667
+[collect 10/24] samples=162 acc_so_far=0.600
+[collect 11/24] samples=162 acc_so_far=0.545
+[collect 12/24] samples=160 acc_so_far=0.500
+[collect 13/24] samples=108 acc_so_far=0.538
+[collect 14/24] samples=163 acc_so_far=0.500
+[collect 15/24] samples=160 acc_so_far=0.533
+[collect 16/24] samples=160 acc_so_far=0.500
+[collect 17/24] samples=162 acc_so_far=0.529
+[collect 18/24] samples=160 acc_so_far=0.500
+[collect 19/24] samples=160 acc_so_far=0.474
+[collect 20/24] samples=162 acc_so_far=0.450
+[collect 21/24] samples=160 acc_so_far=0.429
+[collect 22/24] samples=164 acc_so_far=0.409
+[collect 23/24] samples=162 acc_so_far=0.435
+[collect 24/24] samples=160 acc_so_far=0.417
+oracle (==greedy-q) accuracy: 0.417
+action counts: {'accept': 1696, 'regen': 396, 'escalate': 1459}
+epoch 1: loss=1.0780 train_action_acc=0.526
+epoch 25: loss=0.7832 train_action_acc=0.565
+epoch 50: loss=0.7641 train_action_acc=0.606
+epoch 75: loss=0.7568 train_action_acc=0.594
+epoch 100: loss=0.7502 train_action_acc=0.587
+epoch 125: loss=0.7465 train_action_acc=0.615
+epoch 150: loss=0.7430 train_action_acc=0.603
+saved policy -> /home/ubuntu/ckpts/pi_k32l45.pt
+=== k32l45 :: RL iters=40 lam=0.45 ckpt_every=10 ===
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:00<00:00, 87.17it/s]
+[SELF-SPEC DRAFT] verifier with keep 32/48 layers (KnapSpec-tuned draft); separate Qwen/Qwen2.5-0.5B-Instruct loaded but UNUSED
+keep_mask: 26 / 48
+corrected latencies(ms): t_p1=26.82 t_qp=36.93 t_q=65.67 t_q1=39.78
+iter 1/40: tok_reward=0.105 match=0.705 correct=0.750 cost/tok=1.339 rej=0.373 ent=0.646 gn=1.41 ntok=645 100.6s
+iter 2/40: tok_reward=0.059 match=0.670 correct=0.250 cost/tok=1.359 rej=0.367 ent=0.706 gn=1.45 ntok=648 98.9s
+iter 3/40: tok_reward=0.129 match=0.734 correct=0.000 cost/tok=1.346 rej=0.296 ent=0.634 gn=1.87 ntok=649 95.1s
+iter 4/40: tok_reward=0.112 match=0.701 correct=0.000 cost/tok=1.311 rej=0.324 ent=0.644 gn=1.18 ntok=646 91.9s
+iter 5/40: tok_reward=0.098 match=0.699 correct=0.000 cost/tok=1.336 rej=0.336 ent=0.659 gn=1.32 ntok=645 97.3s
+iter 6/40: tok_reward=0.183 match=0.728 correct=0.000 cost/tok=1.209 rej=0.282 ent=0.554 gn=0.96 ntok=642 87.8s
+iter 7/40: tok_reward=0.194 match=0.723 correct=0.000 cost/tok=1.175 rej=0.226 ent=0.570 gn=1.30 ntok=649 77.4s
+iter 8/40: tok_reward=0.253 match=0.759 correct=0.000 cost/tok=1.126 rej=0.195 ent=0.453 gn=0.86 ntok=648 74.7s
+iter 9/40: tok_reward=0.180 match=0.729 correct=0.250 cost/tok=1.223 rej=0.238 ent=0.563 gn=1.06 ntok=646 84.7s
+iter 10/40: tok_reward=0.177 match=0.698 correct=0.250 cost/tok=1.159 rej=0.230 ent=0.567 gn=1.17 ntok=652 79.4s
+  [ckpt @ 10]
+iter 11/40: tok_reward=0.179 match=0.691 correct=0.000 cost/tok=1.140 rej=0.187 ent=0.497 gn=0.89 ntok=649 72.0s
+iter 12/40: tok_reward=0.199 match=0.693 correct=0.250 cost/tok=1.100 rej=0.175 ent=0.493 gn=0.91 ntok=645 72.3s
+iter 13/40: tok_reward=0.205 match=0.678 correct=0.000 cost/tok=1.052 rej=0.147 ent=0.442 gn=0.45 ntok=646 66.2s
+iter 14/40: tok_reward=0.240 match=0.717 correct=0.000 cost/tok=1.061 rej=0.119 ent=0.423 gn=0.65 ntok=641 62.7s
+iter 15/40: tok_reward=0.207 match=0.682 correct=0.000 cost/tok=1.055 rej=0.143 ent=0.429 gn=0.82 ntok=651 69.1s
+iter 16/40: tok_reward=0.334 match=0.786 correct=0.000 cost/tok=1.002 rej=0.094 ent=0.371 gn=0.92 ntok=648 60.2s
+iter 17/40: tok_reward=0.157 match=0.668 correct=0.000 cost/tok=1.137 rej=0.150 ent=0.431 gn=0.52 ntok=649 67.8s
+iter 18/40: tok_reward=0.376 match=0.809 correct=0.250 cost/tok=0.964 rej=0.048 ent=0.263 gn=0.61 ntok=650 55.0s
+iter 19/40: tok_reward=0.200 match=0.661 correct=0.000 cost/tok=1.024 rej=0.107 ent=0.355 gn=0.37 ntok=646 59.3s
+iter 20/40: tok_reward=0.273 match=0.709 correct=0.000 cost/tok=0.970 rej=0.065 ent=0.268 gn=0.34 ntok=647 57.6s
+  [ckpt @ 20]
+iter 21/40: tok_reward=0.289 match=0.738 correct=0.000 cost/tok=0.998 rej=0.076 ent=0.323 gn=0.73 ntok=645 60.0s
+iter 22/40: tok_reward=0.331 match=0.754 correct=0.000 cost/tok=0.939 rej=0.040 ent=0.239 gn=0.33 ntok=645 53.0s
+iter 23/40: tok_reward=0.326 match=0.748 correct=0.000 cost/tok=0.939 rej=0.040 ent=0.219 gn=0.24 ntok=647 54.9s
+iter 24/40: tok_reward=0.350 match=0.770 correct=0.000 cost/tok=0.931 rej=0.028 ent=0.192 gn=0.26 ntok=646 52.5s
+iter 25/40: tok_reward=0.260 match=0.688 correct=0.000 cost/tok=0.951 rej=0.055 ent=0.229 gn=0.57 ntok=653 55.4s
+iter 26/40: tok_reward=0.289 match=0.723 correct=0.000 cost/tok=0.965 rej=0.054 ent=0.224 gn=0.51 ntok=647 55.6s
+iter 27/40: tok_reward=0.346 match=0.770 correct=0.250 cost/tok=0.945 rej=0.036 ent=0.211 gn=0.42 ntok=643 54.0s
+iter 28/40: tok_reward=0.345 match=0.764 correct=0.000 cost/tok=0.931 rej=0.028 ent=0.189 gn=0.24 ntok=648 51.4s
+iter 29/40: tok_reward=0.380 match=0.790 correct=0.000 cost/tok=0.911 rej=0.022 ent=0.147 gn=0.25 ntok=646 51.5s
+iter 30/40: tok_reward=0.339 match=0.769 correct=0.000 cost/tok=0.955 rej=0.040 ent=0.176 gn=0.41 ntok=645 53.9s
+  [ckpt @ 30]
+iter 31/40: tok_reward=0.273 match=0.684 correct=0.500 cost/tok=0.917 rej=0.041 ent=0.174 gn=0.12 ntok=642 53.3s
+iter 32/40: tok_reward=0.375 match=0.788 correct=0.000 cost/tok=0.919 rej=0.029 ent=0.148 gn=0.32 ntok=647 53.5s
+iter 33/40: tok_reward=0.379 match=0.781 correct=0.000 cost/tok=0.893 rej=0.020 ent=0.116 gn=0.18 ntok=648 53.2s
+iter 34/40: tok_reward=0.318 match=0.729 correct=0.000 cost/tok=0.914 rej=0.028 ent=0.160 gn=0.23 ntok=642 50.8s
+iter 35/40: tok_reward=0.321 match=0.726 correct=0.000 cost/tok=0.898 rej=0.023 ent=0.132 gn=0.15 ntok=652 51.9s
+=== k32l45 :: BENCH ===
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:00<00:00, 87.19it/s]
+[SELF-SPEC DRAFT] verifier with keep 32/48 layers (KnapSpec-tuned draft); separate Qwen/Qwen2.5-0.5B-Instruct loaded but UNUSED
+keep_mask: [True, True, False, True, True, True, True, False, False, False, True, True, True, False, True, True, True, False, False, False, False, False, False, False, True, False, False, False, True, True, True, False, False, False, False, True, True, True, True, True, False, False, False, True, True, True, True, True] (keep 26/48)
+latencies (ms): t_p1=26.65 t_qp=36.89 t_q=65.62 t_q1=39.55
+
+corrected (ms):  t_p1=26.65 t_qp=36.89 t_q=65.62 t_q1=39.55
+bandwidth (ms):  t_p1=6.19 t_qp=5.20 t_q=8.82 t_q1=8.82
+
+running greedy_q ...
+=== k32l45 :: DONE ===

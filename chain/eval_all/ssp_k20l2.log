@@ -1,0 +1,75 @@
+=== k20l2 draft=knapspec_keep20.json qp=dimr_mask.json lam=0.2 :: IMITATION ===
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:  75%|███████▌  | 6/8 [00:00<00:00, 58.89it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:00<00:00, 66.56it/s]
+[SELF-SPEC DRAFT] verifier with keep 20/48 layers (KnapSpec-tuned draft); separate Qwen/Qwen2.5-0.5B-Instruct loaded but UNUSED
+keep_mask: [True, True, False, True, True, True, True, False, False, False, True, True, True, False, True, True, True, False, False, False, False, False, False, False, True, False, False, False, True, True, True, False, False, False, False, True, True, True, True, True, False, False, False, True, True, True, True, True]
+[collect 1/24] samples=69 acc_so_far=1.000
+[collect 2/24] samples=160 acc_so_far=0.500
+[collect 3/24] samples=156 acc_so_far=0.667
+[collect 4/24] samples=133 acc_so_far=0.750
+[collect 5/24] samples=99 acc_so_far=0.800
+[collect 6/24] samples=160 acc_so_far=0.667
+[collect 7/24] samples=97 acc_so_far=0.714
+[collect 8/24] samples=147 acc_so_far=0.750
+[collect 9/24] samples=160 acc_so_far=0.667
+[collect 10/24] samples=160 acc_so_far=0.600
+[collect 11/24] samples=161 acc_so_far=0.545
+[collect 12/24] samples=160 acc_so_far=0.500
+[collect 13/24] samples=108 acc_so_far=0.538
+[collect 14/24] samples=160 acc_so_far=0.500
+[collect 15/24] samples=160 acc_so_far=0.533
+[collect 16/24] samples=160 acc_so_far=0.500
+[collect 17/24] samples=160 acc_so_far=0.529
+[collect 18/24] samples=160 acc_so_far=0.500
+[collect 19/24] samples=160 acc_so_far=0.474
+[collect 20/24] samples=162 acc_so_far=0.450
+[collect 21/24] samples=160 acc_so_far=0.429
+[collect 22/24] samples=160 acc_so_far=0.409
+[collect 23/24] samples=160 acc_so_far=0.435
+[collect 24/24] samples=160 acc_so_far=0.417
+oracle (==greedy-q) accuracy: 0.417
+action counts: {'accept': 729, 'regen': 877, 'escalate': 1926}
+epoch 1: loss=1.0771 train_action_acc=0.591
+epoch 25: loss=0.7238 train_action_acc=0.608
+epoch 50: loss=0.7036 train_action_acc=0.604
+epoch 75: loss=0.6944 train_action_acc=0.612
+epoch 100: loss=0.6888 train_action_acc=0.628
+epoch 125: loss=0.6838 train_action_acc=0.614
+epoch 150: loss=0.6807 train_action_acc=0.635
+saved policy -> /home/ubuntu/ckpts/pi_k20l2.pt
+=== k20l2 :: RL iters=40 lam=0.2 ckpt_every=10 ===
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:00<00:00, 82.02it/s]
+[SELF-SPEC DRAFT] verifier with keep 20/48 layers (KnapSpec-tuned draft); separate Qwen/Qwen2.5-0.5B-Instruct loaded but UNUSED
+keep_mask: 26 / 48
+corrected latencies(ms): t_p1=16.37 t_qp=36.95 t_q=65.52 t_q1=38.30
+iter 1/40: tok_reward=0.449 match=0.685 correct=0.250 cost/tok=1.188 rej=0.606 ent=0.686 gn=2.07 ntok=642 118.6s
+iter 2/40: tok_reward=0.464 match=0.732 correct=0.000 cost/tok=1.343 rej=0.592 ent=0.706 gn=2.38 ntok=642 144.3s
+iter 3/40: tok_reward=0.432 match=0.668 correct=0.000 cost/tok=1.178 rej=0.485 ent=0.717 gn=2.29 ntok=641 99.8s
+iter 4/40: tok_reward=0.435 match=0.714 correct=0.000 cost/tok=1.392 rej=0.570 ent=0.723 gn=2.48 ntok=643 115.1s
+iter 5/40: tok_reward=0.419 match=0.713 correct=0.000 cost/tok=1.471 rej=0.580 ent=0.684 gn=3.24 ntok=644 117.2s
+iter 6/40: tok_reward=0.447 match=0.755 correct=0.000 cost/tok=1.540 rej=0.713 ent=0.683 gn=2.88 ntok=640 139.1s
+iter 7/40: tok_reward=0.435 match=0.749 correct=0.250 cost/tok=1.537 rej=0.668 ent=0.694 gn=3.05 ntok=572 116.5s
+iter 8/40: tok_reward=0.456 match=0.778 correct=0.000 cost/tok=1.613 rej=0.641 ent=0.645 gn=2.54 ntok=641 153.1s
+iter 9/40: tok_reward=0.446 match=0.806 correct=0.000 cost/tok=1.797 rej=0.766 ent=0.604 gn=3.59 ntok=644 186.6s
+iter 10/40: tok_reward=0.439 match=0.761 correct=0.000 cost/tok=1.609 rej=0.647 ent=0.621 gn=3.12 ntok=644 154.7s
+  [ckpt @ 10]
+iter 11/40: tok_reward=0.469 match=0.829 correct=0.000 cost/tok=1.803 rej=0.700 ent=0.560 gn=2.88 ntok=645 168.6s
+iter 12/40: tok_reward=0.477 match=0.843 correct=0.000 cost/tok=1.825 rej=0.696 ent=0.533 gn=2.76 ntok=603 155.8s
+iter 13/40: tok_reward=0.480 match=0.837 correct=0.500 cost/tok=1.785 rej=0.738 ent=0.558 gn=2.73 ntok=560 150.4s
+iter 14/40: tok_reward=0.474 match=0.845 correct=0.000 cost/tok=1.852 rej=0.698 ent=0.516 gn=2.79 ntok=643 169.0s
+=== k20l2 :: BENCH ===
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:00<00:00, 87.54it/s]
+[SELF-SPEC DRAFT] verifier with keep 20/48 layers (KnapSpec-tuned draft); separate Qwen/Qwen2.5-0.5B-Instruct loaded but UNUSED
+keep_mask: [True, True, False, True, True, True, True, False, False, False, True, True, True, False, True, True, True, False, False, False, False, False, False, False, True, False, False, False, True, True, True, False, False, False, False, True, True, True, True, True, False, False, False, True, True, True, True, True] (keep 26/48)
+latencies (ms): t_p1=17.01 t_qp=36.89 t_q=65.74 t_q1=39.34
+
+corrected (ms):  t_p1=17.01 t_qp=36.89 t_q=65.74 t_q1=39.34
+bandwidth (ms):  t_p1=4.22 t_qp=5.20 t_q=8.82 t_q1=8.82
+
+running greedy_q ...
+=== k20l2 :: DONE ===

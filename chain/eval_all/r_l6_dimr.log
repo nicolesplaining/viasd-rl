@@ -1,0 +1,14 @@
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:  62%|██████▎   | 5/8 [00:00<00:00, 45.49it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:00<00:00, 50.86it/s]
+[DRAFT] separate model: Qwen/Qwen2.5-0.5B-Instruct
+keep_mask: [True, True, False, True, True, True, True, False, False, False, True, True, True, False, True, True, True, False, False, False, False, False, False, False, True, False, False, False, True, True, True, False, False, False, False, True, True, True, True, True, False, False, False, True, True, True, True, True] (keep 26/48)
+latencies (ms): t_p1=38.28 t_qp=56.39 t_q=95.42 t_q1=75.64
+
+corrected (ms):  t_p1=1.29 t_qp=19.40 t_q=58.44 t_q1=38.65
+bandwidth (ms):  t_p1=0.29 t_qp=5.20 t_q=8.82 t_q1=8.82
+
+running greedy_q ...
+running plain_sd ...
+running via_fixed ...
+running via_rl ...

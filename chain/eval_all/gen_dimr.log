@@ -1,0 +1,38 @@
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+[load] viasd tiers (drafter + 14B verifier)
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:00<00:00, 86.01it/s]
+[calib] 12 GSM8K-train prompts
+[init evenly-spaced] skip=28/48 score=12.21883
+[random 1] new best score=9.30280
+[random 2] new best score=8.59542
+[random 25] new best score=8.20356
+[random 28] new best score=7.84224
+[hill 1] swap skip42->keep29 score=7.63868
+[hill 2] swap skip29->keep45 score=6.33588
+[hill 3] swap skip38->keep22 score=6.23155
+[hill 4] swap skip44->keep21 score=5.84987
+[hill 5] swap skip24->keep25 score=5.64122
+[hill 6] swap skip11->keep20 score=5.63359
+[hill 7] swap skip14->keep36 score=5.58524
+[hill 8] swap skip25->keep12 score=5.38677
+[hill 9] swap skip13->keep8 score=5.24936
+[hill 10] swap skip19->keep32 score=5.19084
+[hill 11] swap skip22->keep7 score=5.08397
+[hill 12] swap skip17->keep34 score=5.04071
+[hill 13] swap skip12->keep40 score=5.03817
+[hill 14] swap skip41->keep13 score=5.00254
+[hill 15] swap skip32->keep23 score=4.81425
+[hill 16] swap skip8->keep1 score=4.79644
+[hill 17] swap skip21->keep17 score=4.71247
+[hill 18] swap skip20->keep14 score=4.65394
+[hill 19] swap skip23->keep41 score=4.50891
+[hill 20] swap skip36->keep29 score=4.30534
+[hill 21] swap skip7->keep20 score=4.29008
+[hill 22] swap skip20->keep10 score=4.23028
+[hill 23] swap skip18->keep15 score=4.18066
+[hill 24] swap skip15->keep33 score=4.14504
+[hill 25] swap skip29->keep38 score=4.13104
+[hill 26] swap skip40->keep39 score=4.07888
+[hill 27] swap skip41->keep16 score=4.02036
+[hill 28] swap skip10->keep30 score=4.00636

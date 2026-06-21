@@ -1,0 +1,20 @@
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:  75%|███████▌  | 6/8 [00:00<00:00, 55.32it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:00<00:00, 61.82it/s]
+keep_mask: [1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0] (keep 70/96)
+latencies (ms): t_p1=37.43 t_qp=27.26 t_q=76.71 t_q1=75.63
+
+corrected (ms):  t_p1=1.32 t_qp=0.01 t_q=40.60 t_q1=39.52
+bandwidth (ms):  t_p1=0.29 t_qp=3.07 t_q=8.82 t_q1=8.82
+
+running greedy_q ...
+running plain_sd ...
+running via_fixed ...
+running via_rl ...
+
+method         acc    rej accept  escal  q/tok  tok/q   spd spd_cor  spd_bw
+---------------------------------------------------------------------------
+greedy_q     0.800  0.000  0.000  0.000  1.000   1.00 1.00x   1.00x   1.00x
+plain_sd     0.800  0.111  0.000  0.000  0.259   3.87 1.11x   3.24x   3.31x
+via_fixed    0.800  0.117  0.000  0.999  0.262   3.82 0.99x   3.20x   2.52x
+via_rl       0.667  0.094  0.790  0.210  0.152   6.56 1.16x   5.04x   3.55x

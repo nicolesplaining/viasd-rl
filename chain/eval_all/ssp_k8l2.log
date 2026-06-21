@@ -1,0 +1,131 @@
+=== k8l2 draft=knapspec_keep8.json qp=dimr_mask.json lam=0.2 :: IMITATION ===
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:00<00:00, 85.96it/s]
+Loading checkpoint shards:  62%|██████▎   | 5/8 [00:00<00:00, 46.41it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:00<00:00, 52.01it/s]
+[SELF-SPEC DRAFT] verifier with keep 8/48 layers (KnapSpec-tuned draft); separate Qwen/Qwen2.5-0.5B-Instruct loaded but UNUSED
+keep_mask: [True, True, False, True, True, True, True, False, False, False, True, True, True, False, True, True, True, False, False, False, False, False, False, False, True, False, False, False, True, True, True, False, False, False, False, True, True, True, True, True, False, False, False, True, True, True, True, True]
+[SELF-SPEC DRAFT] verifier with keep 8/48 layers (KnapSpec-tuned draft); separate Qwen/Qwen2.5-0.5B-Instruct loaded but UNUSED
+keep_mask: [True, True, False, True, True, True, True, False, False, False, True, True, True, False, True, True, True, False, False, False, False, False, False, False, True, False, False, False, True, True, True, False, False, False, False, True, True, True, True, True, False, False, False, True, True, True, True, True]
+[collect 1/24] samples=69 acc_so_far=1.000
+[collect 1/24] samples=69 acc_so_far=1.000
+[collect 2/24] samples=160 acc_so_far=0.500
+[collect 2/24] samples=160 acc_so_far=0.500
+=== k8l2 :: RL iters=40 lam=0.2 ckpt_every=10 ===
+=== k8l2 :: RL iters=40 lam=0.2 ckpt_every=10 ===
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:00<00:00, 85.96it/s]
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:  62%|██████▎   | 5/8 [00:00<00:00, 49.71it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:00<00:00, 54.87it/s]
+[SELF-SPEC DRAFT] verifier with keep 8/48 layers (KnapSpec-tuned draft); separate Qwen/Qwen2.5-0.5B-Instruct loaded but UNUSED
+keep_mask: 26 / 48
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/ubuntu/viasd/viasd/train_rl_pertoken.py", line 155, in <module>
+    main()
+  File "/home/ubuntu/viasd/viasd/train_rl_pertoken.py", line 89, in main
+    tiers = load_models(cfg)
+  File "/home/ubuntu/viasd/viasd/models.py", line 121, in load_models
+    verifier = AutoModelForCausalLM.from_pretrained(cfg.verifier_name, **common).to(cfg.device).eval()
+  File "/home/ubuntu/venv/lib/python3.10/site-packages/transformers/modeling_utils.py", line 4343, in to
+    return super().to(*args, **kwargs)
+  File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 1355, in to
+    return self._apply(convert)
+  File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 915, in _apply
+    module._apply(fn)
+  File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 915, in _apply
+    module._apply(fn)
+  File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 915, in _apply
+    module._apply(fn)
+  [Previous line repeated 2 more times]
+  File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 942, in _apply
+    param_applied = fn(param)
+  File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 1341, in convert
+    return t.to(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 136.00 MiB. GPU 0 has a total capacity of 79.25 GiB of which 39.81 MiB is free. Process 63855 has 29.16 GiB memory in use. Including non-PyTorch memory, this process has 26.63 GiB memory in use. Process 64391 has 23.41 GiB memory in use. Of the allocated memory 26.20 GiB is allocated by PyTorch, and 20.14 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/ubuntu/viasd/viasd/train_rl_pertoken.py", line 155, in <module>
+    main()
+  File "/home/ubuntu/viasd/viasd/train_rl_pertoken.py", line 91, in main
+    latc = corrected_latencies(tiers, measure_latencies(tiers))
+  File "/usr/lib/python3/dist-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/ubuntu/viasd/viasd/models.py", line 293, in measure_latencies
+    t_q = timeit(lambda: lm_logits(tiers.verifier, blk, None))
+  File "/home/ubuntu/viasd/viasd/models.py", line 266, in timeit
+    fn()
+  File "/home/ubuntu/viasd/viasd/models.py", line 293, in <lambda>
+    t_q = timeit(lambda: lm_logits(tiers.verifier, blk, None))
+  File "/usr/lib/python3/dist-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/ubuntu/viasd/viasd/models.py", line 159, in lm_logits
+    return model(input_ids=input_ids, use_cache=False).logits
+  File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ubuntu/venv/lib/python3.10/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/home/ubuntu/venv/lib/python3.10/site-packages/transformers/models/qwen2/modeling_qwen2.py", line 463, in forward
+    logits = self.lm_head(hidden_states[:, slice_indices, :])
+  File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/usr/lib/python3/dist-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 76.00 MiB. GPU 0 has a total capacity of 79.25 GiB of which 35.81 MiB is free. Including non-PyTorch memory, this process has 29.16 GiB memory in use. Process 64110 has 26.63 GiB memory in use. Process 64391 has 23.41 GiB memory in use. Of the allocated memory 28.64 GiB is allocated by PyTorch, and 22.49 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+=== k8l2 :: BENCH ===
+=== k8l2 :: BENCH ===
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+/usr/lib/python3/dist-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.17.3 and <1.25.0 is required for this version of SciPy (detected version 1.26.4
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:00<00:00, 85.94it/s]
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:00<00:00, 84.65it/s]
+[SELF-SPEC DRAFT] verifier with keep 8/48 layers (KnapSpec-tuned draft); separate Qwen/Qwen2.5-0.5B-Instruct loaded but UNUSED
+Traceback (most recent call last):
+  File "/home/ubuntu/viasd/scripts/bench.py", line 99, in <module>
+    main()
+  File "/home/ubuntu/viasd/scripts/bench.py", line 50, in main
+    tiers = load_models(cfg)
+  File "/home/ubuntu/viasd/viasd/models.py", line 121, in load_models
+    verifier = AutoModelForCausalLM.from_pretrained(cfg.verifier_name, **common).to(cfg.device).eval()
+  File "/home/ubuntu/venv/lib/python3.10/site-packages/transformers/modeling_utils.py", line 4343, in to
+    return super().to(*args, **kwargs)
+  File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 1355, in to
+    return self._apply(convert)
+  File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 915, in _apply
+    module._apply(fn)
+  File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 915, in _apply
+    module._apply(fn)
+  File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 915, in _apply
+    module._apply(fn)
+  [Previous line repeated 2 more times]
+  File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 942, in _apply
+    param_applied = fn(param)
+  File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 1341, in convert
+    return t.to(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 50.00 MiB. GPU 0 has a total capacity of 79.25 GiB of which 19.81 MiB is free. Process 64685 has 29.24 GiB memory in use. Process 64812 has 29.24 GiB memory in use. Including non-PyTorch memory, this process has 20.73 GiB memory in use. Of the allocated memory 20.32 GiB is allocated by PyTorch, and 8.52 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+=== k8l2 :: DONE ===
+keep_mask: [True, True, False, True, True, True, True, False, False, False, True, True, True, False, True, True, True, False, False, False, False, False, False, False, True, False, False, False, True, True, True, False, False, False, False, True, True, True, True, True, False, False, False, True, True, True, True, True] (keep 26/48)
+latencies (ms): t_p1=8.32 t_qp=83.61 t_q=147.93 t_q1=57.42
+
+corrected (ms):  t_p1=8.32 t_qp=83.61 t_q=147.93 t_q1=57.42
+bandwidth (ms):  t_p1=2.24 t_qp=5.20 t_q=8.82 t_q1=8.82
+
+running greedy_q ...
+running plain_sd ...
+running via_fixed ...
+=== k8l2 :: DONE ===
