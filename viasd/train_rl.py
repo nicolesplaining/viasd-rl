@@ -27,9 +27,11 @@ from .policy import GatingPolicy, load_policy, save_policy
 
 
 def rollout(tiers, policy, q, gold, lat, lam, r_correct):
-    """Dense reward: per-token agreement with the full verifier's greedy choice
-    (measured at training time via record_qmatch, not charged to cost), plus a
-    small terminal-correctness bonus, minus a latency penalty.
+    """Dense reward: per-token agreement with canonical greedy-q.
+
+    The match labels come from via_sd_generate(record_qmatch=True), which uses the
+    same no-cache full-verifier reference path as the plain-SD equality check. The
+    reference calls are not charged to the cost meter.
 
         reward = match_rate + r_correct * correct - lam * (latency_per_tok / t_q1)
     """

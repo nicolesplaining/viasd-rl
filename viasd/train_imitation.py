@@ -1,10 +1,10 @@
 """Imitation / supervised pretraining of the gating policy.
 
-We roll out the OracleDecider (which uses the full verifier q to choose the
-cost-minimal route that reproduces greedy-q) over training problems, logging
-(q-free features, oracle action) at every drafted token, then fit the policy
-with class-weighted cross-entropy. This is the strong baseline the RL stage
-refines toward a sequence-level objective.
+We roll out the OracleDecider (which uses the canonical full-verifier reference
+path to choose the cost-minimal route that reproduces greedy-q) over training
+problems, logging (q-free features, oracle action) at every drafted token, then
+fit the policy with class-weighted cross-entropy. This is the strong baseline
+the RL stage refines toward a sequence-level objective.
 """
 import argparse
 

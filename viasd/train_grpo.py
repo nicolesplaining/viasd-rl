@@ -8,7 +8,7 @@ Vs. train_rl.py (REINFORCE + global EMA baseline), GRPO:
   - regularizes with KL to a frozen reference (the imitation policy),
   - needs no value network (advantage is group-relative).
 
-Reward per rollout (dense): match_rate + r_correct*correct - lam*(latency/t_q1).
+Reward per rollout (dense): canonical-q match_rate + r_correct*correct - lam*(latency/t_q1).
 
 Logging: per-iter console line + JSONL with reward mean/std, match, correct,
 cost/tok, rejection, advantage std, KL, entropy, clip fraction, grad norm, sec/iter.

@@ -11,7 +11,8 @@ from viasd.config import Config
 from viasd.cost import CostMeter
 from viasd.data_gsm8k import build_prompt_ids, load_gsm8k
 from viasd.decoding import (FixedThresholdDecider, OracleDecider,
-                            greedy_q_generate, plain_sd_generate, via_sd_generate)
+                            check_plain_sd_sequence_equal, greedy_q_generate,
+                            plain_sd_generate, via_sd_generate)
 from viasd.metrics import is_correct
 from viasd.models import load_models, measure_latencies
 
@@ -33,6 +34,12 @@ def main():
         ids = build_prompt_ids(tiers.tokenizer, q, tiers.device)
         plen = ids.shape[1]
         print(f"\nQ: {q[:70]}...  gold={gold}  prompt_tokens={plen}")
+        check = check_plain_sd_sequence_equal(tiers, ids)
+        print(f"  plain_sd == canonical_q: {check.equal}", end="")
+        if not check.equal:
+            print(f" mismatch_at={check.first_mismatch} ref={check.ref_token} sd={check.test_token}")
+        else:
+            print(f" tokens={check.ref_len}")
         for name, fn in [
             ("greedy_q", lambda ids, m: greedy_q_generate(tiers, ids, m)),
             ("plain_sd", lambda ids, m: plain_sd_generate(tiers, ids, m)),

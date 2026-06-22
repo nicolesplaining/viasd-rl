@@ -14,7 +14,7 @@ drafter and slim-verifier confidence, agreement, KL, and draft position. The ful
 verifier is used during training to compute labels and rewards, but not to make
 routing decisions at inference.
 
-## What We Did
+## Details
 
 The writeup is in [writeup/writeup.tex](writeup/writeup.tex), with a compiled PDF
 at [writeup/writeup.pdf](writeup/writeup.pdf).
@@ -57,12 +57,13 @@ Quick check:
 
 ```bash
 python3 scripts/smoke_test.py
+python3 scripts/check_sequence_equivalence.py --n_eval 8
 ```
 
-Optional DIMR mask search:
+Optional DIMR mask search (paper-style random search with periodic Bayesian optimization):
 
 ```bash
-python3 scripts/run_dimr.py --skip_ratio 0.45
+python3 scripts/run_dimr.py --skip_ratio 0.45 --max_steps 60 --bo_period 10
 ```
 
 Train imitation policy:

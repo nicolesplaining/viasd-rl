@@ -8,7 +8,8 @@ bandit step:
 
     r_t = match_t  -  lam * cost_t  ( + r_correct * correct / T )
 
-  match_t : 1 if the emitted token == full-verifier greedy argmax at t, else 0
+  match_t : 1 if the emitted token == canonical full-verifier greedy argmax at t,
+            using the same no-cache reference path as the plain-SD equality check
   cost_t  : per-action latency in CORRECTED (overhead-free) units / t_q1:
               base = t_p1 + t_qp/gamma           (draft step + share of q' verify)
               escalate adds t_q                   (the full-q call this token triggers)
@@ -84,7 +85,7 @@ def main():
     ap.add_argument("--log_every", type=int, default=1)
     args = ap.parse_args()
 
-    cfg = Config(max_new_tokens=args.max_new, keep_mask_path=args.keep_mask)
+    cfg = Config(gamma=args.gamma, max_new_tokens=args.max_new, keep_mask_path=args.keep_mask)
     torch.manual_seed(cfg.seed)
     device = cfg.device
     tiers = load_models(cfg)

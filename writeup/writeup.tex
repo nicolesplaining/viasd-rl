@@ -126,8 +126,8 @@ layers to retain, giving $q'=\Pi_z(q)$ and skipping the remainder; because each 
 on a residual stream, dropping a block leaves that stream dimensionally intact. The sub-model shares
 the embeddings and output head of $q$, so it introduces no new parameters and changes only the
 inference computation. DIMR is the offline search for the mask $z^*$. It minimizes an accumulated
-divergence cost between $q$ and $q'_z$ over a calibration window, combining random search with greedy
-refinement, while retaining the first and last layers and skipping roughly 45 percent of the middle.
+divergence cost between $q$ and $q'_z$ over a calibration window, combining random search with periodic
+Bayesian optimization, while retaining the first and last layers and skipping roughly 45 percent of the middle.
 The relevant cost is not the raw Kullback-Leibler divergence but a margin-violation cost, a two-term
 rectified penalty that captures the quantity actually governing the rejection rate of the gate from
 $q'$ to $q$. Masks selected by DIMR outperform random and evenly spaced masks, and our own search

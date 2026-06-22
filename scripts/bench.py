@@ -15,7 +15,8 @@ from viasd.config import Config
 from viasd.cost import CostMeter
 from viasd.data_gsm8k import build_prompt_ids, load_gsm8k
 from viasd.decoding import (FixedThresholdDecider, PolicyDecider,
-                            greedy_q_generate, plain_sd_generate, via_sd_generate)
+                            check_plain_sd_sequence_equal, greedy_q_generate,
+                            plain_sd_generate, via_sd_generate)
 from viasd.metrics import is_correct
 from viasd.models import bandwidth_latencies, corrected_latencies, load_models, measure_latencies
 from viasd.paths import DEFAULT_LOCAL_RESULTS
@@ -36,6 +37,23 @@ def run_method(tiers, problems, gen_fn):
     return agg, correct / len(problems)
 
 
+def run_sequence_check(tiers, problems, n_check):
+    checked = 0
+    for i, (q, _gold) in enumerate(problems[:n_check]):
+        ids = build_prompt_ids(tiers.tokenizer, q, tiers.device)
+        check = check_plain_sd_sequence_equal(tiers, ids)
+        checked += 1
+        if not check.equal:
+            print(
+                f"sequence check FAILED problem={i} mismatch_at={check.first_mismatch} "
+                f"ref_tok={check.ref_token} plain_sd_tok={check.test_token} "
+                f"ref_len={check.ref_len} plain_sd_len={check.test_len}",
+                flush=True,
+            )
+            return False, checked
+    return True, checked
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--n_eval", type=int, default=150)
@@ -46,6 +64,10 @@ def main():
     ap.add_argument("--policy_rl", type=str, default=str(DEFAULT_LOCAL_RESULTS / "policy_rl.pt"))
     ap.add_argument("--methods", type=str, default="",
                     help="comma-separated subset to run (e.g. greedy_q,via_fixed,via_rl); empty=all")
+    ap.add_argument("--check_sequence", type=int, default=0,
+                    help="check plain_sd token equality against canonical greedy_q on this many eval prompts")
+    ap.add_argument("--strict_sequence_check", action="store_true",
+                    help="raise if the sequence-equality check fails")
     args = ap.parse_args()
 
     cfg = Config(max_new_tokens=args.max_new, keep_mask_path=args.keep_mask)
@@ -57,6 +79,13 @@ def main():
           f"t_q={lat.t_q*1e3:.2f} t_q1={lat.t_q1*1e3:.2f}\n", flush=True)
 
     problems = load_gsm8k(args.n_eval, split=args.split)
+    if args.check_sequence:
+        n_check = min(args.check_sequence, len(problems))
+        ok, checked = run_sequence_check(tiers, problems, n_check)
+        status = "OK" if ok else "FAILED"
+        print(f"plain_sd sequence equality vs canonical q: {status} ({checked}/{n_check})\n", flush=True)
+        if args.strict_sequence_check and not ok:
+            raise SystemExit(1)
 
     methods = {
         "greedy_q": lambda ids, m: greedy_q_generate(tiers, ids, m),
