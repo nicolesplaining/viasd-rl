@@ -106,12 +106,27 @@ at Nicole's settings (n=150/max320) is the source of truth — see "In progress"
 - `chain/ckpts/jl_*.jsonl` — our real RL convergence curves (for re-plotting).
 - `chain/RESULTS.md` — the full measured ablation + honest verdicts (q'-selection, latency sweep, etc.).
 
-## In progress (next session: pull updated numbers)
-- **Real re-bench at Nicole's settings (n=150, max_new=320)** running on f1 — cells `r_F_dimr`, `r_F_ksm26`,
-  `r_G_dimr`, … These give the **real accuracy** (the n=30 ones were truncation/noise-deflated to ~0.47;
-  expect ~0.71). Pull `~/bench_logs/r_*.log` from the box and parse the `via_rl` rows.
-- To get a **real Full-Self accuracy point**, re-bench the saved self-spec policies (`chain/ckpts/ps_*.pt`)
-  with `VIASD_DRAFT_MASK=knapspec_keep{8,20}.json` at n=150/max320.
+## Measured results at Nicole's settings (n=150, max_new=320) — **[MEASURED]**, DONE
+The 0.5B-draft (Semi-Self) re-bench completed for all 8 cells (full data in `chain/eval_data.md`,
+plotted in `chain/pareto_s5d.png`). These confirm the n=30 numbers were truncation/noise-deflated:
+
+| cell (policy × q′) | GSM8K acc | spd_bw | note |
+|---|---|---|---|
+| λ0.6 + DIMR | **0.873** | 2.21× | most accurate |
+| λ0.3 + DIMR | 0.867 | 2.25× | |
+| GRPO + evenly | 0.867 | 2.80× | |
+| **GRPO + KnapSpec-q′** | **0.833** | 2.87× | KnapSpec ≈ DIMR (our Leg-3) |
+| GRPO + DIMR | 0.813 | 2.90× | |
+| F + evenly (= Nicole v2 repro) | 0.720 | 3.44× | reproduces her 0.713 ✓ |
+| F + KnapSpec-q′ | 0.673 | 3.57× | |
+| **F + DIMR** | 0.667 | **3.68×** | fastest measured point |
+
+Baselines (n=150): greedy/AR 0.90 @ 1.0× · plain SD (lossless) 0.90 @ 3.29×.
+
+**Still projected (not measured): the Full-Self (self-spec draft) point** — its policies trained
+(`chain/ckpts/ps_*.pt`, match→0.95) but weren't re-benched at n=150. To get a real point: re-bench
+those with `VIASD_DRAFT_MASK=knapspec_keep{8,20}.json` at n=150/max320 (needs a fresh GPU box;
+ours were terminated).
 
 ## Reproduce
 All code + masks + policies are in `chain/` (see `chain/RESUME.md`). Key pieces:
