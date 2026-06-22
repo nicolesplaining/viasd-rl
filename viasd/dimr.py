@@ -19,6 +19,7 @@ import torch.nn.functional as F
 from .config import Config
 from .data_gsm8k import build_prompt_ids, load_gsm8k
 from .models import load_models, lm_logits, make_keep_mask
+from .paths import DEFAULT_LOCAL_RESULTS, ensure_parent_dir
 
 
 @torch.no_grad()
@@ -105,7 +106,7 @@ def main():
     ap.add_argument("--hill_steps", type=int, default=40)
     ap.add_argument("--alpha", type=float, default=0.5)   # paper alpha1 (acceptance)
     ap.add_argument("--beta", type=float, default=0.3)    # paper alpha2 (residual)
-    ap.add_argument("--out", type=str, default="dimr_mask.json")
+    ap.add_argument("--out", type=str, default=str(DEFAULT_LOCAL_RESULTS / "dimr_mask.json"))
     args = ap.parse_args()
 
     cfg = Config(skip_ratio=args.skip_ratio)
@@ -117,6 +118,7 @@ def main():
     mask, score = search(tiers, calib, args.skip_ratio, cfg.keep_first_last,
                          n_random=args.n_random, hill_steps=args.hill_steps, seed=cfg.seed,
                          alpha=args.alpha, beta=args.beta)
+    ensure_parent_dir(args.out)
     with open(args.out, "w") as f:
         json.dump({"keep_mask": mask, "skip_ratio": args.skip_ratio, "score": score,
                    "alpha": args.alpha, "beta": args.beta}, f)

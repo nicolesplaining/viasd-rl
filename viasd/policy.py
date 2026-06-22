@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 
 from .features import FEATURE_DIM
+from .paths import ensure_parent_dir
 
 ACCEPT, REGEN, ESCALATE = 0, 1, 2
 ACTION_NAMES = ["accept", "regen", "escalate"]
@@ -33,6 +34,7 @@ class GatingPolicy(nn.Module):
 
 
 def save_policy(policy, path):
+    ensure_parent_dir(path)
     torch.save(policy.state_dict(), path)
 
 

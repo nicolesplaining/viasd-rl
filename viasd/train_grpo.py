@@ -29,6 +29,7 @@ from .data_gsm8k import build_prompt_ids, load_gsm8k
 from .decoding import PolicyDecider, via_sd_generate
 from .metrics import is_correct
 from .models import compile_models, load_models, measure_latencies
+from .paths import DEFAULT_LOCAL_RESULTS, ensure_parent_dir
 from .policy import load_policy, save_policy
 
 
@@ -50,11 +51,11 @@ def rollout(tiers, policy, q, gold, lat, lam, r_correct, match_weight=1.0):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--init", default="policy_imitation.pt")
-    ap.add_argument("--out", default="policy_grpo.pt")
-    ap.add_argument("--ckpt", default="grpo_ckpt.pt")
+    ap.add_argument("--init", default=str(DEFAULT_LOCAL_RESULTS / "policy_imitation.pt"))
+    ap.add_argument("--out", default=str(DEFAULT_LOCAL_RESULTS / "policy_grpo.pt"))
+    ap.add_argument("--ckpt", default=str(DEFAULT_LOCAL_RESULTS / "grpo_ckpt.pt"))
     ap.add_argument("--resume", default="")
-    ap.add_argument("--jsonl", default="grpo_log.jsonl")
+    ap.add_argument("--jsonl", default=str(DEFAULT_LOCAL_RESULTS / "grpo_log.jsonl"))
     ap.add_argument("--n_train", type=int, default=100)
     ap.add_argument("--iters", type=int, default=150)
     ap.add_argument("--group_size", type=int, default=6)        # G rollouts per prompt
@@ -105,10 +106,12 @@ def main():
         print(f"RESUMED from {resume_path} at iter {start_iter}", flush=True)
 
     def save_ckpt(it_done):
+        ensure_parent_dir(args.ckpt)
         torch.save({"policy": policy.state_dict(), "opt": opt.state_dict(),
                     "pi": pi, "iter": it_done, "args": vars(args)}, args.ckpt)
         save_policy(policy, args.out)
 
+    ensure_parent_dir(args.jsonl)
     jl = open(args.jsonl, "a")
 
     for it in range(start_iter, args.iters):

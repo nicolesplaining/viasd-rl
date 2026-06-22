@@ -17,6 +17,7 @@ from .decoding import OracleDecider, via_sd_generate
 from .cost import CostMeter
 from .metrics import is_correct
 from .models import load_models
+from .paths import DEFAULT_LOCAL_RESULTS, ensure_parent_dir
 from .policy import GatingPolicy, N_ACTIONS, ACTION_NAMES, save_policy
 
 
@@ -75,7 +76,7 @@ def main():
     ap.add_argument("--epochs", type=int, default=200)
     ap.add_argument("--max_new", type=int, default=320)
     ap.add_argument("--keep_mask", type=str, default="")
-    ap.add_argument("--out", type=str, default="policy_imitation.pt")
+    ap.add_argument("--out", type=str, default=str(DEFAULT_LOCAL_RESULTS / "policy_imitation.pt"))
     args = ap.parse_args()
 
     cfg = Config(max_new_tokens=args.max_new, keep_mask_path=args.keep_mask)
@@ -84,7 +85,9 @@ def main():
     print("keep_mask:", tiers.keep_mask, flush=True)
     problems = load_gsm8k(args.n_train, split=args.split)
     X, y = collect_dataset(tiers, problems)
-    torch.save({"X": X, "y": y}, args.out.replace(".pt", "_data.pt"))
+    data_path = args.out.replace(".pt", "_data.pt")
+    ensure_parent_dir(data_path)
+    torch.save({"X": X, "y": y}, data_path)
     policy = train(X, y, cfg.device, epochs=args.epochs)
     save_policy(policy, args.out)
     print(f"saved policy -> {args.out}")

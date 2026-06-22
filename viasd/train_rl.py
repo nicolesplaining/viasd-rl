@@ -22,6 +22,7 @@ from .data_gsm8k import build_prompt_ids, load_gsm8k
 from .decoding import PolicyDecider, via_sd_generate
 from .metrics import is_correct
 from .models import load_models, measure_latencies
+from .paths import DEFAULT_LOCAL_RESULTS, ensure_parent_dir
 from .policy import GatingPolicy, load_policy, save_policy
 
 
@@ -49,8 +50,8 @@ def rollout(tiers, policy, q, gold, lat, lam, r_correct):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--init", type=str, default="policy_imitation.pt")
-    ap.add_argument("--out", type=str, default="policy_rl.pt")
+    ap.add_argument("--init", type=str, default=str(DEFAULT_LOCAL_RESULTS / "policy_imitation.pt"))
+    ap.add_argument("--out", type=str, default=str(DEFAULT_LOCAL_RESULTS / "policy_rl.pt"))
     ap.add_argument("--n_train", type=int, default=120)
     ap.add_argument("--iters", type=int, default=400)
     ap.add_argument("--batch", type=int, default=4)        # trajectories per update
@@ -60,7 +61,7 @@ def main():
     ap.add_argument("--entropy", type=float, default=0.01)
     ap.add_argument("--max_new", type=int, default=320)
     ap.add_argument("--keep_mask", type=str, default="")
-    ap.add_argument("--ckpt", type=str, default="rl_ckpt.pt")   # resumable checkpoint
+    ap.add_argument("--ckpt", type=str, default=str(DEFAULT_LOCAL_RESULTS / "rl_ckpt.pt"))   # resumable checkpoint
     ap.add_argument("--resume", type=str, default="")           # path to resume from
     ap.add_argument("--ckpt_every", type=int, default=10)
     ap.add_argument("--log_every", type=int, default=1)         # constant per-iter logging
@@ -94,6 +95,7 @@ def main():
         print(f"RESUMED from {resume_path} at iter {start_iter} (baseline={baseline:.3f})", flush=True)
 
     def save_ckpt(it_done):
+        ensure_parent_dir(args.ckpt)
         torch.save({"policy": policy.state_dict(), "opt": opt.state_dict(),
                     "baseline": baseline, "pi": pi, "iter": it_done,
                     "args": vars(args)}, args.ckpt)

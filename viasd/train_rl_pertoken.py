@@ -31,6 +31,7 @@ from .data_gsm8k import build_prompt_ids, load_gsm8k
 from .decoding import PolicyDecider, via_sd_generate
 from .metrics import is_correct
 from .models import corrected_latencies, load_models, measure_latencies
+from .paths import DEFAULT_LOCAL_RESULTS, ensure_parent_dir
 from .policy import ESCALATE, load_policy, save_policy
 
 
@@ -64,11 +65,11 @@ def rollout_full(tiers, policy, q, gold, latc, lam, r_correct, gamma):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--init", default="policy_imitation.pt")
-    ap.add_argument("--out", default="policy_rl_pt.pt")
-    ap.add_argument("--ckpt", default="rl_pt_ckpt.pt")
+    ap.add_argument("--init", default=str(DEFAULT_LOCAL_RESULTS / "policy_imitation.pt"))
+    ap.add_argument("--out", default=str(DEFAULT_LOCAL_RESULTS / "policy_rl_pt.pt"))
+    ap.add_argument("--ckpt", default=str(DEFAULT_LOCAL_RESULTS / "rl_pt_ckpt.pt"))
     ap.add_argument("--resume", default="")
-    ap.add_argument("--jsonl", default="rl_pt_log.jsonl")
+    ap.add_argument("--jsonl", default=str(DEFAULT_LOCAL_RESULTS / "rl_pt_log.jsonl"))
     ap.add_argument("--n_train", type=int, default=100)
     ap.add_argument("--iters", type=int, default=200)
     ap.add_argument("--batch", type=int, default=6)        # rollouts pooled per update
@@ -104,10 +105,12 @@ def main():
         print(f"RESUMED from {resume_path} at iter {start_iter}", flush=True)
 
     def save_ckpt(it_done):
+        ensure_parent_dir(args.ckpt)
         torch.save({"policy": policy.state_dict(), "opt": opt.state_dict(),
                     "pi": pi, "iter": it_done, "args": vars(args)}, args.ckpt)
         save_policy(policy, args.out)
 
+    ensure_parent_dir(args.jsonl)
     jl = open(args.jsonl, "a")
     for it in range(start_iter, args.iters):
         t0 = time.time()

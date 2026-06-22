@@ -18,6 +18,7 @@ from viasd.decoding import (FixedThresholdDecider, PolicyDecider,
                             greedy_q_generate, plain_sd_generate, via_sd_generate)
 from viasd.metrics import is_correct
 from viasd.models import bandwidth_latencies, corrected_latencies, load_models, measure_latencies
+from viasd.paths import DEFAULT_LOCAL_RESULTS
 from viasd.policy import load_policy
 
 
@@ -41,8 +42,8 @@ def main():
     ap.add_argument("--split", type=str, default="test")
     ap.add_argument("--max_new", type=int, default=320)
     ap.add_argument("--keep_mask", type=str, default="")
-    ap.add_argument("--policy_imitation", type=str, default="policy_imitation.pt")
-    ap.add_argument("--policy_rl", type=str, default="policy_rl.pt")
+    ap.add_argument("--policy_imitation", type=str, default=str(DEFAULT_LOCAL_RESULTS / "policy_imitation.pt"))
+    ap.add_argument("--policy_rl", type=str, default=str(DEFAULT_LOCAL_RESULTS / "policy_rl.pt"))
     ap.add_argument("--methods", type=str, default="",
                     help="comma-separated subset to run (e.g. greedy_q,via_fixed,via_rl); empty=all")
     args = ap.parse_args()
