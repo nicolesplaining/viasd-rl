@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.venv/
+
+# Local scratch outputs. Curated experiment folders under results/ stay tracked.
+results/local/*
+!results/local/.gitkeep
+
+# LaTeX intermediates.
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+~$*.pptx

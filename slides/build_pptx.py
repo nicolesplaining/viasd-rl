@@ -2,19 +2,20 @@
 """Build <deck>.pptx from <deck>.pdf (slide images) + <deck>.tex (\\note speaker notes).
 Each PPTX slide = the rendered beamer slide as a full-bleed image, with the speaker note
 attached as a native PowerPoint note (editable in the Notes pane). Usage: build_pptx.py <deck>"""
-import os
+from pathlib import Path
 import re
 import sys
+import tempfile
 
 import fitz  # PyMuPDF
 from pptx import Presentation
 from pptx.util import Inches
 
-deck = sys.argv[1]
-pdf, tex = deck + ".pdf", deck + ".tex"
+deck = Path(sys.argv[1])
+pdf, tex = deck.with_suffix(".pdf"), deck.with_suffix(".tex")
 
 # ---- extract \note{...} blocks in document order (brace-aware) ----
-s = open(tex).read()
+s = tex.read_text()
 notes_raw, i = [], 0
 while True:
     j = s.find("\\note{", i)
@@ -42,15 +43,14 @@ def clean(t):
 notes = [clean(n) for n in notes_raw]
 
 # ---- render PDF pages to PNG ----
-doc = fitz.open(pdf)
-outdir = f"/tmp/{deck}_png"
-os.makedirs(outdir, exist_ok=True)
+doc = fitz.open(str(pdf))
+outdir = Path(tempfile.mkdtemp(prefix=f"{deck.stem}_png_"))
 mat = fitz.Matrix(2.6, 2.6)  # ~190 dpi
 imgs = []
 for pi in range(doc.page_count):
-    p = f"{outdir}/p{pi:02d}.png"
-    doc[pi].get_pixmap(matrix=mat).save(p)
-    imgs.append(p)
+    p = outdir / f"p{pi:02d}.png"
+    doc[pi].get_pixmap(matrix=mat).save(str(p))
+    imgs.append(str(p))
 
 assert len(imgs) == len(notes), f"page/note mismatch: {len(imgs)} pages vs {len(notes)} notes"
 
@@ -62,5 +62,6 @@ for img, note in zip(imgs, notes):
     slide = prs.slides.add_slide(blank)
     slide.shapes.add_picture(img, 0, 0, width=prs.slide_width, height=prs.slide_height)
     slide.notes_slide.notes_text_frame.text = note
-prs.save(deck + ".pptx")
-print(f"{deck}.pptx: {len(imgs)} slides, notes attached ({sum(len(n.split()) for n in notes)} note words)")
+out_pptx = deck.with_suffix(".pptx")
+prs.save(out_pptx)
+print(f"{out_pptx}: {len(imgs)} slides, notes attached ({sum(len(n.split()) for n in notes)} note words)")

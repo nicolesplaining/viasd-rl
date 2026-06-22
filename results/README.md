@@ -6,6 +6,9 @@ Each subfolder is one GPU/experiment. Some runs were still in progress at collec
 time (marked ⏳) — re-pull to refresh.
 
 ## Folders & files
+- `local/` — default scratch/output folder for new local runs.
+- `dimr_14b/` — standalone DIMR search artifacts moved out of the repo root:
+  `dimr.log`, `dimr_mask.json`, and `dimr_mask_validation.json`.
 - `A_reinforce_14B_lam0.3/` — REINFORCE policy, λ=0.3.
   `run.log` (imitation→RL→bench), `sweep.log` (via_fixed threshold sweep, 9 configs),
   `ctx_sweep.log` (context-length / overhead sweep), `policy_{imitation,rl}.pt`.
