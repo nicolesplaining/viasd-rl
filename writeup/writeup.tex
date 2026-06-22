@@ -318,18 +318,18 @@ The q-calls-per-token figure is exact and hardware-independent. Accuracy uses $n
 \end{table}
 
 \begin{figure}[H]\centering
-\includegraphics[width=0.72\textwidth]{results/figures/speedup_bar.png}
+\includegraphics[width=0.72\textwidth]{../results/figures/speedup_bar.png}
 \caption{Speedup by method. The fixed-threshold gate is slow because it over-escalates to the full
 model, whereas the learned gates are faster, with the per-token policy highest.}
 \end{figure}
 \begin{figure}[H]\centering
-\includegraphics[width=0.62\textwidth]{results/figures/pareto.png}
+\includegraphics[width=0.62\textwidth]{../results/figures/pareto.png}
 \caption{Accuracy versus speedup. The learned gates (blue) dominate the fixed-threshold methods (red);
 REINFORCE with DIMR reaches near-greedy accuracy (0.907), while the per-token variant trades accuracy
 for higher speed.}
 \end{figure}
 \begin{figure}[H]\centering
-\includegraphics[width=\textwidth]{results/figures/rl_curves.png}
+\includegraphics[width=\textwidth]{../results/figures/rl_curves.png}
 \caption{Reinforcement-learning training curves. The per-token variant (blue) has the lowest variance
 and drives the rejection rate lowest, GRPO (orange) is the noisiest, and REINFORCE (green) is
 intermediate; all three reach a match rate of about 0.95.}

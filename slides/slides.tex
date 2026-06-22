@@ -18,7 +18,7 @@
 \setbeamertemplate{itemize items}[circle]
 \setbeamertemplate{note page}{\insertnote}
 
-\setbeameroption{show notes}
+% ---- toggle notes: `\setbeameroption{show notes}` for the notes build ----
 
 \title{\textbf{S\textsuperscript{4}D}}
 \subtitle{Self-Taught Semi-Self Speculative Decoding}
@@ -140,7 +140,7 @@ We evaluate on GSM8K with a Qwen2.5 drafter and verifier. The learned gate attai
 % =====================================================================
 \begin{frame}{The accuracy and speed frontier}
 \centering
-\includegraphics[width=0.62\textwidth]{results/figures/pareto.png}
+\includegraphics[width=0.62\textwidth]{../results/figures/pareto.png}
 \end{frame}
 \note{
 These results define a frontier in the accuracy-efficiency plane. The learned policies Pareto-dominate the fixed-threshold baseline, and the cost coefficient traces a continuous trade-off between accuracy and speed. Strengthening the drafter shifts this frontier outward. To our knowledge, this constitutes the state of the art for hierarchical speculative decoding.

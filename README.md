@@ -82,6 +82,8 @@ viasd/
   train_imitation.py
   train_rl.py
 scripts/           # smoke_test, run_dimr, bench
+slides/            # full slide deck, notes deck, and PPTX builder
+writeup/           # writeup source and compiled PDF
 ```
 
 ## Notes / caveats
