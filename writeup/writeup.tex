@@ -9,6 +9,7 @@
 \usepackage{float}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, positioning, shapes.geometric}
+\setlength{\emergencystretch}{2em}
 \title{\textbf{Self-Taught Semi-Self Speculative Decoding (S4D):\\ A Learned Routing Policy for Hierarchical Verification}}
 \author{viasd-rl experiments}
 \date{\today}
@@ -68,7 +69,8 @@ from the 0.21-to-0.40 range of the fixed-threshold rule to between 0.88 and 0.91
 expensive verifier calls. We also report several negative results that clarify when the intermediate
 tier does and does not help.
 
-\begin{figure}[t]\centering
+\begin{figure}[H]\centering
+\resizebox{0.94\textwidth}{!}{%
 \begin{tikzpicture}[font=\small,>=Stealth,
   io/.style={draw,rounded corners,align=center,inner sep=4pt,minimum height=7mm},
   gate/.style={draw,very thick,fill=blue!12,rounded corners,align=center,minimum width=34mm,minimum height=14mm},
@@ -87,12 +89,10 @@ tier does and does not help.
 \draw[->,dashed,thick] (rl.west) -- node[above,font=\scriptsize]{update $\theta$} (gate.east);
 \draw[->,dashed] (esc.east) to[out=0,in=-90] node[right,font=\scriptsize,pos=0.35]{outcome} (rl.south);
 \end{tikzpicture}
-\caption{Method overview. The learned gate is the central component. For each drafted token it reads
-the $q$-free features $s_t$ and routes the token to one of three tiers: accept (drafter), regenerate
-(slim $q'$), or escalate (full $q$). Reinforcement learning enters only at training time, shown by the
-dashed path. Each action's outcome yields a reward $r_t=\text{match}_t-\lambda\,\text{cost}_t$,
-computed with $q$ off-line, and a policy-gradient step updates the gate parameters $\theta$. At
-inference the dashed path is removed, and the gate runs from the $q$-free features alone.}
+}
+\caption{Method overview. The learned gate routes each drafted token to accept, regenerate with
+$q'$, or escalate to $q$. The dashed RL path is used only during training; at inference the gate runs
+from $q$-free features alone.}
 \label{fig:flow}
 \end{figure}
 
@@ -251,19 +251,23 @@ contextual-bandit form of the same baseline subtraction.
 \subsection{Gradient updates}
 Let $\pi_\theta(a_t\mid s_t)$ be the gate and $\mathcal{H}$ its entropy. The three methods maximize
 $J(\theta)$ by the following gradients, each with an entropy bonus $+\eta\,\mathcal{H}[\pi_\theta]$:
+\begin{small}
 \begin{align}
 \text{REINFORCE:}\quad
 &\nabla_\theta J = \mathbb{E}\!\Big[(R-b)\textstyle\sum_t \nabla_\theta\log\pi_\theta(a_t\mid s_t)\Big],
 \qquad b \leftarrow (1{-}\tau)\,b + \tau\,R \\[2pt]
 \text{GRPO:}\quad
-&\nabla_\theta J = \mathbb{E}\!\Big[\textstyle\sum_t \nabla_\theta \min\!\big(\rho_t A_i,\,
-\mathrm{clip}(\rho_t,1{-}\epsilon,1{+}\epsilon)\,A_i\big)\Big] - \beta\,\nabla_\theta\mathrm{KL}\!\big[\pi_\theta\Vert\pi_{\mathrm{ref}}\big], \notag\\
+&\nabla_\theta J =
+\mathbb{E}\!\Big[\textstyle\sum_t \nabla_\theta
+\min\!\big(\rho_t A_i,\mathrm{clip}(\rho_t,1{-}\epsilon,1{+}\epsilon)A_i\big)\Big] \notag\\
+&\hspace{22mm}{}- \beta\,\nabla_\theta\mathrm{KL}\!\big[\pi_\theta\Vert\pi_{\mathrm{ref}}\big], \notag\\
 &\rho_t = \frac{\pi_\theta(a_t\mid s_t)}{\pi_{\theta_{\mathrm{old}}}(a_t\mid s_t)},
 \qquad A_i = \frac{R_i-\mathrm{mean}_{j\in\mathcal{G}}R_j}{\mathrm{std}_{j\in\mathcal{G}}R_j+\varepsilon} \\[2pt]
 \text{per-token (v2):}\quad
 &\nabla_\theta J = \mathbb{E}\!\Big[\textstyle\sum_t \hat A_t\,\nabla_\theta\log\pi_\theta(a_t\mid s_t)\Big],
 \qquad \hat A_t = \frac{r_t-\mathrm{mean}_{\mathrm{batch}}\,r}{\mathrm{std}_{\mathrm{batch}}\,r+\varepsilon}
 \end{align}
+\end{small}
 Here $R$ is the trajectory return of Equation (1) or (3), $r_t$ the per-token reward of Equation (2),
 $b$ a global exponential-moving-average baseline with decay $\tau$, $\mathcal{G}$ a group of $G$
 rollouts of one prompt, $\pi_{\mathrm{ref}}$ the frozen warm-start policy, and $\epsilon$, $\beta$, and
@@ -301,15 +305,15 @@ operating point, and directly optimizing correctness does not surpass it at this
 Method & GSM8K acc & q-calls/tok & speedup \\
 \midrule
 greedy-$q$ (reference)        & 0.887 & 1.000 & 1.00$\times$ \\
-plain SD (standard, lossless) & 0.907 & 0.259 & 1.40$\times$ \\
+plain SD (standard, lossless) & \textbf{0.907} & 0.259 & 1.40$\times$ \\
 \midrule
 via\_fixed (paper, tuned)     & 0.40\textsuperscript{*} & 0.31 & 1.76$\times$ \\
 via\_imit (imitation only)    & 0.34  & 0.29 & 1.69$\times$ \\
 \midrule
 via\_rl REINFORCE             & 0.880 & 0.243 & 2.29$\times$ \\
 via\_rl GRPO                  & 0.853 & 0.162 & 2.94$\times$ \\
-via\_rl REINFORCE\,+\,DIMR    & 0.907 & 0.250 & 2.22$\times$ \\
-via\_rl v2 per-token ($\lambda{=}0.3$) & 0.713 & 0.104 & 3.53$\times$ \\
+via\_rl REINFORCE\,+\,DIMR    & \textbf{0.907} & 0.250 & 2.22$\times$ \\
+via\_rl v2 per-token ($\lambda{=}0.3$) & 0.713 & \textbf{0.104} & \textbf{3.53$\times$} \\
 \bottomrule
 \end{tabular}
 \caption{Headline comparison on a GSM8K slice with a 0.5B drafter and a 14B verifier.
