@@ -113,8 +113,11 @@ class Transformer(nn.Module):
         for b in self.layers:
             b.attention.kv_cache = KVCache(
                 max_batch_size, max_seq_length, self.config.n_local_heads, head_dim, dtype)
+        # fp32 rope cache regardless of model dtype: HF applies rope in fp32, and bf16 angle
+        # quantization was measured to cost ~0.9% argmax agreement vs HF (apply_rotary_emb
+        # already computes in fp32 and casts back, so this is dtype-compatible).
         self.freqs_cis = precompute_freqs_cis(
-            self.config.block_size, head_dim, self.config.rope_base, dtype)
+            self.config.block_size, head_dim, self.config.rope_base, torch.float32)
         self.causal_mask = torch.tril(
             torch.ones(max_seq_length, max_seq_length, dtype=torch.bool))
 
@@ -181,8 +184,25 @@ class Attention(nn.Module):
         if self.kv_cache is not None:
             k, v = self.kv_cache.update(input_pos, k, v)
 
-        y = F.scaled_dot_product_attention(
-            q, k, v, attn_mask=mask, enable_gqa=(self.n_head != self.n_local_heads))
+        # GQA via zero-copy batch-fold (batch=1 only): enable_gqa+mask has no efficient kernel
+        # in torch 2.5 (math fallback, 161us/layer) and repeat_interleave materializes 5x KV
+        # (109us); folding kv-groups into batch with a stride-0 expand hits the cutlass kernel
+        # with no copy (68us, bit-exact).
+        if self.n_head != self.n_local_heads and bsz == 1:
+            rep = self.n_head // self.n_local_heads
+            L = q.shape[2]
+            S = k.shape[2]
+            qg = q.view(self.n_local_heads, rep, L, self.head_dim)
+            kg = k.view(self.n_local_heads, 1, S, self.head_dim).expand(-1, rep, -1, -1)
+            vg = v.view(self.n_local_heads, 1, S, self.head_dim).expand(-1, rep, -1, -1)
+            y = F.scaled_dot_product_attention(qg, kg, vg, attn_mask=mask)
+            y = y.view(bsz, self.n_head, L, self.head_dim)
+        else:
+            if self.n_head != self.n_local_heads:
+                rep = self.n_head // self.n_local_heads
+                k = k.repeat_interleave(rep, dim=1)
+                v = v.repeat_interleave(rep, dim=1)
+            y = F.scaled_dot_product_attention(q, k, v, attn_mask=mask)
         y = y.transpose(1, 2).contiguous().view(bsz, seqlen, self.dim)
         return self.wo(y)
 

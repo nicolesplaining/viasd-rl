@@ -78,6 +78,9 @@ class Engine:
     qp_fwd: object = None
 
     def compile_all(self):
+        import torch._inductor.config as ic
+        ic.coordinate_descent_tuning = True   # gpt-fast's batch-1 GEMV magic: Triton beats
+        ic.triton.unique_kernel_names = True  # cuBLAS ~1.5x on skinny matmuls
         def make(m):
             def fwd(x, pos):
                 return m(x, pos)
