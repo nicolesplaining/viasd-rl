@@ -80,6 +80,7 @@ def _draft_gamma(eng, st, T, capture_logits: bool):
     Fills st.draft (device); optionally st.p_buf with sliced logits per step."""
     st.x1[0, 0] = st.tokens[T - 1]
     for j in range(eng.gamma):
+        torch.compiler.cudagraph_mark_step_begin()   # same-graph replay w/o step-mark re-records
         pos = torch.arange(T - 1 + j, T + j, device=eng.device)
         lg = eng.drafter_fwd(st.x1, pos)
         if capture_logits:
@@ -148,6 +149,7 @@ def _q_backfill(eng, st, q_pos, target):
     while gap > BACKFILL_BUCKETS[-1]:                            # long-gap 64-chunks
         L = BACKFILL_BUCKETS[-1]
         st.xb[L][0] = st.tokens[q_pos:q_pos + L]
+        torch.compiler.cudagraph_mark_step_begin()
         pos = torch.arange(q_pos, q_pos + L, device=eng.device)
         eng.q_fwd(st.xb[L], pos)
         q_pos += L
@@ -155,6 +157,7 @@ def _q_backfill(eng, st, q_pos, target):
     L = next(b for b in BACKFILL_BUCKETS if b >= gap)
     s = target - L                                               # overlap into consumed region: harmless
     st.xb[L][0] = st.tokens[s:target]
+    torch.compiler.cudagraph_mark_step_begin()
     pos = torch.arange(s, target, device=eng.device)
     lg = eng.q_fwd(st.xb[L], pos)
     tok = int(lg[0, -1, :eng.vocab].argmax())                    # sync (escalation blocks only)

@@ -184,6 +184,21 @@ class Attention(nn.Module):
         if self.kv_cache is not None:
             k, v = self.kv_cache.update(input_pos, k, v)
 
+        # Small-L decode/verify (L<=8): cutlass fmha costs 60-85us/layer in FIXED overhead at
+        # these tiny shapes (73% of a 0.5B step!). Manual attention = two small batched GEMMs
+        # + fp32 softmax; inductor fuses it to ~15us. Same math as SDPA (fp32 softmax).
+        if seqlen <= 8 and bsz == 1:
+            rep = self.n_head // self.n_local_heads
+            S = k.shape[2]
+            L = seqlen
+            qg = q.reshape(self.n_local_heads, rep * L, self.head_dim)       # [Hkv, rep*L, D]
+            att = qg @ k[0].transpose(-1, -2) * (self.head_dim ** -0.5)       # [Hkv, rep*L, S]
+            att = att.view(self.n_local_heads, rep, L, S).float()
+            att = att.masked_fill(~mask[0, 0], float("-inf")).softmax(-1)     # mask [L,S] bcast
+            y = (att.to(v.dtype).view(self.n_local_heads, rep * L, S) @ v[0])
+            y = y.view(self.n_local_heads, rep, L, self.head_dim) \
+                 .reshape(bsz, self.n_head, L, self.head_dim)
+            return self.wo(y.transpose(1, 2).reshape(bsz, L, self.dim))
         # GQA via zero-copy batch-fold (batch=1 only): enable_gqa+mask has no efficient kernel
         # in torch 2.5 (math fallback, 161us/layer) and repeat_interleave materializes 5x KV
         # (109us); folding kv-groups into batch with a stride-0 expand hits the cutlass kernel
