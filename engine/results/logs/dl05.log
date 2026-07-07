@@ -1,0 +1,22 @@
+Downloading '.gitattributes' to '/home/ubuntu/ckpts/Qwen2.5-0.5B-Instruct/.cache/huggingface/download/wPaCkH-WbT7GsmxMKKrNZTV4nSM=.a6344aac8c09253b3b630fb776ae94478aa0275b.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-0.5B-Instruct/.gitattributes
+Downloading 'LICENSE' to '/home/ubuntu/ckpts/Qwen2.5-0.5B-Instruct/.cache/huggingface/download/DhCjcNQuMpl4FL346qr3tvNUCgY=.6634c8cc3133b3848ec74b9f275acaaa1ea618ab.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-0.5B-Instruct/LICENSE
+Downloading 'README.md' to '/home/ubuntu/ckpts/Qwen2.5-0.5B-Instruct/.cache/huggingface/download/Xn7B-BWUGOee2Y6hCZtEhtFu4BE=.4b8373851d093eb9f3017443f27781c6971eff24.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-0.5B-Instruct/README.md
+Downloading 'config.json' to '/home/ubuntu/ckpts/Qwen2.5-0.5B-Instruct/.cache/huggingface/download/8_PA_wEVGiVa2goH2H4KQOQpvVY=.0dbb161213629a23f0fc00ef286e6b1e366d180f.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-0.5B-Instruct/config.json
+Downloading 'generation_config.json' to '/home/ubuntu/ckpts/Qwen2.5-0.5B-Instruct/.cache/huggingface/download/3EVKVggOldJcKSsGjSdoUCN1AyQ=.dfc11073787daf1b0f9c0f1499487ab5f4c93738.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-0.5B-Instruct/generation_config.json
+Downloading 'merges.txt' to '/home/ubuntu/ckpts/Qwen2.5-0.5B-Instruct/.cache/huggingface/download/PtHk0z_I45atnj23IIRhTExwT3w=.20024bfe7c83998e9aeaf98a0cd6a2ce6306c2f0.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-0.5B-Instruct/merges.txt
+Downloading 'model.safetensors' to '/home/ubuntu/ckpts/Qwen2.5-0.5B-Instruct/.cache/huggingface/download/xGOKKLRSlIhH692hSVvI1-gpoa8=.fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-0.5B-Instruct/model.safetensors
+Downloading 'tokenizer.json' to '/home/ubuntu/ckpts/Qwen2.5-0.5B-Instruct/.cache/huggingface/download/HgM_lKo9sdSCfRtVg7MMFS7EKqo=.443909a61d429dff23010e5bddd28ff530edda00.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-0.5B-Instruct/tokenizer.json
+Downloading 'tokenizer_config.json' to '/home/ubuntu/ckpts/Qwen2.5-0.5B-Instruct/.cache/huggingface/download/vzaExXFZNBay89bvlQv-ZcI6BTg=.07bfe0640cb5a0037f9322287fbfc682806cf672.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-0.5B-Instruct/tokenizer_config.json
+Downloading 'vocab.json' to '/home/ubuntu/ckpts/Qwen2.5-0.5B-Instruct/.cache/huggingface/download/j3m-Hy6QvBddw8RXA1uSWl1AJ0c=.4783fe10ac3adce15ac8f358ef5462739852c569.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-0.5B-Instruct/vocab.json
+[33m⚠️  Warning: 'huggingface-cli download' is deprecated. Use 'hf download' instead.[0m
+/home/ubuntu/ckpts/Qwen2.5-0.5B-Instruct

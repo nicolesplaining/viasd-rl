@@ -30,7 +30,10 @@ def run_method(name, fn, prompts, tokenizer, max_new, eos_id):
         m = CostMeter()
         out, dt = timed(fn, ids, max_new, m, eos_id)
         text = tokenizer.decode(out[ids.shape[1]:], skip_special_tokens=True)
-        correct += int(is_correct(text, gold))
+        try:
+            correct += int(is_correct(text, gold))
+        except (OverflowError, ValueError):
+            pass    # degenerate output (e.g. huge digit string from a weak draft) = wrong
         times.append(dt)
         toks += m.tokens
         meter.merge(m)
@@ -53,6 +56,8 @@ def main():
     ap.add_argument("--drafter-dir", required=True)
     ap.add_argument("--verifier-dir", required=True)
     ap.add_argument("--mask")
+    ap.add_argument("--self-draft-mask", default=None,
+                    help="keep_mask json: drafter = layer-subset view of the verifier (S5D)")
     ap.add_argument("--policies", default="")   # name=path,name=path for via_rl variants
     ap.add_argument("--methods", default="ar,plain_sd,via_rl")
     ap.add_argument("--n-eval", type=int, default=150)
@@ -67,7 +72,9 @@ def main():
     device = "cuda"
     keep = load_keep_mask(a.mask) if a.mask else None
     print("[build] engine (compile on)...", flush=True)
-    eng = build_engine(a.drafter_dir, a.verifier_dir, keep_mask=keep, compile=True)
+    sdm = load_keep_mask(a.self_draft_mask) if a.self_draft_mask else None
+    eng = build_engine(a.drafter_dir, a.verifier_dir, keep_mask=keep,
+                       self_draft_mask=sdm, compile=True)
 
     problems = load_gsm8k(a.n_eval + 2, split="test")
     prompts = [(build_prompt_ids(tok, q, device), g) for q, g in problems]

@@ -1,0 +1,38 @@
+Downloading '.gitattributes' to '/home/ubuntu/ckpts/Qwen2.5-14B-Instruct/.cache/huggingface/download/wPaCkH-WbT7GsmxMKKrNZTV4nSM=.a6344aac8c09253b3b630fb776ae94478aa0275b.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-14B-Instruct/.gitattributes
+Downloading 'LICENSE' to '/home/ubuntu/ckpts/Qwen2.5-14B-Instruct/.cache/huggingface/download/DhCjcNQuMpl4FL346qr3tvNUCgY=.6634c8cc3133b3848ec74b9f275acaaa1ea618ab.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-14B-Instruct/LICENSE
+Downloading 'README.md' to '/home/ubuntu/ckpts/Qwen2.5-14B-Instruct/.cache/huggingface/download/Xn7B-BWUGOee2Y6hCZtEhtFu4BE=.cdb53558f3d3871db6823dd95ecac029044757a0.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-14B-Instruct/README.md
+Downloading 'config.json' to '/home/ubuntu/ckpts/Qwen2.5-14B-Instruct/.cache/huggingface/download/8_PA_wEVGiVa2goH2H4KQOQpvVY=.172d20a3d7fc27df9ed89628cafdbaf1a773ddc1.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-14B-Instruct/config.json
+Downloading 'generation_config.json' to '/home/ubuntu/ckpts/Qwen2.5-14B-Instruct/.cache/huggingface/download/3EVKVggOldJcKSsGjSdoUCN1AyQ=.bf077f03dc569cfb8a90b3ec1ad20365a620bad6.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-14B-Instruct/generation_config.json
+Downloading 'merges.txt' to '/home/ubuntu/ckpts/Qwen2.5-14B-Instruct/.cache/huggingface/download/PtHk0z_I45atnj23IIRhTExwT3w=.20024bfe7c83998e9aeaf98a0cd6a2ce6306c2f0.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-14B-Instruct/merges.txt
+Downloading 'model-00001-of-00008.safetensors' to '/home/ubuntu/ckpts/Qwen2.5-14B-Instruct/.cache/huggingface/download/kWKIu8gS4RO6oPIX4oh3Bgg-Q5A=.b477be7572f0ab3ae3cbba38d508cc33e70600b2045669c4ad848051c3432094.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-14B-Instruct/model-00001-of-00008.safetensors
+Downloading 'model-00002-of-00008.safetensors' to '/home/ubuntu/ckpts/Qwen2.5-14B-Instruct/.cache/huggingface/download/0h2PhEN4wf4qC6Njm74VvfC6t1E=.eb356aacae443e30f52712b1e98fadf206976365e2f5ee886321b0bb38c7cea8.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-14B-Instruct/model-00002-of-00008.safetensors
+Downloading 'model-00003-of-00008.safetensors' to '/home/ubuntu/ckpts/Qwen2.5-14B-Instruct/.cache/huggingface/download/EHpm-K7rdV4CgBWL-uyhsBxgY_o=.cee9dbdf738ce61adb21c70ad5c5585747caaab6457c9ffc3bfa20d73127c2c6.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-14B-Instruct/model-00003-of-00008.safetensors
+Downloading 'model-00004-of-00008.safetensors' to '/home/ubuntu/ckpts/Qwen2.5-14B-Instruct/.cache/huggingface/download/bUZ-Wph4eKxfWpbgEc4sIyI6tC8=.b1201a6edcac8ef96a37040524fe37a5a84e446513ed40491e764a37302385fa.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-14B-Instruct/model-00004-of-00008.safetensors
+Downloading 'model-00005-of-00008.safetensors' to '/home/ubuntu/ckpts/Qwen2.5-14B-Instruct/.cache/huggingface/download/6g1A1Sffu6ppCoytuuyE76A1WOI=.fbbda3cdee31895d0c57d617449af5579d219df34f3d63f7a23acbfe7fb0a647.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-14B-Instruct/model-00005-of-00008.safetensors
+Downloading 'model-00006-of-00008.safetensors' to '/home/ubuntu/ckpts/Qwen2.5-14B-Instruct/.cache/huggingface/download/aESknW7TOKEmfryZ2OONv6DRGfk=.f7ac652aa101717c97cfeccf5109985cca5b04529b57d3f4d2ec7a802266296b.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-14B-Instruct/model-00006-of-00008.safetensors
+Downloading 'model-00007-of-00008.safetensors' to '/home/ubuntu/ckpts/Qwen2.5-14B-Instruct/.cache/huggingface/download/sXoMdGKE4Flr20prmlhvMqJ3A08=.e9115e615b575acb6e8b3a06524b32cbf7f680f07517125e4334f62c3f4acb0d.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-14B-Instruct/model-00007-of-00008.safetensors
+Downloading 'model-00008-of-00008.safetensors' to '/home/ubuntu/ckpts/Qwen2.5-14B-Instruct/.cache/huggingface/download/-vH6cOyDWwSz9eriTyl87vkLn44=.a77f603d8368749c19d3ac9cf2a300e476edcc794ea41af8e473ee12935eadb8.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-14B-Instruct/model-00008-of-00008.safetensors
+Downloading 'model.safetensors.index.json' to '/home/ubuntu/ckpts/Qwen2.5-14B-Instruct/.cache/huggingface/download/yVzAsSxRSINSz-tQbpx-TLpfkLU=.76830d05f05b79fd413acb4a718b32bb68d96211.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-14B-Instruct/model.safetensors.index.json
+Downloading 'tokenizer.json' to '/home/ubuntu/ckpts/Qwen2.5-14B-Instruct/.cache/huggingface/download/HgM_lKo9sdSCfRtVg7MMFS7EKqo=.443909a61d429dff23010e5bddd28ff530edda00.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-14B-Instruct/tokenizer.json
+Downloading 'tokenizer_config.json' to '/home/ubuntu/ckpts/Qwen2.5-14B-Instruct/.cache/huggingface/download/vzaExXFZNBay89bvlQv-ZcI6BTg=.07bfe0640cb5a0037f9322287fbfc682806cf672.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-14B-Instruct/tokenizer_config.json
+Downloading 'vocab.json' to '/home/ubuntu/ckpts/Qwen2.5-14B-Instruct/.cache/huggingface/download/j3m-Hy6QvBddw8RXA1uSWl1AJ0c=.4783fe10ac3adce15ac8f358ef5462739852c569.incomplete'
+Download complete. Moving file to /home/ubuntu/ckpts/Qwen2.5-14B-Instruct/vocab.json
+[33m⚠️  Warning: 'huggingface-cli download' is deprecated. Use 'hf download' instead.[0m
+/home/ubuntu/ckpts/Qwen2.5-14B-Instruct

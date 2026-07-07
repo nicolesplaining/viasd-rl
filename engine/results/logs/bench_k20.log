@@ -1,0 +1,18 @@
+[build] engine (compile on)...
+/home/ubuntu/viasd-rl/viasd/policy.py:41: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  policy.load_state_dict(torch.load(path, map_location=device))
+[warmup] compiling all shapes (minutes)...
+[warmup] done in 179s
+  [via_rl:f] 25/150 acc_so_far=0.600 ms/tok=13.04
+  [via_rl:f] 50/150 acc_so_far=0.620 ms/tok=9.13
+  [via_rl:f] 75/150 acc_so_far=0.680 ms/tok=7.88
+  [via_rl:f] 100/150 acc_so_far=0.670 ms/tok=7.28
+  [via_rl:f] 125/150 acc_so_far=0.672 ms/tok=6.88
+  [via_rl:f] 150/150 acc_so_far=0.693 ms/tok=6.60
+
+method              acc  ms/tok   tok/s    xAR   xVAN  q/tok  t/blk             a/r/e  %roof
+--------------------------------------------------------------------------------------------
+via_rl:f          0.693    6.60   151.5    nan    nan  0.090   4.27    0.90/0.00/0.10    nan
+
+[WROTE] /home/ubuntu/bench_final_k20_n150.json
+K20_DONE

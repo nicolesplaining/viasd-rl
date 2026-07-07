@@ -1,0 +1,19 @@
+=== [1/2] plain_sd token-identity vs ar (n=20, compiled) ===
+  [sd] DIVERGED at pos 526 (lens 695 vs 716)
+[sd] 6/20 prompts token-identical  (FAIL)
+Traceback (most recent call last):
+AssertionError
+=== [2/2] measured baselines: ar + plain_sd, n=50 quick pass ===
+CUDAGraph supports dynamic shapes by recording a new graph for each distinct input size. Recording too many CUDAGraphs may lead to extra overhead. We have observed 51 distinct sizes. Please consider the following options for better performance: a) padding inputs to a few fixed number of shapes; or b) set torch._inductor.config.triton.cudagraph_skip_dynamic_graphs=True. Set torch._inductor.config.triton.cudagraph_dynamic_shape_warn_limit=None to silence this warning.
+  [ar] 25/50 acc_so_far=0.800 ms/tok=57.90
+  [ar] 50/50 acc_so_far=0.880 ms/tok=37.51
+  [plain_sd] 25/50 acc_so_far=0.720 ms/tok=7.69
+  [plain_sd] 50/50 acc_so_far=0.820 ms/tok=7.80
+
+method              acc  ms/tok   tok/s    xAR   xVAN  q/tok  t/blk             a/r/e  %roof
+--------------------------------------------------------------------------------------------
+ar                0.880   37.51    26.7   1.00   0.21  1.0009715.00    0.00/0.00/0.00   23.5
+plain_sd          0.820    7.80   128.3   4.81   1.00  0.255   3.93    0.00/0.00/0.00    nan
+
+[WROTE] /home/ubuntu/bench_p1_n50.json
+PHASE1_DONE

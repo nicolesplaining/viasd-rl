@@ -1,0 +1,2 @@
+compile 41s
+[G0-speed] coord-descent compiled 14B decode: 14.07 ms/tok (71.1 tok/s)  FAIL (roofline 8.82)

@@ -1,0 +1,17 @@
++ tail -2
++ python engine/convert_qwen.py --checkpoint_dir /home/ubuntu/ckpts/Qwen2.5-14B-Instruct
+[config] Qwen2.5-14B-Instruct: all 9 fields match HF config.json
+[saved] /home/ubuntu/ckpts/Qwen2.5-14B-Instruct/model.pth  (387 tensors)
++ python engine/parity.py --test logits --hf-dir /home/ubuntu/ckpts/Qwen2.5-14B-Instruct --ckpt-dir /home/ubuntu/ckpts/Qwen2.5-14B-Instruct --model-name Qwen2.5-14B-Instruct
++ grep -aE '\[logits'
+[logits:Qwen2.5-14B-Instruct] argmax agreement 99.3797% over 806 pos (confident-margin: 100.0000% over 793), max|dlogit|=4.109  (PASS)
++ python -
+compiling...
+/home/ubuntu/venv/lib/python3.12/site-packages/torch/_inductor/compile_fx.py:167: UserWarning: TensorFloat32 tensor cores for float32 matrix multiplication available but not enabled. Consider setting `torch.set_float32_matmul_precision('high')` for better performance.
+  warnings.warn(
+/home/ubuntu/venv/lib/python3.12/site-packages/torch/_inductor/cudagraph_trees.py:2345: UserWarning: Unable to hit fast path of CUDAGraphs because of pending, uninvoked backwards. Consider running with torch.no_grad() or using torch.compiler.cudagraph_mark_step_begin() before each model invocation
+  warnings.warn(
+warmup+compile 45s
+[G0-speed] compiled 14B decode: 76.10 ms/tok (13.1 tok/s)  FAIL (roofline 8.82)
++ echo G0_DONE
+G0_DONE

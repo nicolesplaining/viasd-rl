@@ -1,0 +1,22 @@
+[build] engine (compile on)...
+/home/ubuntu/viasd-rl/viasd/policy.py:41: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  policy.load_state_dict(torch.load(path, map_location=device))
+[warmup] compiling all shapes (minutes)...
+[warmup] done in 217s
+  [ar] 25/50 acc_so_far=0.800 ms/tok=13.06
+  [ar] 50/50 acc_so_far=0.880 ms/tok=13.07
+  [plain_sd] 25/50 acc_so_far=0.800 ms/tok=5.44
+  [plain_sd] 50/50 acc_so_far=0.880 ms/tok=5.54
+  [via_rl:grpo] 25/50 acc_so_far=0.720 ms/tok=7.67
+  [via_rl:grpo] 50/50 acc_so_far=0.740 ms/tok=7.32
+  [via_rl:f] 25/50 acc_so_far=0.440 ms/tok=5.67
+  [via_rl:f] 50/50 acc_so_far=0.540 ms/tok=5.62
+
+method              acc  ms/tok   tok/s    xAR   xVAN  q/tok  t/blk             a/r/e  %roof
+--------------------------------------------------------------------------------------------
+ar                0.880   13.07    76.5   1.00   0.42  1.0009655.00    0.00/0.00/0.00   67.5
+plain_sd          0.880    5.54   180.7   2.36   1.00  0.258   3.88    0.00/0.00/0.00    nan
+via_rl:grpo       0.740    7.32   136.7   1.79   0.76  0.140   3.98    0.80/0.01/0.19    nan
+via_rl:f          0.540    5.62   177.9   2.32   0.98  0.093   4.17    0.89/0.01/0.11    nan
+
+[WROTE] /home/ubuntu/bench_p2_n50.json

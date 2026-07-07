@@ -100,10 +100,15 @@ class Engine:
 
 
 def build_engine(drafter_dir, verifier_dir, drafter_name=None, verifier_name=None,
-                 keep_mask=None, gamma=5, max_seq=1408, device="cuda",
+                 keep_mask=None, self_draft_mask=None, gamma=5, max_seq=1408, device="cuda",
                  dtype=torch.bfloat16, compile=True) -> Engine:
-    drafter = load_engine_model(drafter_name or Path(drafter_dir).name, drafter_dir, device, dtype)
     q = load_engine_model(verifier_name or Path(verifier_dir).name, verifier_dir, device, dtype)
+    if self_draft_mask is not None:
+        # FULL-SELF (S5D): the drafter is a layer-subset VIEW of the verifier itself --
+        # one weight set plays all three roles (draft / q' / q).
+        drafter = build_qprime(q, self_draft_mask)
+    else:
+        drafter = load_engine_model(drafter_name or Path(drafter_dir).name, drafter_dir, device, dtype)
     qp = build_qprime(q, keep_mask) if keep_mask is not None else None
     models = [m for m in (drafter, q, qp) if m is not None]
     setup_all_caches(models, max_seq, device)

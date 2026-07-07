@@ -1,0 +1,32 @@
+{
+  "config": {
+    "drafter_dir": "/home/ubuntu/ckpts/Qwen2.5-0.5B-Instruct",
+    "verifier_dir": "/home/ubuntu/ckpts/Qwen2.5-14B-Instruct",
+    "mask": "masks/knapspec_keep20.json",
+    "policies": "f=policy_rl_pt.pt",
+    "methods": "via_rl",
+    "n_eval": 150,
+    "max_new": 320,
+    "out": "/home/ubuntu/bench_final_k20_n150.json",
+    "roofline_ar_ms": 8.82
+  },
+  "results": [
+    {
+      "method": "via_rl:f",
+      "n": 150,
+      "acc": 0.6933333333333334,
+      "ms_per_tok": 6.600949660930934,
+      "tok_per_s": 151.49335343650685,
+      "q_per_tok": 0.09022768486802338,
+      "tok_per_block": 4.268880096335799,
+      "accept": 0.895950030223655,
+      "regen": 0.00032238565383840417,
+      "escalate": 0.10372758412250654,
+      "rejection": 0.06234132581100141,
+      "total_tokens": 24815,
+      "total_time_s": 163.80256583600112,
+      "x_ar": NaN,
+      "x_vanilla": NaN
+    }
+  ]
+}

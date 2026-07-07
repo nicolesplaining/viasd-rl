@@ -1,0 +1,15 @@
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+fmha_cutlassF_bf16_aligned_64x64_rf_sm80(PyTorchMemE...         0.00%       0.000us         0.00%       0.000us       0.000us      60.637ms        73.79%      60.637ms      84.218us           720  
+                                                triton_         0.00%       0.000us         0.00%       0.000us       0.000us      18.025ms        21.94%      18.025ms       3.433us          5250  
+std::enable_if<!(false), void>::type internal::gemvx...         0.00%       0.000us         0.00%       0.000us       0.000us       3.371ms         4.10%       3.371ms       4.682us           720  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us      58.558us         0.07%      58.558us       0.976us            60  
+void at::native::(anonymous namespace)::multi_tensor...         0.00%       0.000us         0.00%       0.000us       0.000us      49.472us         0.06%      49.472us       1.649us            30  
+void (anonymous namespace)::elementwise_kernel_with_...         0.00%       0.000us         0.00%       0.000us       0.000us      30.111us         0.04%      30.111us       1.004us            30  
+                                       cudaLaunchKernel         0.94%     730.113us         0.94%     730.113us       6.084us       0.000us         0.00%       0.000us       0.000us           120  
+                                  cudaStreamIsCapturing         0.04%      27.898us         0.04%      27.898us       0.465us       0.000us         0.00%       0.000us       0.000us            60  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 77.469ms
+Self CUDA time total: 82.171ms
+

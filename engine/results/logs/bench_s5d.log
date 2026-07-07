@@ -1,0 +1,24 @@
+[build] engine (compile on)...
+/home/ubuntu/viasd-rl/viasd/policy.py:41: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  policy.load_state_dict(torch.load(path, map_location=device))
+[warmup] compiling all shapes (minutes)...
+[warmup] done in 222s
+Traceback (most recent call last):
+  File "/home/ubuntu/viasd-rl/engine/bench_gsm8k.py", line 126, in <module>
+    main()
+  File "/home/ubuntu/viasd-rl/engine/bench_gsm8k.py", line 101, in main
+    results.append(run_method(
+                   ^^^^^^^^^^^
+  File "/home/ubuntu/viasd-rl/engine/bench_gsm8k.py", line 33, in run_method
+    correct += int(is_correct(text, gold))
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/viasd-rl/viasd/metrics.py", line 26, in is_correct
+    pred = extract_pred(pred_text)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/viasd-rl/viasd/metrics.py", line 22, in extract_pred
+    return _norm(nums[-1]) if nums else None
+           ^^^^^^^^^^^^^^^
+  File "/home/ubuntu/viasd-rl/viasd/metrics.py", line 11, in _norm
+    return int(f) if f == int(f) else f
+                          ^^^^^^
+OverflowError: cannot convert float infinity to integer

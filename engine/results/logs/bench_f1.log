@@ -1,0 +1,38 @@
+[build] engine (compile on)...
+/home/ubuntu/viasd-rl/viasd/policy.py:41: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  policy.load_state_dict(torch.load(path, map_location=device))
+[warmup] compiling all shapes (minutes)...
+[warmup] done in 205s
+  [ar] 25/150 acc_so_far=0.800 ms/tok=13.09
+  [ar] 50/150 acc_so_far=0.880 ms/tok=13.09
+  [ar] 75/150 acc_so_far=0.907 ms/tok=13.10
+  [ar] 100/150 acc_so_far=0.900 ms/tok=13.10
+  [ar] 125/150 acc_so_far=0.904 ms/tok=13.10
+  [ar] 150/150 acc_so_far=0.907 ms/tok=13.11
+  [plain_sd] 25/150 acc_so_far=0.800 ms/tok=5.45
+  [plain_sd] 50/150 acc_so_far=0.880 ms/tok=5.54
+  [plain_sd] 75/150 acc_so_far=0.907 ms/tok=5.57
+  [plain_sd] 100/150 acc_so_far=0.900 ms/tok=5.58
+  [plain_sd] 125/150 acc_so_far=0.896 ms/tok=5.61
+  [plain_sd] 150/150 acc_so_far=0.900 ms/tok=5.59
+  [via_rl:grpo] 25/150 acc_so_far=0.720 ms/tok=7.48
+  [via_rl:grpo] 50/150 acc_so_far=0.740 ms/tok=7.23
+  [via_rl:grpo] 75/150 acc_so_far=0.787 ms/tok=7.17
+  [via_rl:grpo] 100/150 acc_so_far=0.790 ms/tok=7.12
+  [via_rl:grpo] 125/150 acc_so_far=0.800 ms/tok=7.15
+  [via_rl:grpo] 150/150 acc_so_far=0.800 ms/tok=7.12
+  [via_rl:f] 25/150 acc_so_far=0.440 ms/tok=5.68
+  [via_rl:f] 50/150 acc_so_far=0.540 ms/tok=5.63
+  [via_rl:f] 75/150 acc_so_far=0.640 ms/tok=5.62
+  [via_rl:f] 100/150 acc_so_far=0.640 ms/tok=5.65
+  [via_rl:f] 125/150 acc_so_far=0.664 ms/tok=5.65
+  [via_rl:f] 150/150 acc_so_far=0.667 ms/tok=5.62
+
+method              acc  ms/tok   tok/s    xAR   xVAN  q/tok  t/blk             a/r/e  %roof
+--------------------------------------------------------------------------------------------
+ar                0.907   13.11    76.3   1.00   0.43  1.00027019.00    0.00/0.00/0.00   67.3
+plain_sd          0.900    5.59   178.8   2.34   1.00  0.259   3.86    0.00/0.00/0.00    nan
+via_rl:grpo       0.800    7.12   140.4   1.84   0.79  0.143   3.96    0.80/0.01/0.19    nan
+via_rl:f          0.667    5.62   178.0   2.33   1.00  0.091   4.21    0.89/0.01/0.10    nan
+
+[WROTE] /home/ubuntu/bench_final_dimr_n150.json

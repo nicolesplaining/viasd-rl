@@ -1,0 +1,49 @@
+{
+  "config": {
+    "drafter_dir": "/home/ubuntu/ckpts/Qwen2.5-0.5B-Instruct",
+    "verifier_dir": "/home/ubuntu/ckpts/Qwen2.5-14B-Instruct",
+    "mask": null,
+    "policies": "",
+    "methods": "ar,plain_sd",
+    "n_eval": 50,
+    "max_new": 320,
+    "out": "/home/ubuntu/bench_p1c_n50.json",
+    "roofline_ar_ms": 8.82
+  },
+  "results": [
+    {
+      "method": "ar",
+      "n": 50,
+      "acc": 0.88,
+      "ms_per_tok": 13.10055974862721,
+      "tok_per_s": 76.33261625365196,
+      "q_per_tok": 1.0,
+      "tok_per_block": 9655.0,
+      "accept": 0.0,
+      "regen": 0.0,
+      "escalate": 0.0,
+      "rejection": 0.0,
+      "total_tokens": 9655,
+      "total_time_s": 126.48590437299572,
+      "x_ar": 1.0,
+      "x_vanilla": 0.423909963373058
+    },
+    {
+      "method": "plain_sd",
+      "n": 50,
+      "acc": 0.88,
+      "ms_per_tok": 5.5534578032071185,
+      "tok_per_s": 180.06799284987827,
+      "q_per_tok": 0.25780924614743855,
+      "tok_per_block": 3.878836833602585,
+      "accept": 0.0,
+      "regen": 0.0,
+      "escalate": 0.0,
+      "rejection": 0.10766347355268638,
+      "total_tokens": 9604,
+      "total_time_s": 53.335408742001164,
+      "x_ar": 2.3589914991452074,
+      "x_vanilla": 1.0
+    }
+  ]
+}

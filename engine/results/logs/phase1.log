@@ -1,0 +1,19 @@
+=== [1/2] plain_sd token-identity vs ar (n=20, compiled) ===
+    raise TorchRuntimeError(str(e)).with_traceback(e.__traceback__) from None
+    raise RuntimeError(make_error_message(e)).with_traceback(
+    raise ValueError(msg)
+torch._dynamo.exc.TorchRuntimeError: Failed running call_method view(*(FakeTensor(..., device='cuda:0', size=(8, 5, 8, 128), dtype=torch.bfloat16,
+=== [2/2] measured baselines: ar + plain_sd, n=50 quick pass ===
+  File "/home/ubuntu/viasd-rl/engine/model.py", line 149, in forward
+    h = x + self.attention(self.attention_norm(x), freqs_cis, mask, input_pos)
+  File "/home/ubuntu/viasd-rl/engine/model.py", line 199, in forward
+    y = y.view(bsz, self.n_head, L, self.head_dim)
+
+Set TORCH_LOGS="+dynamo" and TORCHDYNAMO_VERBOSE=1 for more information
+
+
+You can suppress this exception and fall back to eager by setting:
+    import torch._dynamo
+    torch._dynamo.config.suppress_errors = True
+
+PHASE1_DONE

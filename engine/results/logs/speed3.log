@@ -1,0 +1,1 @@
+[G0-speed] no_grad compiled 14B decode: 15.49 ms/tok (64.6 tok/s)  FAIL (roofline 8.82)

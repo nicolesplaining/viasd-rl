@@ -1,0 +1,2 @@
+(a) mark-per-call     : 2.758 ms/step
+(b) 5-per-mark chained: 4.758 ms/step

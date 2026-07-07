@@ -1,0 +1,14 @@
+[build] engine (compile on)...
+[warmup] compiling all shapes (minutes)...
+[warmup] done in 145s
+  [ar] 25/50 acc_so_far=0.760 ms/tok=14.87
+  [ar] 50/50 acc_so_far=0.860 ms/tok=14.88
+  [plain_sd] 25/50 acc_so_far=0.720 ms/tok=7.68
+  [plain_sd] 50/50 acc_so_far=0.820 ms/tok=7.78
+
+method              acc  ms/tok   tok/s    xAR   xVAN  q/tok  t/blk             a/r/e  %roof
+--------------------------------------------------------------------------------------------
+ar                0.860   14.88    67.2   1.00   0.52  1.0009698.00    0.00/0.00/0.00   59.3
+plain_sd          0.820    7.78   128.5   1.91   1.00  0.255   3.93    0.00/0.00/0.00    nan
+
+[WROTE] /home/ubuntu/bench_p1b_n50.json
