@@ -33,6 +33,11 @@ class GenState:
         self.p_buf = torch.zeros(g, V, dtype=dt, device=d)                   # logits and flip
         self.qp_buf = torch.zeros(g, V, dtype=dt, device=d)                  # near-tie argmaxes
         self.draft = torch.zeros(g, dtype=torch.long, device=d)
+        # fixed staging buffers: feeding views of st.tokens (whose storage OFFSET changes
+        # every step) makes cudagraphs re-record per offset -> 2.5x slowdown. copy into
+        # fixed-offset buffers instead.
+        self.x1 = torch.zeros(1, 1, dtype=torch.long, device=d)
+        self.xg = torch.zeros(1, g + 1, dtype=torch.long, device=d)
 
 
 def _prefill(model, tokens, upto, device):
@@ -61,9 +66,9 @@ def ar_generate(eng, prompt_ids, max_new, meter: CostMeter, eos_id):
         if tok == eos_id or T - P >= max_new:
             break
         torch.compiler.cudagraph_mark_step_begin()
-        x = st.tokens[T - 1].view(1, 1)
+        st.x1[0, 0] = st.tokens[T - 1]
         pos = torch.arange(T - 1, T, device=eng.device)
-        lg = eng.q_fwd(x, pos)
+        lg = eng.q_fwd(st.x1, pos)
         tok = int(lg[0, -1, :eng.vocab].argmax())                # sync (EOS check)
         meter.q1_steps += 1
     return st.tokens[:T].clone()
@@ -73,17 +78,17 @@ def ar_generate(eng, prompt_ids, max_new, meter: CostMeter, eos_id):
 def _draft_gamma(eng, st, T, capture_logits: bool):
     """gamma compiled [1,1] drafter steps starting by consuming tokens[T-1].
     Fills st.draft (device); optionally st.p_buf with sliced logits per step."""
-    x = st.tokens[T - 1].view(1, 1)
+    st.x1[0, 0] = st.tokens[T - 1]
     for j in range(eng.gamma):
         pos = torch.arange(T - 1 + j, T + j, device=eng.device)
-        lg = eng.drafter_fwd(x, pos)
+        lg = eng.drafter_fwd(st.x1, pos)
         if capture_logits:
             st.p_buf[j].copy_(lg[0, -1, :eng.vocab])             # out of cudagraph memory
             nxt = st.p_buf[j].argmax()
         else:
             nxt = lg[0, -1, :eng.vocab].argmax().clone()
         st.draft[j] = nxt
-        x = nxt.view(1, 1)
+        st.x1[0, 0] = nxt
 
 
 @torch.no_grad()
@@ -101,9 +106,10 @@ def plain_sd_generate(eng, prompt_ids, max_new, meter: CostMeter, eos_id):
         torch.compiler.cudagraph_mark_step_begin()
         _draft_gamma(eng, st, T, capture_logits=False)
         meter.draft_steps += g
-        xin = torch.cat([st.tokens[T - 1:T], st.draft]).view(1, g + 1)
+        st.xg[0, 0] = st.tokens[T - 1]
+        st.xg[0, 1:] = st.draft
         pos = torch.arange(T - 1, T + g, device=eng.device)
-        qlg = eng.q_fwd(xin, pos)
+        qlg = eng.q_fwd(st.xg, pos)
         meter.q_forwards += 1
         qarg = qlg[0, :g, :eng.vocab].argmax(dim=-1)             # rel pos j predicts T+j
         rows = torch.stack([qarg, st.draft]).cpu()               # ONE sync per block
@@ -136,18 +142,21 @@ def _q_backfill(eng, st, q_pos, target):
     """Bring q's cache up to consumed-through target-1 and return q's argmax prediction
     for position `target`. Overlap buckets keep shapes fixed (recompute is byte-identical)."""
     gap = target - q_pos
+    if not hasattr(st, "xb"):
+        st.xb = {b: torch.zeros(1, b, dtype=torch.long, device=eng.device)
+                 for b in BACKFILL_BUCKETS}
     while gap > BACKFILL_BUCKETS[-1]:                            # long-gap 64-chunks
         L = BACKFILL_BUCKETS[-1]
-        x = st.tokens[q_pos:q_pos + L].view(1, L)
+        st.xb[L][0] = st.tokens[q_pos:q_pos + L]
         pos = torch.arange(q_pos, q_pos + L, device=eng.device)
-        eng.q_fwd(x, pos)
+        eng.q_fwd(st.xb[L], pos)
         q_pos += L
         gap = target - q_pos
     L = next(b for b in BACKFILL_BUCKETS if b >= gap)
     s = target - L                                               # overlap into consumed region: harmless
-    x = st.tokens[s:target].view(1, L)
+    st.xb[L][0] = st.tokens[s:target]
     pos = torch.arange(s, target, device=eng.device)
-    lg = eng.q_fwd(x, pos)
+    lg = eng.q_fwd(st.xb[L], pos)
     tok = int(lg[0, -1, :eng.vocab].argmax())                    # sync (escalation blocks only)
     return tok, target
 
@@ -169,9 +178,10 @@ def via_sd_generate(eng, prompt_ids, max_new, meter: CostMeter, eos_id, policy):
         torch.compiler.cudagraph_mark_step_begin()
         _draft_gamma(eng, st, T, capture_logits=True)
         meter.draft_steps += g
-        xin = torch.cat([st.tokens[T - 1:T], st.draft]).view(1, g + 1)
+        st.xg[0, 0] = st.tokens[T - 1]
+        st.xg[0, 1:] = st.draft
         pos = torch.arange(T - 1, T + g, device=eng.device)
-        qplg = eng.qp_fwd(xin, pos)
+        qplg = eng.qp_fwd(st.xg, pos)
         st.qp_buf.copy_(qplg[0, :g, :eng.vocab])
         meter.qp_forwards += 1
         rows = gate_block(policy, st.p_buf, st.qp_buf, st.draft, T, g, max_len)  # ONE sync

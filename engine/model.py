@@ -192,11 +192,11 @@ class Attention(nn.Module):
             rep = self.n_head // self.n_local_heads
             L = q.shape[2]
             S = k.shape[2]
-            qg = q.view(self.n_local_heads, rep, L, self.head_dim)
+            qg = q.reshape(self.n_local_heads, rep, L, self.head_dim)   # q transposed -> reshape
             kg = k.view(self.n_local_heads, 1, S, self.head_dim).expand(-1, rep, -1, -1)
             vg = v.view(self.n_local_heads, 1, S, self.head_dim).expand(-1, rep, -1, -1)
             y = F.scaled_dot_product_attention(qg, kg, vg, attn_mask=mask)
-            y = y.view(bsz, self.n_head, L, self.head_dim)
+            y = y.reshape(bsz, self.n_head, L, self.head_dim)           # sdpa out may be non-contig
         else:
             if self.n_head != self.n_local_heads:
                 rep = self.n_head // self.n_local_heads
